@@ -99,11 +99,16 @@ article h1, h2, h3 {
   color: #079992;
 }
 
-article h2 {
-  font-size: calc(.6vw + .8em);
+article h1 {
+  font-size: calc(1vw + 1em);
 }
 
-#post h1 {
+article h2 {
+  font-size: calc(.75vw + .75em);
+}
+
+#post #maintitle {
+  font-size: calc(1.1vw + 1.1em);
   border-bottom: 1px lightgray solid;
 }
 
