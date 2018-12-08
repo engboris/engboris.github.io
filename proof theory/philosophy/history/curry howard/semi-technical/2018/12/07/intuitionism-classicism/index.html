@@ -4,7 +4,7 @@
 <meta name="author" content="Eng Sambo Boris">
 <meta name="description" content="Eng Boris's webpage. Student in Computer Science.">
 <title> On Intuitionism and Classicism › Eng (Sambo) Boris</title>
-<link rel="canonical" href="https://engboris.github.io//logic/semi-technical/2018/12/07/intuitionism-classicism/">
+<link rel="canonical" href="http://localhost:4000/proof%20theory/philosophy/history/curry%20howard/semi-technical/2018/12/07/intuitionism-classicism/">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="/basic.css" rel="stylesheet">
@@ -73,25 +73,25 @@
     <header>
       <h1 id="maintitle">On Intuitionism and Classicism</h1>
       <time datetime="2018-12-07T00:00:00+01:00">December 7, 2018</time>
-      <div><span class="category" style="background-color: hsl(0, 50%, 50%);">logic</span><span class="category" style="background-color: hsl(120, 50%, 50%);">semi-technical</span></div>
+      <div><span class="category" style="background-color: hsl(2, 50%, 50%);">proof theory</span><span class="category" style="background-color: hsl(225, 50%, 50%);">philosophy</span><span class="category" style="background-color: hsl(3, 50%, 50%);">history</span><span class="category" style="background-color: hsl(0, 50%, 50%);">curry howard</span><span class="category" style="background-color: hsl(120, 50%, 50%);">semi-technical</span></div>
     </header>
 <h1 id="introduction">Introduction</h1>
 
 <p>Is there several logics? A unique and right logic? Intuitionism was introduced during the so-called
 foundational crisis of mathematics in the beginning of the 20th century by mathematicians such as <em>H. Poincaré</em>. Strongly defended by <em>L.E.J Brouwer</em> [1],
-it constitutes both a critic of the mathematical practice and an opposition to formalism in favor of intuition and construction.
-I provide an understanding of intuitionism and classicism to the ones not familiar with it (but already know it) especially aimed
-at students in Computer Science. We start from the question of the reliability of logic and mathematics.</p>
+it constitutes both a critic of the mathematical practice and an opposition to formalism in favor of <strong>intuition</strong> and <strong>construction</strong>.
+I provide an understanding of intuitionism and classicism to the ones not familiar with it but already know it.
+We start from the question of the reliability of logic and mathematics.</p>
 
 <h1 id="the-location-of-certainty">The location of certainty</h1>
 
-<p>Practice shows that mathematics has a great reliability but in the time of Brouwer, the appearence of non-euclidean geometries
+<p>Practice shows that mathematics has a great reliability but in the time of Brouwer, the appearance of non-euclidean geometries
 resulted in the emergence of doubts regarding this reliability. What right allows us
 to put a proposition as axiom or to use a particular rule of deduction? Where does the certainty of mathematics lies?
 Two school of philosophy tried to answer that last question:</p>
 <ul>
-  <li><strong>Formalism (German)</strong>: it is located in the paper, that is in the symbols we write, in the linguistics of mathematics, which are concrete, elementary and combinatorial</li>
-  <li><strong>Intuitionism (French)</strong>: it is located in the human’s intuition, that is, we should rely to what is accessible to our intuition, to what we truly know, what we can show/exhibit</li>
+  <li><strong>Formalism (German)</strong>: it is located in the paper, that is in the <em>symbols</em> we write, in the linguistics of mathematics, which are concrete, elementary and combinatorial</li>
+  <li><strong>Intuitionism (French)</strong>: it is located in the human’s intuition, that is, we should rely to what is accessible to our intuition, what we <em>know</em> as humans</li>
 </ul>
 
 <p>Something still links both of them: the rejection of the correlation between mathematical laws and the laws of nature.
@@ -104,16 +104,17 @@ We focus on intuitionism and its viewpoint regarding logic.</p>
 to find the certainty of logic. From the viewpoint of intuitionism, certainty appears when we can make the existence
 of mathematical entities <strong>explicit</strong> (opposing <em>semantic realism</em> and its external existence of entities). It has several consequences:</p>
 <ul>
-  <li>A revision of infinity. Brouwer rejected actual infinity (e.g <script type="math/tex">\{1, 2, ...\}</script>) but admitted potential infinity (e.g the inductive definition of <script type="math/tex">\mathbb{N}</script>).</li>
-  <li>The rejection of the law of excluded-middle <script type="math/tex">\forall P. P \lor \lnot P</script> because it allows us to avoid to prove either <script type="math/tex">P</script> or <script type="math/tex">\lnot P</script>.</li>
-  <li>The rejection of proof by contradiction (i.e <script type="math/tex">\lnot A \Rightarrow \bot \vdash A</script>) for the same reason.</li>
-  <li>A proof of existence <script type="math/tex">\exists x. P(x)</script> must provide explicitly an entity <script type="math/tex">c</script> and a proof of <script type="math/tex">P(c)</script></li>
+  <li>A revision of infinity. Brouwer rejected actual infinity (e.g ${1, 2, …}$) but admitted potential infinity (e.g the inductive definition of $\mathbb{N}$).</li>
+  <li>The rejection of the law of excluded-middle $\forall P. P \lor \lnot P$ because it automatically provide either a proof of $A$ or $\lnot A$ both coming right from the sky.</li>
+  <li>The rejection of proof by contradiction (i.e $\lnot A \Rightarrow \bot \vdash A$) and several other laws for the same reason.</li>
+  <li>A proof of existence $\exists x. P(x)$ must provide explicitly an entity $c$ and a proof of $P(c)$</li>
 </ul>
 
 <p>The rejection of logical laws was quite shocking since they were both strongly used in the mathematical practice. Intuitionism is a subjectivist ideology
-because it only accept what we, humans, know, understand and can construct against any theory of truth and reality coming from <em>God</em> associating either <script type="math/tex">0</script> or <script type="math/tex">1</script> to propositions.
-We have to accept that we don’t necessarily know and have to consider the undecidability of propositions.
-Brouwer defended pure intuition instead of a linguistical and mechanical thus belittling view of mathematics so he was against any formalism in logic.
+because it only accept what we, humans, know, understand and can construct, opposing any theory of truth and realism (adherence to reality).
+We have to accept that we don’t necessarily know and have to consider the undecidability of propositions.</p>
+
+<p>Brouwer defended pure intuition instead of a linguistical and mechanical thus belittling view of mathematics so he was against any formalist conception of logic.
 Ironically, himself and one of his students, <em>A. Heyting</em> (and independently <em>A. Kolmogorov</em>) are behind the formalization of constructivism through the <em>BHK interpretation</em>.
 Logic is now divided in two: <strong>classical logic</strong> and <strong>intuitionistic logic</strong>.</p>
 
@@ -121,34 +122,33 @@ Logic is now divided in two: <strong>classical logic</strong> and <strong>intuit
 
 <h1 id="technical-interpretation">Technical interpretation</h1>
 
-<p>No, intuitionism isn’t weaker. It can even be seen as stronger because intuitionistic logic is a logic where only constructions emerges. Not only it has a power
-that classical logic don’t have but moreover, the conception of classical truth isn’t lost.</p>
-
 <h2 id="model-theoretic-interpretation">Model-theoretic interpretation</h2>
 
-<p>As I understand it, classical logic was interpreted naturally with truth values either <script type="math/tex">0</script> or <script type="math/tex">1</script> associated to a logical proposition.
+<p>As I understand it, classical logic was interpreted naturally with truth values either $0$ or $1$ associated to a logical proposition.
 As the concept of provability changed in the intuitionistic framework, we have to switch to <em>Heyting models</em> or <em>Kripke models</em>. It seems to me
-that they are rather ad-hoc constructions which are used because they work and ignoring the deep mechanism of intuitionism.</p>
+that they are rather ad-hoc constructions which are used because they work by internalizing the unknowable and ignoring the deep mechanism of intuitionism.</p>
 
-<p>In Heyting models we usually interpret propositions in either a presentation of truth, falsity or “intermediate truth values” (e.g <script type="math/tex">2^{\{3, 4\}}</script> ordered by inclusion).
+<p>In Heyting models we usually interpret propositions in either a symbol representing truth, falsity or an “intermediate truth values” (e.g think of <script type="math/tex">2^{\{3, 4\}}</script> ordered by inclusion).
 These values represent the absence of knowledge “I don’t know” that we can assign to generally undecidable propositions such as the law of excluded middle.
-In Kripke models we do something similar by reifying a “world of all possibilities” allowing us to model the unknown and the unknowable.
-Therefore, the truth value of <script type="math/tex">P \lor \lnot P</script> is “I don’t know”. Is that satisfyfing?</p>
+In Kripke models we do something similar by reifying a “world of all possibilities” allowing us to model the unknown/unknowable.
+Therefore, the truth value of $P \lor \lnot P$ is “I don’t know”. Is that satisfyfing?</p>
 
 <h2 id="proof-theoretic-interpretation">Proof-theoretic interpretation</h2>
 
-<p>The proof-theoretical interpretation is very interesting. Let’s explore it in the <em>Natural Deduction</em> <script type="math/tex">NJ</script> and the <em>Sequent Calculus</em> <script type="math/tex">LJ</script>.</p>
+<p>The proof-theoretical interpretation is very interesting. Let’s explore it in the <em>Natural Deduction</em> $NJ$ and the <em>Sequent Calculus</em> $LJ$.</p>
 
 <ul>
   <li>
-    <p>The system <script type="math/tex">NJ</script> is inherently and naturally intuitionistic because it simulates reasoning with implicit structural rules on the context and
-with determinism in the unique conclusion. Any reference to sub-formula in the final statement already appears proved in the top of the derivation tree.
-We can make it classical by adding a classical law but it’s indeed an artificial extension.</p>
+    <p>The system $NJ$ is inherently and naturally intuitionistic because it simulates reasoning with implicit structural rules on the context and
+with determinism in the unique conclusion. Any reference to sub-formula in the final statement already appears proved in the top of the derivation tree i.e
+everything is explicitly justified at some point.
+We can make it classical by adding a classical law but it’s indeed an artificial extension which also breaks the symmetry introduction/elimination since the
+excluded middle is a kind of introduction of disjunction. We should not break it since it is responsible of the good behavior of proof-reduction.</p>
   </li>
   <li>
-    <p>The sequent calculus is especially interesting because we can make it either classical or intuitionistic depending of if we restrict the right-hand part
-of the sequent to at most one formula or an arbitrary number of formulas. The system <script type="math/tex">LK</script> has sequents of the shape <script type="math/tex">\Gamma \vdash \Delta</script> for arbitrary
-sequences of formulas <script type="math/tex">\Gamma, \Delta</script> and <script type="math/tex">LJ</script> of the shape <script type="math/tex">\Gamma \vdash A</script>. In other words, we forbid contraction (infinity, duplication) in the conclusion.
+    <p>The sequent calculus is especially interesting because we can make it either classical or intuitionistic by restricting the right-hand part
+of the sequent to at most one formula or an arbitrary number of formulas. The system $LK$ has sequents of the shape $\Gamma \vdash \Delta$ for arbitrary
+sequences of formulas $\Gamma, \Delta$ and $LJ$ of the shape $\Gamma \vdash A$. In other words, we forbid contraction (infinity/duplication) in the conclusion.
 This peculiarity is not innocent and purely technical, the right-space restriction allows to focus only on a unique conclusion while laws such as the excluded-middle
 allows to diverge by kind of “jumps” in the reasoning. Having the focus only on the construction of <em>the</em> conclusion enforces constructivity.</p>
   </li>
@@ -156,26 +156,30 @@ allows to diverge by kind of “jumps” in the reasoning. Having the focus only
 
 <h2 id="computational-interpretation">Computational interpretation</h2>
 
-<p>The system <script type="math/tex">NJ</script> being isomorphic to the <script type="math/tex">\lambda</script>-calculus through the <em>Curry-Howard isomorphism</em>, the computational interpretation is straightforward:</p>
+<p>The system $NJ$ being isomorphic to the $\lambda$-calculus through the <em>Curry-Howard isomorphism</em>, the computational interpretation is straightforward:</p>
 <ul>
-  <li>Intuitionistic proofs <script type="math/tex">\Gamma \vdash A</script> are typed functional programs <script type="math/tex">\Gamma \vdash M : A</script>.</li>
+  <li>Intuitionistic proofs $\Gamma \vdash A$ are typed functional programs $\Gamma \vdash M : A$.</li>
   <li>Lambda terms can also be seen as a kind of logs or annotation describing the structure of the proof.</li>
 </ul>
 
 <p>In particular, intuitionism captures computational decidability. What is provable is what is computable by a sequential functional program. We have a correspondence
-between computationally decidable and logically decidable in this framework. As in <script type="math/tex">NJ</script> the computation only operates on a unique output.</p>
+between computationally decidable and logically decidable in this framework. As in $NJ$, the computation only operates sequentially on a unique output.</p>
 
 <h1 id="classicism-strikes-back">Classicism strikes back</h1>
 
 <p>Is intuitionism weaker as its rejection of logical rules suggest?</p>
 
-<p>To recover the classical truth, there exists several encoding called <strong>double-negation translations</strong> <script type="math/tex">[\![ \cdot ]\!]</script>
-such that if <script type="math/tex">A</script> is provable classically then <script type="math/tex">[\![ A ]\!]</script> is provable in intuitionistic logic. These translations usually work by putting double-negations <script type="math/tex">\lnot\lnot</script> at the
-right position in formulas. Here is an example with a proof of the encoding of the excluded-middle in natural deduction <script type="math/tex">NJ</script> and sequent calculus <script type="math/tex">LJ</script>.</p>
+<p>No, intuitionism isn’t weaker. It can even be seen as stronger because intuitionistic logic is a logic where only constructions emerges. Not only it has a power
+that classical logic don’t have but moreover, the conception of classical truth isn’t lost.</p>
 
-<p>Note that we have <script type="math/tex">\lnot A \equiv A \Rightarrow \bot</script> in intuitionistic systems. We also use the notation <script type="math/tex">\Gamma = \{(A \lor \lnot A) \Rightarrow \bot\}</script>.</p>
+<p>To recover the classical truth, there exists several encoding called <strong>double-negation translations</strong> $[![ \cdot ]!]$
+such that if $A$ is provable classically then $[![ A ]!]$ is provable in intuitionistic logic. These translations usually work by putting double-negations $\lnot\lnot$ at the
+right position in formulas. Here is an example with a proof of the encoding of the excluded-middle in natural deduction $NJ$ and sequent calculus $LJ$.</p>
 
-<script type="math/tex; mode=display">\infer[\Rightarrow i]{
+<p>Note that we have $\lnot A \equiv A \Rightarrow \bot$ in intuitionistic systems. We also use the notation $\Gamma = {(A \lor \lnot A) \Rightarrow \bot}$.</p>
+
+<p>$
+\infer[\Rightarrow i]{
     \infer[\Rightarrow e]{
         \infer[ax]{\qquad\qquad\qquad\qquad}{\Gamma \vdash (A \lor \lnot A) \Rightarrow \bot}
         \qquad
@@ -192,11 +196,13 @@ right position in formulas. Here is an example with a proof of the encoding of t
             }{\Gamma \vdash A \lor \lnot A}
     }
         {(A \lor \lnot A) \Rightarrow \bot \vdash \bot}
-    }{\vdash_{NJ} ((A \lor \lnot A) \Rightarrow \bot) \Rightarrow \bot}</script>
+    }{\vdash_{NJ} ((A \lor \lnot A) \Rightarrow \bot) \Rightarrow \bot}
+$</p>
 
 <p><br /></p>
 
-<script type="math/tex; mode=display">\infer[\Rightarrow r]{
+<p>$
+\infer[\Rightarrow r]{
     \infer[c]{
         \infer[\Rightarrow l]{
             \infer[\lor r]{
@@ -214,24 +220,27 @@ right position in formulas. Here is an example with a proof of the encoding of t
             \infer[ax]{\qquad}{\bot \vdash \bot}
             }{(A \lor \lnot A) \Rightarrow \bot, (A \lor \lnot A) \Rightarrow \bot \vdash \bot}
         }{(A \lor \lnot A) \Rightarrow \bot \vdash \bot}
-    }{\vdash_{LJ} ((A \lor \lnot A) \Rightarrow \bot) \Rightarrow \bot}</script>
+    }{\vdash_{LJ} ((A \lor \lnot A) \Rightarrow \bot) \Rightarrow \bot}
+$</p>
 
 <p>These translations not only recover the classical power of proofs but also gives a computational interpretation of proofs.
-Why does <script type="math/tex">\vdash \lnot\lnot(A \lor \lnot A)</script> works? Double-negation isn’t a magical technicality coming from nowhere.
-Actually, it works because adding negations allows to bypass the restriction on conclusion and thus allowing free contraction
-on the hypothesis. We clearly see that negation act as a manipulation on spatial positions in a proof.</p>
+Why does $\vdash \lnot\lnot(A \lor \lnot A)$ works? Double-negation isn’t a magical technicality coming from nowhere.
+Actually, it works because adding negations allows to bypass the restriction on conclusion and exploit free contraction
+on the hypothesis. We clearly see that negation act as a manipulation on spatial positions in a proof (it puts information in the context).
+Double-negation make the context-awareness of proofs and programs emerge (as we can see in <em>CPS translations</em>).</p>
 
 <p>If we take a close look at the two above proofs, we can see that a kind of mechanism of “saving of information” is at work.
 The double-negation allows us to put information in the context which is less restricted and thus we can reuse it for both
 the branches with $A$ and the one with $\lnot A$ in $A \lor \lnot A$ where in the intuitionistic case we had a choice destructing
 information (irreversibility of disjunction).</p>
 
-<p>Going further, we can see if we prove classical laws by each other that double-negation corresponds to an artificial ability of saving information
-or pointers/jumps on data while maintaining constructivity and sequentiality. The Curry-Howard isomorphism tells us that</p>
+<p>Going further, we can see if we prove classical laws by each other that double-negation corresponds to an artificial ability of freely saving information
+or an application of pointers/jumps on data while maintaining constructivity and sequentiality. The Curry-Howard isomorphism tells us that the computational
+contents of classical logic lies in continuation-passing style and control operators such as call/cc.</p>
 
 <h1 id="conclusion-human-mind-and-non-determinism">Conclusion: human mind and non-determinism</h1>
 
-<p>To conclude, right-hand restriction on space forbids contraction/infinity on the conclusion but enforce constructivity and sequentiality.
+<p>To conclude, right-hand restriction on space forbids infinity on the conclusion but enforces constructivity and sequentiality.
 We may think that some classical truths are lost in this new intuitionistic framework but an encoding with double-negation allows to
 simulate classical proofs in a sequential way by a mechanism of jump/pointer/saving on the left-hand side which acts as a kind of memory.</p>
 
@@ -239,18 +248,52 @@ simulate classical proofs in a sequential way by a mechanism of jump/pointer/sav
 What makes $\vdash A \lor \lnot A$ provable? It seems to be the human ability of retraction (which is destructive for sequential machines). The excluded-middle is indeed provable
 if we choose to prove $\lnot A$, then introduce $A$ in the context and change our mind to prove $A$ instead (as suggested by <em>P. Wadler’s devil</em>):</p>
 
-<script type="math/tex; mode=display">\infer[\lor r]{
+<p>$
+\infer[\lor r]{
     \infer[\lnot r]{
         \infer[ax]{\qquad}{A \vdash A}
         }{\vdash A, \lnot A}
-    }{\vdash_{LK} A \lor \lnot A}</script>
+    }{\vdash_{LK} A \lor \lnot A}
+$</p>
 
-<p>Then the right-hand part $LK$’s sequents should be seen as a space of non-determinism where we can postpone partial/unfinished proofs to later.
-Classicism gives more space for working on proofs and seem to be environment-aware for both pure classicism and negation-translation.</p>
+<p>But $LK$ lacking confluence as stating by the below critical pair [2], it is irrelevant in the computational world.</p>
+
+<p>$
+\infer[cut]{
+    \infer[RW]{
+        \infer{\vdots}{A \vdash B}
+        }{A \vdash C, B}
+    \qquad
+    \infer[LW]{
+        \infer{\vdots}{D \vdash E}
+        }{D, C \vdash E}
+    }{A, D \vdash B, E}
+$</p>
+
+<p>reducing to either</p>
+
+<p>$\infer[{RW, RC, LW, LC}^\ast]{A, D \vdash B, E}{A \vdash B}$</p>
+
+<p>or</p>
+
+<p>$\infer[{RW, RC, LW, LC}^\ast]{A, D \vdash B, E}{D \vdash E}$</p>
+
+<p>To study logical phenomena further we can normalize the rules of $LK$ thanks to the involutivity of negation to only consider right rules producing a monolateral version of $LK$.
+Sequents are now of the shape $\vdash A_1, …, A_n$ corresponding to a kind of space of concurrent interaction with partial/unfinished proofs we can postpone:</p>
+<ul>
+  <li>the cut ${\small\infer[cut]{\vdash \Gamma, A \quad \vdash \Delta, \lnot A}{\vdash \Gamma, \Delta}}$ makes $A$ interacts with its dual $\lnot A$.</li>
+  <li>general infinity (free duplication/contraction and erasure/weakening) creates non-determinism leading to complex exponentiation and polarization in Linear Logic.</li>
+  <li>the goal is to connect two dual formulas by the axiom $\vdash \Gamma, A, \lnot A$.</li>
+</ul>
+
+<p>Classicism gives more space to work on proofs and seem to be environment-aware for both pure classicism and negation-translation. Finally, one may ask
+what is the status of concurrency and parallelism in reasoning and computation. Is consciousness sequential and unconsciousness parallel?</p>
 
 <h1 id="references">References</h1>
 
 <p>[1] Brouwer, L. E. J. (1913). Intuitionism and Formalism. Bulletin of the American Mathematical Society 20:81-96.</p>
+
+<p>[2] Girard, J. Y., Taylor, P., &amp; Lafont, Y. (1989). Proofs and types (Vol. 7). Cambridge: Cambridge University Press.</p>
 
     
     
