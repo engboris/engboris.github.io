@@ -22,6 +22,14 @@ body {
   margin: 3px;
 }
 
+.current {
+  background-color: #b583d0;
+}
+
+ul {
+  list-style-type: circle;
+}
+
 a.ghost, a.gray, a.disabled {
   border-radius: 2px;
   padding: 0.4em 0.8em;
