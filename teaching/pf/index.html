@@ -4,7 +4,7 @@
 <meta name="author" content="Eng Sambo Boris">
 <meta name="description" content="Eng Boris's webpage. PhD in Computer Science.">
 <title>Eng (Sambo) Boris</title>
-<link rel="canonical" href="https://engboris.github.io//teaching/g2in7a/">
+<link rel="canonical" href="https://engboris.github.io//teaching/pf/">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="/basic.css" rel="stylesheet">
@@ -153,7 +153,15 @@ de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
 
 <h2 id="tp2">TP2</h2>
 
-<p>(à venir)</p>
+<p>On représente des mots par des listes de caractères. Par exemple <code class="highlighter-rouge">w = ['s'; 'a'; 'l'; 'u'; 't']</code>.</p>
+
+<ol>
+  <li><code class="highlighter-rouge">prefixe u v</code> qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['s'; 'a'] w = true</code>).</li>
+  <li><code class="highlighter-rouge">suffixe u v</code> qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['l'; 'u'; 't'] w = true</code>)</li>
+  <li><code class="highlighter-rouge">facteur u v</code> qui renvoie vrai si u est un facteur de v et faux sinon. C’est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple <code class="highlighter-rouge">prefixe ['a'; 'l'; 'u'] w = true</code>).</li>
+  <li><code class="highlighter-rouge">liste_decomp w</code>, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme <code class="highlighter-rouge">w = uv</code> (par exemple <code class="highlighter-rouge">liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]</code>).</li>
+  <li><code class="highlighter-rouge">sans_facteur_carre w</code> qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa.</li>
+</ol>
 
   </article>
 </main>

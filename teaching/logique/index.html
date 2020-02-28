@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Eng Sambo Boris">
+<meta name="description" content="Eng Boris's webpage. PhD in Computer Science.">
+<title>Eng (Sambo) Boris</title>
+<link rel="canonical" href="https://engboris.github.io//teaching/logique/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+        TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js"],
+        Macros: {
+              infer: [`\\begin{array}\[b\]{c c c c}
+              \\style{border-bottom:1px solid black; padding-bottom:7px;}{
+              \\begin{array}\[b\]{c c c c} #2 \\end{array}}
+                    &  \\hspace{-.5em}\\raise{-.6em}{#1} \\\\
+              #3 \\\\\[-50em\]
+              \\end{array}`,3,""
+              ]
+            }
+        }
+        });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<header>
+  <h1>⊢ <a href="">Eng (Sambo) Boris</a></h1>
+  <div class="sub">PhD Student in Computer Science at Laboratoire d'Informatique de Paris Nord (Université Paris 13, France)</div>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/thoughts/">Thoughts</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+        <span class="sub">engboris@hotmail.fr</span>
+    </div>
+  </nav>
+</header>
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="logique-g1in6a">Logique (G1IN6A)</h1>
+
+<p><strong>Responsable du cours</strong> : Christophe Fouquéré</p>
+
+<p><strong>Chargé de TP (GR6)</strong> : Moi (eng@lipn.fr)</p>
+
+<h2 id="taille-des-arbres-binaires-complets-de-hauteur-n">Taille des arbres binaires complets de hauteur n</h2>
+
+<p>Supposons que l’on a un arbre binaire complet (seulement des sommets à deux branches) de hauteur n. C’est-à-dire que la plus longue branche entre une feuille
+et la racine de l’arbre comporte $n$ arêtes.</p>
+
+<p>Le nombre de sommet est $1+2^1+2^3+…+2^{n+1}$ car chaque niveau de hauteur représente une couche de sommets et le nombre de sommet double à chaque couche. On
+veut donc $n+1$ couches (rappelons que la hauteur dépend du nombre d’arêtes mais qu’il y a $n+1$ sommets sur cette branche). On a en fait :</p>
+
+<p>$1+2^1+2^3+…+2^{n+1} = \sum_{i=0}^{n+1} 2^i = \frac{2^{n+1}-1}{2-1} = 2^{n+1}-1$. C’est dû au fait qu’on a $\sum_{i=0}^n r^i = \frac{r^n-1}{r-1}$. Prouvons-le :</p>
+
+<p>On part de cette égalité : $\sum_{i=0}^n r^i = r^0+r^1+r^2+…+r^n$</p>
+
+<p>On multiple par r des deux côtés : $r\sum_{i=0}^n r^i = r^1+r^2+r^3+…+r^{n+1}$</p>
+
+<p>On soustrait la seconde expression par la première : $r\sum_{i=0}^n r^i-\sum_{i=0}^n r^i = (r^1+r^2+r^3+…+r^{n+1}) - (r^0+r^1+r^2+…+r^n)$</p>
+
+<p>On simplifie et factorise à gauche : $\sum_{i=0}^n r^i (r-1) = r^{n+1}-1$</p>
+
+<p>Ce qui nous donne finalement : $\sum_{i=0}^n r^i (r-1) = r^{n+1}-1$ et $\sum_{i=0}^n r^i = \frac{r^{n+1}-1}{r-1}$.</p>
+
+<h2 id="preuve-par-récurrence-sur-les-formules">Preuve par récurrence sur les formules</h2>
+
+<ul>
+  <li>Montrons que pour toute formule $F \in \mathcal{F}$, le nombre de parenthèses (noté $np(F)$) est pair. On raisonne par
+induction sur la taille/structure de la formule $F$ :
+    <ul>
+      <li>Cas $F = A$ (un atome). On a $np(A) = 0$ qui est pair.</li>
+      <li>Cas $F = \lnot G$. Par hypothèse de récurrence, on a $nb(G)$ pair. Montrons qu’on a $nb(\lnot G)$ pair.
+Comme la négation n’introduit par de parenthèses, on a $nb(\lnot G) = nb(G)$ donc $nb(\lnot G)$ est pair.</li>
+      <li>Cas $F = (G \ast H)$ pour un connecteur binaire $\ast \in \{\lor, \land, \Rightarrow, \Leftrightarrow\}$.
+Par hypothèse de récurrence, $np(G)$ et $np(H)$ sont pairs donc on peut les écrire sous la forme $np(G) = 2k$ et $np(H) = 2l$.
+On a $np((G \ast H)) = 2k+2l+2 = 2(k+l+1)$ qui est pair car on a un facteur 2.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>Montrons que pour toute formule $F \in \mathcal{F}$, on a $h(F) \leq l(F)$ c’est-à-dire que la hauteur d’une formule est toujours inférieur ou égal à sa longueur.
+On raisonne par induction sur la taille/structure de la formule $F$ :
+    <ul>
+      <li>Cas $F = A$ (un atome). On a $h(A) = 0$ qui est bien inférieur ou égal à $l(A) = 1$.</li>
+      <li>Cas $F = \lnot G$. Par hypothèse de récurrence, on suppose $h(G) \leq l(G)$. On a $h(\lnot G) = 1+h(G)$
+qui est bien inférieur ou égal à $l(\lnot G) = 1+l(G)$ par hypothèse de récurrence et le fait que $x \leq y$ implique $1+x \leq 1+y$.</li>
+      <li>Cas $F = (G \ast H)$ pour un connecteur binaire $\ast \in \{\lor, \land, \Rightarrow, \Leftrightarrow\}$. Par hypothèse de récurrence,
+$h(G) \leq l(G)$ et $h(H) \leq l(H)$. On veut montrer $h((G \ast H)) \leq l((G \ast H))$. Il s’agit d’ajouter un connecteur à deux formules.
+Quand on fait cela, on ajoute une arête entre la racine et une feuille de l’arbre correspondant à la formule et la hauteur dépend du maximum
+entre la hauteur des deux-sous formules. On en conclut que $h((G \ast H)) = 1+max(h(G), h(H))$. Ensuite, on a  $l((G \ast H)) = 1+l(G)+l(H)$
+(car les symboles de $(G \ast H)$ sont ceux de $G$, ceux de $H$ et le connecteur binaire que l’on rajoute). Ce que l’on doit montrer revient à
+montrer $max(h(G), h(H)) \leq l(G)+l(H)$ (on ignore les +1 pour simplifier). On raisonne cas par cas (car il y a deux possibilités) :
+        <ul>
+          <li>Supposons que $max(h(G), h(H)) = h(G)$. On sait que $h(G) \leq l(G)$, donc on a nécéssairement $h(G) \leq l(G)+l(H)$. C’est ce qu’on voulait montrer.</li>
+          <li>Même chose pour l’autre cas où l’on a $max(h(G), h(H)) = h(H)$.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  </article>
+</main>
+
+
