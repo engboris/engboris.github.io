@@ -94,7 +94,7 @@ faisant partie de la définition précédente. Dans le cas habituel, les <code c
 
 <hr />
 
-<h2 id="tp1">TP1</h2>
+<h2 id="tp1--listes-et-ensembles">TP1 : Listes et ensembles</h2>
 
 <p><strong>Exercice 1</strong></p>
 
@@ -140,7 +140,7 @@ de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
 
 <p>b. <code class="highlighter-rouge">union2 l1 l2</code> qui calcule l’union de deux listes triées. Le modèle est le même que pour <code class="highlighter-rouge">inter2</code>.</p>
 
-<p><strong>Bonus</strong></p>
+<p><strong>Bonus (à faire si vous ne savez pas quoi faire)</strong></p>
 
 <ol>
   <li><code class="highlighter-rouge">diff l1 l2</code> qui calcule les éléments de l1 sans ceux de l2 (par exemple <code class="highlighter-rouge">diff [1; 2] [2; 4] = [1]</code>)</li>
@@ -151,17 +151,37 @@ de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
   <li><code class="highlighter-rouge">unzip l</code> qui prend une liste de paires et effectue l’opération inverse (par exemple <code class="highlighter-rouge">unzip [(1, 4); (2, 5); (3, 6)] = ([1; 2; 3]; [4; 5; 6])</code>)</li>
 </ol>
 
-<h2 id="tp2">TP2</h2>
+<h2 id="tp2--tri-sur-les-listes">TP2 : Tri sur les listes</h2>
 
-<p>On représente des mots par des listes de caractères. Par exemple <code class="highlighter-rouge">w = ['s'; 'a'; 'l'; 'u'; 't']</code>.</p>
+<p><strong>Exercice 1</strong></p>
 
 <ol>
-  <li><code class="highlighter-rouge">prefixe u v</code> qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['s'; 'a'] w = true</code>).</li>
-  <li><code class="highlighter-rouge">suffixe u v</code> qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['l'; 'u'; 't'] w = true</code>)</li>
-  <li><code class="highlighter-rouge">facteur u v</code> qui renvoie vrai si u est un facteur de v et faux sinon. C’est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple <code class="highlighter-rouge">prefixe ['a'; 'l'; 'u'] w = true</code>).</li>
-  <li><code class="highlighter-rouge">liste_decomp w</code>, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme <code class="highlighter-rouge">w = uv</code> (par exemple <code class="highlighter-rouge">liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]</code>).</li>
-  <li><code class="highlighter-rouge">sans_facteur_carre w</code> qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa.</li>
+  <li><code class="highlighter-rouge">inserer x l</code> qui insère un élément <code class="highlighter-rouge">x</code> dans une liste <code class="highlighter-rouge">l</code> à la bonne position pour obtenir une liste triée.</li>
+  <li><code class="highlighter-rouge">tri_insertion l</code> qui trie par ordre croissant la liste l en utilisant <code class="highlighter-rouge">inserer</code></li>
 </ol>
+
+<p><strong>Exercice 2</strong></p>
+
+<ol>
+  <li><code class="highlighter-rouge">decouper e l</code> qui renvoie une paire <code class="highlighter-rouge">(petits, grands)</code> où <code class="highlighter-rouge">petits = {x ∈ l | x &lt;= e}</code> et <code class="highlighter-rouge">grands = {x ∈ l | x &gt; e}</code>.</li>
+  <li><code class="highlighter-rouge">tri_rapide l</code> qui utilise la fonction précédente et la concaténation pour effectuer un tri rapide (quicksort).</li>
+</ol>
+
+<p><strong>Exercice 3</strong></p>
+
+<ol>
+  <li><code class="highlighter-rouge">decouper_bis l</code> qui renvoie une paire <code class="highlighter-rouge">(pairs, impairs)</code> contenant la liste des éléments de rangs pairs et impairs.</li>
+  <li><code class="highlighter-rouge">fusion l1 l2</code> qui va effectuer la fusion de deux listes (conformément au tri fusion).</li>
+  <li><code class="highlighter-rouge">tri_fusion l</code> qui va effectuer un tri fusion en utilisant les deux fonctions précédentes.</li>
+</ol>
+
+<!-- On représente des mots par des listes de caractères. Par exemple `w = ['s'; 'a'; 'l'; 'u'; 't']`.
+
+1. `prefixe u v` qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple `prefixe ['s'; 'a'] w = true`).
+2. `suffixe u v` qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple `prefixe ['l'; 'u'; 't'] w = true`)
+3. `facteur u v` qui renvoie vrai si u est un facteur de v et faux sinon. C'est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple `prefixe ['a'; 'l'; 'u'] w = true`).
+4. `liste_decomp w`, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme `w = uv` (par exemple `liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]`).
+5. `sans_facteur_carre w` qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa. -->
 
   </article>
 </main>
