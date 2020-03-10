@@ -129,7 +129,7 @@ de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
 5
 6
 7
-</pre></td><td class="code"><pre><span class="kr">let</span> <span class="n">inter2</span> <span class="n">l1</span> <span class="n">l2</span> <span class="p">=</span>
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">inter2</span> <span class="n">l1</span> <span class="n">l2</span> <span class="p">=</span>
     <span class="n">match</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="kr">with</span> <span class="c">(*</span><span class="cm"> On peut faire des match sur plusieurs listes à la fois *)</span>
     <span class="p">|</span> <span class="p">[],</span> <span class="n">l2</span> <span class="p">-&gt;</span> <span class="p">...</span>
     <span class="p">|</span> <span class="n">l1</span><span class="p">,</span> <span class="p">[]</span> <span class="p">-&gt;</span> <span class="p">...</span>
@@ -175,13 +175,17 @@ de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
   <li><code class="highlighter-rouge">tri_fusion l</code> qui va effectuer un tri fusion en utilisant les deux fonctions précédentes.</li>
 </ol>
 
-<!-- On représente des mots par des listes de caractères. Par exemple `w = ['s'; 'a'; 'l'; 'u'; 't']`.
+<h2 id="tp3--traitement-des-mots">TP3 : traitement des mots</h2>
 
-1. `prefixe u v` qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple `prefixe ['s'; 'a'] w = true`).
-2. `suffixe u v` qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple `prefixe ['l'; 'u'; 't'] w = true`)
-3. `facteur u v` qui renvoie vrai si u est un facteur de v et faux sinon. C'est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple `prefixe ['a'; 'l'; 'u'] w = true`).
-4. `liste_decomp w`, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme `w = uv` (par exemple `liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]`).
-5. `sans_facteur_carre w` qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa. -->
+<p>On représente des mots par des listes de caractères. Par exemple <code class="highlighter-rouge">w = ['s'; 'a'; 'l'; 'u'; 't']</code>.</p>
+
+<ol>
+  <li><code class="highlighter-rouge">prefixe u v</code> qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['s'; 'a'] w = true</code>).</li>
+  <li><code class="highlighter-rouge">suffixe u v</code> qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['l'; 'u'; 't'] w = true</code>)</li>
+  <li><code class="highlighter-rouge">facteur u v</code> qui renvoie vrai si u est un facteur de v et faux sinon. C’est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple <code class="highlighter-rouge">prefixe ['a'; 'l'; 'u'] w = true</code>).</li>
+  <li><code class="highlighter-rouge">liste_decomp w</code>, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme <code class="highlighter-rouge">w = uv</code> (par exemple <code class="highlighter-rouge">liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]</code>).</li>
+  <li><code class="highlighter-rouge">sans_facteur_carre w</code> qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa.</li>
+</ol>
 
   </article>
 </main>
