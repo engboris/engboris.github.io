@@ -81,7 +81,7 @@
 
 <p><strong>Chargé de TP (GR6)</strong> : Moi (eng@lipn.fr)</p>
 
-<h2 id="taille-des-arbres-binaires-complets-de-hauteur-n">Taille des arbres binaires complets de hauteur n</h2>
+<h2 id="taille-des-arbres-binaires-complets-de-hauteur-n-td1-exercice-1-pas-important">Taille des arbres binaires complets de hauteur n (TD1 Exercice 1, pas important)</h2>
 
 <p>Supposons que l’on a un arbre binaire complet (seulement des sommets à deux branches) de hauteur n. C’est-à-dire que la plus longue branche entre une feuille
 et la racine de l’arbre comporte $n$ arêtes.</p>
@@ -101,7 +101,15 @@ veut donc $n+1$ couches (rappelons que la hauteur dépend du nombre d’arêtes 
 
 <p>Ce qui nous donne finalement : $\sum_{i=0}^n r^i (r-1) = r^{n+1}-1$ et $\sum_{i=0}^n r^i = \frac{r^{n+1}-1}{r-1}$.</p>
 
-<h2 id="preuve-par-récurrence-sur-les-formules">Preuve par récurrence sur les formules</h2>
+<h2 id="définition-inductive-de-hauteur-et-longueur-dune-formule-utile">Définition inductive de hauteur et longueur d’une formule (utile)</h2>
+
+<p>On peut définir la hauteur et la longueur d’une formule par récurrence sur la structure des formules :</p>
+
+<p>$l(A) = 1 \qquad\qquad l(\lnot G) = 1+l(G) \qquad\qquad l(G \ast H) = 1+l(G)+l(H)$</p>
+
+<p>$h(A) = 0 \qquad\qquad h(\lnot G) = 1+h(G) \qquad\qquad h(G \ast H) = 1+max(h(G), h(H))$</p>
+
+<h2 id="preuve-par-récurrence-sur-les-formules-td1-exercice-2-et-3-important">Preuve par récurrence sur les formules (TD1 Exercice 2 et 3, important)</h2>
 
 <ul>
   <li>Montrons que pour toute formule $F \in \mathcal{F}$, le nombre de parenthèses (noté $np(F)$) est pair. On raisonne par
@@ -123,7 +131,7 @@ On a $np((G \ast H)) = 2k+2l+2 = 2(k+l+1)$ qui est pair car on a un facteur 2.</
   <li>Montrons que pour toute formule $F \in \mathcal{F}$, on a $h(F) \leq l(F)$ c’est-à-dire que la hauteur d’une formule est toujours inférieur ou égal à sa longueur.
 On raisonne par induction sur la taille/structure de la formule $F$ :
     <ul>
-      <li>Cas $F = A$ (un atome). On a $h(A) = 0$ qui est bien inférieur ou égal à $l(A) = 1$.</li>
+      <li>Cas $F = A$ (une variable). On a $h(A) = 0$ qui est bien inférieur ou égal à $l(A) = 1$.</li>
       <li>Cas $F = \lnot G$. Par hypothèse de récurrence, on suppose $h(G) \leq l(G)$. On a $h(\lnot G) = 1+h(G)$
 qui est bien inférieur ou égal à $l(\lnot G) = 1+l(G)$ par hypothèse de récurrence et le fait que $x \leq y$ implique $1+x \leq 1+y$.</li>
       <li>Cas $F = (G \ast H)$ pour un connecteur binaire $\ast \in \{\lor, \land, \Rightarrow, \Leftrightarrow\}$. Par hypothèse de récurrence,
@@ -140,6 +148,36 @@ montrer $max(h(G), h(H)) \leq l(G)+l(H)$ (on ignore les +1 pour simplifier). On 
     </ul>
   </li>
 </ul>
+
+<h2 id="analyse-sémantique-td3-exercice-utile">Analyse sémantique (TD3 Exercice, utile)</h2>
+
+<p>On remarque que lorsque des parenthèses ouvrantes s’enchaînent, la hauteur d’une formule s’accumule. On aimerait le prouver par récurrence. Montrons que
+pour toute formule $F$, on a $h(F) = maxp(F)$ où $maxp(F)$ est la plus grande chaîne de parenthèses ouvrantes dans $F$. On pense à mettre toutes les parenthèses
+autour des connecteurs et on raisonne par récurrence.</p>
+<ul>
+  <li>Cas $F = A$ (une variable). On a $h(A) = 0 = maxp(A)$ (il n’y a pas de parenthèse).</li>
+  <li>Cas $F = (\lnot G)$. Par hypothèse de récurrence, $h(G) = maxp(G)$. On a $h((\lnot G)) = h(G)+1$ et $maxp((\lnot G)) = maxp(G)+1$ (car on a ajouté une parenthèse ouvrante).
+Les deux sont donc égaux en utilisant l’hypothèse de récurrence.</li>
+  <li>Cas $F = (G \ast H)$ pour un connecteur binaire $\ast \in \{\lor, \land, \Rightarrow, \Leftrightarrow\}$. Par hypothèse de récurrence, on a $h(G) = maxp(G)$ et
+$h(H) = maxp(H)$. En calculant la hauteur de $F$, on obtient $h((G \ast H)) = 1+max(h(G), h(H))$. Si on veut calculer la plus longue chaîne de parenthèses ouvrantes,
+cela dépend qui a la plus longue chaîne entre $G$ et $H$ puis on ajoute une parenthèse ouvrante. On a donc $maxp((G \ast H)) = 1+max(maxp(G), maxp(H))$ ce qui coïncide
+avec la hauteur. Donc on a bien $h(F) = maxp(F)$.</li>
+</ul>
+
+<h2 id="analyse-sémantique-td3-exercice-43-utile">Analyse sémantique (TD3 Exercice 4.3, utile)</h2>
+
+<p>On a la formule $J = p \Rightarrow ((p \land q) \lor (p \land \lnot q))$. L’analyse sémantique consiste à prouver des choses en utilisant des
+équivalences logiques (par exemple lois de De Morgan) ou des équivalences par substitutions. On peut par exemple, par transformations, ramener la formule
+à une tautologie connue.</p>
+
+<p>$p \Rightarrow ((p \land q) \lor (p \land \lnot q))$</p>
+
+<p>$\equiv p \Rightarrow (p \land (q \lor \lnot q))$ (par factorisation)</p>
+
+<p>$\equiv p \Rightarrow p$ (car le tiers exclu est toujours vrai et donc la vérité de la conjonction dépend seulement de $p$)</p>
+
+<p>La formule qu’on obtient est une tautologie connue (toute formule implique elle-même). On remarque
+aussi que le “ou” et le “et” ont les mêmes propriétés que l’addition et la multiplication ($1$ est un élément absorbant pour $\land$).</p>
 
   </article>
 </main>
