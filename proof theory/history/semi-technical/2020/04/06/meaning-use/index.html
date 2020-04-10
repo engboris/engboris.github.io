@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Eng Sambo Boris">
+<meta name="description" content="Eng Boris's webpage. PhD in Computer Science.">
+<title> Meaning and Use in Gentzen's logical systems › Eng (Sambo) Boris</title>
+<link rel="canonical" href="https://engboris.github.io//proof%20theory/history/semi-technical/2020/04/06/meaning-use/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+        TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js"],
+        Macros: {
+              infer: [`\\begin{array}\[b\]{c c c c}
+              \\style{border-bottom:1px solid black; padding-bottom:7px;}{
+              \\begin{array}\[b\]{c c c c} #2 \\end{array}}
+                    &  \\hspace{-.5em}\\raise{-.6em}{#1} \\\\
+              #3 \\\\\[-50em\]
+              \\end{array}`,3,""
+              ]
+            }
+        }
+        });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<header>
+  <h1>⊢ <a href="">Eng (Sambo) Boris</a></h1>
+  <div class="sub">PhD Student in Computer Science at Laboratoire d'Informatique de Paris Nord (Université Paris 13, France)</div>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  id="selected"  href="/thoughts/">Thoughts</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+        <span class="sub">engboris@hotmail.fr</span>
+    </div>
+  </nav>
+</header>
+<main>
+  <article  id="post" >
+    
+    <a href="/thoughts">« Return to Thoughts</a>
+    <header>
+      <h1 id="maintitle">Meaning and Use in Gentzen's logical systems</h1>
+      <time datetime="2020-04-06T00:00:00+02:00">April 6, 2020</time>
+      
+      <div>
+      
+      
+      
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(24, 50%, 50%);">proof theory</span>
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(79, 50%, 50%);">history</span>
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(273, 50%, 50%);">semi-technical</span></div>
+      
+    </header>
+    <p><strong>Prerequisite</strong>: natural deduction, sequent calculus, intuitionistic logic, classical logic</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In this post, we will investigate the differences between natural deduction and the sequent calculus, two systems introduced by Gentzen during the 20th century. They represent two way of looking at the same object: logic but with a different point of view providing a different understanding. Let’s start with natural deduction $NJ$.</p>
+
+<h1 id="natural-deduction">Natural Deduction</h1>
+
+<h2 id="conventions-and-their-use">Conventions and their use</h2>
+
+<p>The Natural Deduction represents logic as a set of rules divided in two categories: introduction rules (introducing a symbol) and elimination rule (eliminating a symbol). It is our common language used to describe what inference is. The intuition behind these rules is that the introductions are definitions we use in order to allow reasoning to take place and that the elimination rules are ways of using these definitions.</p>
+
+<p>In the bottom-top reading, we basically manipulate our symbols in the goal/conclusion and introduce new hypotheses with the introduction rule of the implication until we have a conclusion matching an hypothesis (an evidence: an assumed statement is proven). Two interesting points:</p>
+<ul>
+  <li>the system is intuitionistic by nature due to the fact that we justify a unique statement at each step of the proof</li>
+  <li>although it captures all the mathematical use of logic, it is not so natural. For instance, the introduction of the disjunction introduces $A \lor B$ from $A$. We lost information. It isn’t something we usually want in practice.</li>
+</ul>
+
+<p>This system shows that we can see formulas and proof with the point of view of a set of rules but also that we interpret it as a computational system (simply-typed lambda-calculus) thanks to the Curry-Howard correspondence.</p>
+
+<h2 id="harmony">Harmony</h2>
+
+<p>In order to have a consistent logical system, we need an <em>harmony</em> between introductions and eliminations corresponding to the fact that the definition and the use of a convention should be complementary. In Proof Theory, it is translated as the simplification of introductions preceding eliminations. For instance, the succession of rules $\infer[\land e 1]{\infer[\land i]{A \quad B}{A \land B}}{A}$ is exactly the $\pi_1 (A, B)$ for functional programming. They both reduce to $A$ thus describing a kind of computation leading to the Curry-Howard correspondence.</p>
+
+<h1 id="sequent-calculus">Sequent Calculus</h1>
+
+<h2 id="logic-from-the-intuition-of-space">Logic from the intuition of space</h2>
+
+<p>In the Sequent Calculus, we have either introductions on the left or on the right of a turnstile symbol $\vdash$. We now manipulate both sides of a sequent $A_1, …, A_n \vdash B_1, …, B_k$. A proof ends when all its branches have a same formula on the left and on the right. We created a space divided in two parts where we can act freely on each formulas. The distinction between classical and intuitionistic logic becomes a mere distinction between the restriction of space: either at most one place ($LJ$) or no restriction ($LK$).</p>
+
+<p>Let’s use $A \vdash A$ as the axiom rule. The act of reasoning becomes a manipulation of symbols in space where the negation becomes the exchange between right and left. In $LK$, we can even break this (artificial) separation by using a monolateral version where all sequents are of the form $\vdash A_1, …, A_n$. Since we work with entities within a same space, we need “structural rules” in order duplicates formulas we want to use several times, discard formulas we don’t need or exchange them so we can exactly connect formulas (as in the axiom rule). In $NJ$, they were implicit in the management of contexts (the axiom rule was $\Gamma, A \vdash A$).</p>
+
+<p>The existence of structural rules lead to an alternative definition of disjunction and conjunction with a different management of the context. We have the multiplicative and the additive connectives. They are equivalent thanks to the structural rules but by restricting the structural rules, we obtain different connectives leading to Linear Logic.</p>
+
+<h2 id="decomposing-use-to-show-its-computational-interactions">Decomposing use to show its computational interactions</h2>
+
+<p>To understand the difference between natural deduction and sequent calculus, it is interesting to look at how $NJ$ can be translated into $LJ$. If we look at the translation, we can see that only elimination rules are translated. Let’s take the translation of an elimination of conjunction:</p>
+
+<script type="math/tex; mode=display">\infer[\land e 1]{\Gamma \vdash A \land B}{\Gamma \vdash A} \quad \leadsto \quad \infer[cut]{\Gamma \vdash A \land B \quad \infer[\land l]{\infer[ax]{}{A \vdash A}}{A \land B \vdash A}}{\Gamma \vdash A}</script>
+
+<p>While in $NJ$, the formula $A \land B$ directly leads to $A$, the system $LJ$ show more details about how can $A \land B$ lead to $A$ in a setting of spatial management of formulas. It is at a “lower-level” (in the sense of programming languages) and decomposes the logical use in a more detailed way.</p>
+
+<p>Moreover, the translation always make a cut rule appear connecting a formula in conclusion and another one in hypothesis thus acting like an extension cord of the logical flow of reasoning. When using the monolateral version of the sequent calculus, we see that the axiom rule and the cut rules are two ways of connecting a formula and its dual in two different ways. The axiom rule connect two dual conclusions and the cut rule connect two dual hypothesis. We revealed a mechanism of interaction within the logical reasoning which can be further explored if we look at things from the right angle. Logic is now similar to a physical phenomena we’re trying to understand by mathematical models.</p>
+
+  </article>
+</main>
+
+
+<footer>
+     <span></span> 
+    <a href="/proof%20theory/philosophy/history/semi-technical/2018/12/07/intuitionism-classicism/">On Intuitionism and Classicism »</a>
+</footer>
+
