@@ -95,97 +95,139 @@ faisant partie de la définition précédente. Dans le cas habituel, les <code c
 
 <hr />
 
-<h2 id="tp1--listes-et-ensembles">TP1 : Listes et ensembles</h2>
+<h2 id="tp-x--itérateurs">TP X : Itérateurs</h2>
 
-<p><strong>Exercice 1</strong></p>
+<p>Quand on écrit des fonctions récursives sur les listes, on remarque qu’une méthode revient souvent :</p>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">somme</span> <span class="n">l</span> <span class="p">=</span>
+    <span class="n">match</span> <span class="n">l</span> <span class="kr">with</span>
+    <span class="p">|</span> <span class="p">[]</span> <span class="p">-&gt;</span> <span class="mi">0</span>
+    <span class="p">|</span> <span class="n">h::t</span> <span class="p">-&gt;</span> <span class="n">h</span> <span class="n">+</span> <span class="n">somme</span> <span class="n">t</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On rassemble/connecte les éléments de la liste par un opérateur (“+” ci-dessus) pour retomber sur un élément terminal (“0” ci-dessus). On peut généraliser cette manière de programmer avec une fonction et un élément terminal générique :</p>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">l</span> <span class="n">base</span> <span class="p">=</span>
+    <span class="n">match</span> <span class="n">l</span> <span class="kr">with</span>
+    <span class="p">|</span> <span class="p">[]</span> <span class="p">-&gt;</span> <span class="n">base</span>
+    <span class="p">|</span> <span class="n">h::t</span> <span class="p">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="p">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">base</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Cette fonction calcule <code class="highlighter-rouge">f x1 (f x2 (f x3 base))</code> pour <code class="highlighter-rouge">[x1; x2; x3]</code> et existe en OCaml sous le nom de <code class="highlighter-rouge">List.fold_right</code> et peut être utilisée pour écrire un grand nombre de fonction de façon très simple. Par exemple, le calcul de la somme peut être remplacé par</p>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="n">somme</span> <span class="p">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="p">(</span><span class="n">+</span><span class="p">)</span> <span class="n">l</span> <span class="mi">0</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>De la même manière, la fonction <code class="highlighter-rouge">List.fold_left</code> calculant <code class="highlighter-rouge">f (f (f acc x1) x2) x3</code> pour <code class="highlighter-rouge">[x1; x2; x3]</code> généralise les fonctions récursives avec accumulateurs :</p>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">l</span> <span class="p">=</span>
+    <span class="n">match</span> <span class="n">l</span> <span class="kr">with</span>
+    <span class="p">|</span> <span class="p">[]</span> <span class="p">-&gt;</span> <span class="n">acc</span>
+    <span class="p">|</span> <span class="n">x::s</span> <span class="p">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">x</span><span class="p">)</span> <span class="n">s</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Les deux fonctions sont des sortes de “pliages” de la liste jusqu’à obtenir un élément, d’où le terme “fold” signifiant “pli”. Écrivez les fonctions suivantes en utilisant <code class="highlighter-rouge">List.fold_right</code> ou <code class="highlighter-rouge">List.fold_left</code> (parfois l’un est plus adapté que l’autre mais d’autres fois les deux sont utilisables).</p>
 
 <ol>
-  <li><code class="highlighter-rouge">fact n</code> qui calcule la factorielle !n d’un entier</li>
-  <li><code class="highlighter-rouge">pow n k</code> qui calcule la puissance n^k (pour deux entiers)</li>
-  <li><code class="highlighter-rouge">fact_acc n acc</code> qui calcule la factorielle en stockant en en mettant à jour le résultat à chaque étape dans son second argument</li>
-  <li><code class="highlighter-rouge">append l1 l2</code> qui calcule la concaténation de deux listes (par exemple <code class="highlighter-rouge">append [1; 2] [3; 4] = [1; 2; 3; 4]</code>)</li>
-  <li><code class="highlighter-rouge">rev l</code> qui calcule le renversement d’une liste (par exemple <code class="highlighter-rouge">rev [1; 2; 3; 4] = [4; 3; 2; 1]</code>)</li>
-  <li><code class="highlighter-rouge">rev_acc l acc</code> qui calcule le renversement d’une liste en transférant les éléments de <code class="highlighter-rouge">l</code> dans <code class="highlighter-rouge">acc</code> puis en renvoyant <code class="highlighter-rouge">acc</code></li>
+  <li>
+    <p><code class="highlighter-rouge">append l1 l2</code> qui concatène deux listes. Par exemple <code class="highlighter-rouge">append [1; 2] [3; 4; 5] = [1; 2; 3; 4; 5]</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">flatten l</code> qui concaténe toutes les listes d’une liste de listes. Par exemple <code class="highlighter-rouge">aplatir [[1; 2]; [3; 4; 5]; []] = [1 ; 2; 3; 4; 5]</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">reverse l</code> qui inverse les éléments d’une liste. Par exemple <code class="highlighter-rouge">reverse [1; 2; 3] = [3; 2; 1]</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">mem x l</code> qui vérifie la présence d’un élément dans une liste. Par exemple <code class="highlighter-rouge">mem 3 [2; 3] = true</code> et <code class="highlighter-rouge">mem 3 [] = false</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">length l</code> qui calcule le nombre d’élément dans une liste. Par exemple <code class="highlighter-rouge">length [1; 2; 3] = 3</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">map f l</code> qui applique une fonction à tous les éléments d’une liste. Par exemple <code class="highlighter-rouge">map f [1; 2; 3] = [f 1; f 2; f 3]</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">filter p l</code> qui extrait tous les éléments qui valident un prédicat. Supposons qu’on ait un prédicat <code class="highlighter-rouge">pair</code>. Par exemple <code class="highlighter-rouge">filter pair [1; 2; 3; 4] = [2; 4]</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">exists p l</code> qui vérifie si un élément d’une liste valide un prédicat. Par exemple <code class="highlighter-rouge">exists pair [1; 2; 3] = true</code> et <code class="highlighter-rouge">exists pair [1; 3; 7] = false</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">forall p l</code> qui vérifie si tous les éléments d’une liste valide un prédicat. Par exemple : <code class="highlighter-rouge">forall pair [2; 4; 5] = false</code> et <code class="highlighter-rouge">forall pair [2; 4; 6] = true</code>.</p>
+  </li>
 </ol>
 
-<p><strong>Exercice 2</strong></p>
+<h2 id="tp-y--lambda-calcul-pur">TP Y : Lambda-calcul pur</h2>
 
-<p>On suppose qu’on travaille sur des listes sans répétitions (ensembles mathématiques).</p>
+<p>Le lambda-calcul pur est le langage de programmation fonctionnelle le plus simple, au coeur du langage OCaml. On peut imaginer définir le lambda-calcul pur
+en OCaml et programmer avec. C’est un langage où l’on ne manipule que des variables, des fonctions et des applications de fonctions. De façon assez surprenante,
+il est aussi puissant que n’importe quel langage de programmation.</p>
 
-<ol>
-  <li><code class="highlighter-rouge">appartient x l</code> qui détermine si l’élément <code class="highlighter-rouge">e</code> est dans la liste <code class="highlighter-rouge">n</code></li>
-  <li><code class="highlighter-rouge">inter l1 l2</code> qui calcule l’intersection de deux listes sans répétitions (par exemple <code class="highlighter-rouge">inter [1; 2] [2; 4] = [2]</code>)</li>
-  <li><code class="highlighter-rouge">union l1 l2</code> qui calcule l’union de deux listes sans répétitions (par exemple <code class="highlighter-rouge">union [1; 2] [2; 4] = [1; 2; 4]</code>)</li>
-</ol>
-
-<p>On suppose maintenant que l’on travaille sur des listes sans répétions mais aussi <em>triées</em>. On veut définir des fonctions
-de façon intelligente en prenant en compte le fait qu’elles sont triées.</p>
-
-<p>a. <code class="highlighter-rouge">inter2 l1 l2</code> qui calcule l’intersection de deux listes triées. Voici le modèle de la fonction :</p>
+<p>Un lambda-terme est défini par :</p>
 
 <figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6
-7
-</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">inter2</span> <span class="n">l1</span> <span class="n">l2</span> <span class="p">=</span>
-    <span class="n">match</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="kr">with</span> <span class="c">(*</span><span class="cm"> On peut faire des match sur plusieurs listes à la fois *)</span>
-    <span class="p">|</span> <span class="p">[],</span> <span class="n">l2</span> <span class="p">-&gt;</span> <span class="p">...</span>
-    <span class="p">|</span> <span class="n">l1</span><span class="p">,</span> <span class="p">[]</span> <span class="p">-&gt;</span> <span class="p">...</span>
-    <span class="p">|</span> <span class="n">h1::t1</span><span class="p">,</span> <span class="n">h2::t2</span> <span class="n">when</span> <span class="n">h1</span> <span class="n">&lt;</span> <span class="n">h2</span> <span class="p">-&gt;</span> <span class="p">...</span> <span class="c">(*</span><span class="cm"> 'when' permet de préciser une condition nécessaire *)</span>
-    <span class="p">|</span> <span class="n">h1::t1</span><span class="p">,</span> <span class="n">h2::t2</span> <span class="n">when</span> <span class="n">h1</span> <span class="n">&gt;</span> <span class="n">h2</span> <span class="p">-&gt;</span> <span class="p">...</span>
-    <span class="p">|</span> <span class="n">h1::t1</span><span class="p">,</span> <span class="n">h2::t2</span> <span class="p">-&gt;</span> <span class="p">...</span> <span class="c">(*</span><span class="cm"> On ne précise pas de condition, cela correspond aux autres cas *)</span>
+</pre></td><td class="code"><pre><span class="kr">type</span> <span class="kt">id</span> <span class="p">=</span> <span class="n">String</span>
+<span class="kr">type</span> <span class="kt">term</span> <span class="p">=</span>
+  <span class="p">|</span> <span class="n">Var</span> <span class="kr">of</span> <span class="n">id</span>
+  <span class="p">|</span> <span class="n">Fun</span> <span class="kr">of</span> <span class="p">(</span><span class="n">id</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span>
+  <span class="p">|</span> <span class="n">App</span> <span class="kr">of</span> <span class="p">(</span><span class="n">term</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>b. <code class="highlighter-rouge">union2 l1 l2</code> qui calcule l’union de deux listes triées. Le modèle est le même que pour <code class="highlighter-rouge">inter2</code>.</p>
-
-<p><strong>Bonus (à faire si vous ne savez pas quoi faire)</strong></p>
-
 <ol>
-  <li><code class="highlighter-rouge">diff l1 l2</code> qui calcule les éléments de l1 sans ceux de l2 (par exemple <code class="highlighter-rouge">diff [1; 2] [2; 4] = [1]</code>)</li>
-  <li><code class="highlighter-rouge">subset l1 l2</code> qui calcule si l1 est un sous ensemble de l2 (tous deux supposés sans répétitions)</li>
-  <li><code class="highlighter-rouge">remove1 x l</code> calcule la liste obtenue si on retire le premier <code class="highlighter-rouge">x</code> dans <code class="highlighter-rouge">l</code></li>
-  <li><code class="highlighter-rouge">remove_all x l</code> calcule la liste obtenue en retirant tous les <code class="highlighter-rouge">x</code> dans <code class="highlighter-rouge">l</code></li>
-  <li><code class="highlighter-rouge">zip l1 l2</code> qui fusionne deux listes de même taille en mettant chaque élément par paire (par exemple <code class="highlighter-rouge">zip [1; 2; 3] [4; 5; 6] = [(1, 4); (2, 5); (3, 6)]</code>)</li>
-  <li><code class="highlighter-rouge">unzip l</code> qui prend une liste de paires et effectue l’opération inverse (par exemple <code class="highlighter-rouge">unzip [(1, 4); (2, 5); (3, 6)] = ([1; 2; 3]; [4; 5; 6])</code>)</li>
-</ol>
-
-<h2 id="tp2--tri-sur-les-listes">TP2 : Tri sur les listes</h2>
-
-<p><strong>Exercice 1</strong></p>
-
-<ol>
-  <li><code class="highlighter-rouge">inserer x l</code> qui insère un élément <code class="highlighter-rouge">x</code> dans une liste <code class="highlighter-rouge">l</code> à la bonne position pour obtenir une liste triée.</li>
-  <li><code class="highlighter-rouge">tri_insertion l</code> qui trie par ordre croissant la liste l en utilisant <code class="highlighter-rouge">inserer</code></li>
-</ol>
-
-<p><strong>Exercice 2</strong></p>
-
-<ol>
-  <li><code class="highlighter-rouge">decouper e l</code> qui renvoie une paire <code class="highlighter-rouge">(petits, grands)</code> où <code class="highlighter-rouge">petits = {x ∈ l | x &lt;= e}</code> et <code class="highlighter-rouge">grands = {x ∈ l | x &gt; e}</code>.</li>
-  <li><code class="highlighter-rouge">tri_rapide l</code> qui utilise la fonction précédente et la concaténation pour effectuer un tri rapide (quicksort).</li>
-</ol>
-
-<p><strong>Exercice 3</strong></p>
-
-<ol>
-  <li><code class="highlighter-rouge">decouper_bis l</code> qui renvoie une paire <code class="highlighter-rouge">(pairs, impairs)</code> contenant la liste des éléments de rangs pairs et impairs.</li>
-  <li><code class="highlighter-rouge">fusion l1 l2</code> qui va effectuer la fusion de deux listes (conformément au tri fusion).</li>
-  <li><code class="highlighter-rouge">tri_fusion l</code> qui va effectuer un tri fusion en utilisant les deux fonctions précédentes.</li>
-</ol>
-
-<h2 id="tp25--traitement-des-mots">TP2.5 : traitement des mots</h2>
-
-<p>On représente des mots par des listes de caractères. Par exemple <code class="highlighter-rouge">w = ['s'; 'a'; 'l'; 'u'; 't']</code>.</p>
-
-<ol>
-  <li><code class="highlighter-rouge">prefixe u v</code> qui renvoie vrai si u est un préfixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['s'; 'a'] w = true</code>).</li>
-  <li><code class="highlighter-rouge">suffixe u v</code> qui renvoie vrai si u est un suffixe de v et faux sinon (par exemple <code class="highlighter-rouge">prefixe ['l'; 'u'; 't'] w = true</code>)</li>
-  <li><code class="highlighter-rouge">facteur u v</code> qui renvoie vrai si u est un facteur de v et faux sinon. C’est-à-dire que u est une sous-partie (possiblement vide) de v (par exemple <code class="highlighter-rouge">prefixe ['a'; 'l'; 'u'] w = true</code>).</li>
-  <li><code class="highlighter-rouge">liste_decomp w</code>, pour un mot w, renvoie la liste de toutes les décompositions possibles de la forme <code class="highlighter-rouge">w = uv</code> (par exemple <code class="highlighter-rouge">liste_decomp ['a'; 'b'] = [[[]; ['a', 'b']]; [['a']; ['b']]; ['a'; 'b']; []]</code>).</li>
-  <li><code class="highlighter-rouge">sans_facteur_carre w</code> qui renvoie vrai si w possède un sous-mot qui répété deux fois. Par exemple : abcabc a un facteur carré (abc est répété deux fois) mais pas abca ou cdaa.</li>
+  <li>
+    <p>Définir une fonction <code class="highlighter-rouge">print_lambda t</code> qui affiche un lambda-terme. Par exemple <code class="highlighter-rouge">Fun ("x", App (Var "x", Var "x"))</code> affiche <code class="highlighter-rouge">(λx -&gt; (x x))</code>.</p>
+  </li>
+  <li>Dans une fonction <code class="highlighter-rouge">let f x = e</code>, on dit que la variable <code class="highlighter-rouge">x</code> est liée c’est-à-dire que si elle apparaît dans <code class="highlighter-rouge">t</code>, elle est locale à la fonction <code class="highlighter-rouge">f</code>. Il existe une notion similaire en lambda-calcul. Par exemple, dans <code class="highlighter-rouge">(λx -&gt; (x y))</code>, la variable <code class="highlighter-rouge">x</code> est liée mais la variable <code class="highlighter-rouge">y</code> est libre.
+    <ul>
+      <li>Définir la fonction <code class="highlighter-rouge">freevars t</code> qui calcule l’ensemble (sans répétitions) de toutes les variables libres dans <code class="highlighter-rouge">t</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Définir une fonction <code class="highlighter-rouge">subst x u t</code> qui remplace toutes les occurrences <strong>libres</strong> de la variable <code class="highlighter-rouge">x</code> par <code class="highlighter-rouge">u</code> dans le terme <code class="highlighter-rouge">t</code> (on calcule donc <code class="highlighter-rouge">t[x:=u]</code>). On peut gérer les cas du type <code class="highlighter-rouge">(λx -&gt; y x)[y:=x]</code> en renommant la variable locale en <code class="highlighter-rouge">(λz -&gt; y z)[y:=x]</code> pour obtenir <code class="highlighter-rouge">(x z)</code> et non <code class="highlighter-rouge">(x x)</code>. On évite ainsi une capture de variable qui changerait le sens du programme.</p>
+  </li>
+  <li>
+    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction t</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>.</p>
+  </li>
+  <li>La fonction de réduction ne suffit pas pour évaluer entièrement un terme. Imaginons par exemple qu’on ait une application <code class="highlighter-rouge">(t u)</code> mais qu’il reste des termes à réduire dans <code class="highlighter-rouge">t</code> ou dans <code class="highlighter-rouge">u</code>. On doit définir une stratégie d’évaluation. Il en existe plusieurs. On choisit la stratégie appel-par-valeur qui n’évalue pas le corps des fonctions et qui, lors d’une application <code class="highlighter-rouge">(t u)</code>, évalue l’argument <code class="highlighter-rouge">u</code> puis la fonction <code class="highlighter-rouge">t</code> avant d’appliquer la réduction sur le tout.
+    <ul>
+      <li>Définir une fonction <code class="highlighter-rouge">eval t</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
+    </ul>
+  </li>
+  <li>On peut représenter une paire <code class="highlighter-rouge">p = (a, b)</code> par un terme <code class="highlighter-rouge">[p] = λf.f a b</code> qui attend une fonction de sélection en argument. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">fst = λx.λy.x</code> et <code class="highlighter-rouge">snd = λx.λy.y</code> tels que <code class="highlighter-rouge">fst [p] --&gt; a</code> et <code class="highlighter-rouge">snd [p] --&gt; b</code>.
+    <ul>
+      <li>Définir un terme <code class="highlighter-rouge">exchange</code> qui échange les éléments d’une paire codée en lambda-calcul.</li>
+    </ul>
+  </li>
+  <li>On peut représenter un entier naturel <code class="highlighter-rouge">n</code> par <code class="highlighter-rouge">n</code> applications d’une fonction successeur à une constante représentant zéro. On note cet encodage <code class="highlighter-rouge">[n]</code>. Par exemple <code class="highlighter-rouge">[0] = λs.λz.z</code> et <code class="highlighter-rouge">[2] = λs.λz.s (s z)</code> ou encore <code class="highlighter-rouge">[4] = λs.λz.s (s (s z))</code>.
+    <ul>
+      <li>Définir une fonction <code class="highlighter-rouge">lambda_to_int [n] = n</code> qui transforme un entier ud lambda-calcul en entier d’OCaml.</li>
+      <li>Définir un terme <code class="highlighter-rouge">succ [n] = [n+1]</code> qui calcule le successeur de <code class="highlighter-rouge">[n]</code>.</li>
+      <li>Définir un terme <code class="highlighter-rouge">add [n] [m] = [n+m]</code>.</li>
+    </ul>
+  </li>
+  <li>On peut représenter une liste par une fonction <code class="highlighter-rouge">cons</code> qui relie une tête à une queue. Par exemple <code class="highlighter-rouge">[[1; 2; 3]] = λcons.λempty.cons 1 (cons 2 (cons 3 empty))</code>.
+    <ul>
+      <li>Définir <code class="highlighter-rouge">taille [l]</code> se réduisant en <code class="highlighter-rouge">[n]</code> où <code class="highlighter-rouge">n</code> est la taille de <code class="highlighter-rouge">l</code>.</li>
+    </ul>
+  </li>
 </ol>
 
   </article>
