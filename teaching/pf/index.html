@@ -194,18 +194,18 @@ il est aussi puissant que n’importe quel langage de programmation.</p>
   </li>
   <li>Dans une fonction <code class="highlighter-rouge">let f x = e</code>, on dit que la variable <code class="highlighter-rouge">x</code> est liée c’est-à-dire que si elle apparaît dans <code class="highlighter-rouge">t</code>, elle est locale à la fonction <code class="highlighter-rouge">f</code>. Il existe une notion similaire en lambda-calcul. Par exemple, dans <code class="highlighter-rouge">(λx -&gt; (x y))</code>, la variable <code class="highlighter-rouge">x</code> est liée mais la variable <code class="highlighter-rouge">y</code> est libre.
     <ul>
-      <li>Définir la fonction <code class="highlighter-rouge">freevars t</code> qui calcule l’ensemble (sans répétitions) de toutes les variables libres dans <code class="highlighter-rouge">t</code>.</li>
+      <li>Définir la fonction <code class="highlighter-rouge">freevars : term -&gt; id list</code> qui calcule la liste de toutes les variables libres dans <code class="highlighter-rouge">t</code>.</li>
     </ul>
   </li>
   <li>
     <p>Définir une fonction <code class="highlighter-rouge">subst x u t</code> qui remplace toutes les occurrences <strong>libres</strong> de la variable <code class="highlighter-rouge">x</code> par <code class="highlighter-rouge">u</code> dans le terme <code class="highlighter-rouge">t</code> (on calcule donc <code class="highlighter-rouge">t[x:=u]</code>). On peut gérer les cas du type <code class="highlighter-rouge">(λx -&gt; y x)[y:=x]</code> en renommant la variable locale en <code class="highlighter-rouge">(λz -&gt; y z)[y:=x]</code> pour obtenir <code class="highlighter-rouge">(x z)</code> et non <code class="highlighter-rouge">(x x)</code>. On évite ainsi une capture de variable qui changerait le sens du programme.</p>
   </li>
   <li>
-    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction t</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>.</p>
+    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction : term -&gt; term</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>.</p>
   </li>
   <li>La fonction de réduction ne suffit pas pour évaluer entièrement un terme. Imaginons par exemple qu’on ait une application <code class="highlighter-rouge">(t u)</code> mais qu’il reste des termes à réduire dans <code class="highlighter-rouge">t</code> ou dans <code class="highlighter-rouge">u</code>. On doit définir une stratégie d’évaluation. Il en existe plusieurs. On choisit la stratégie appel-par-valeur qui n’évalue pas le corps des fonctions et qui, lors d’une application <code class="highlighter-rouge">(t u)</code>, évalue l’argument <code class="highlighter-rouge">u</code> puis la fonction <code class="highlighter-rouge">t</code> avant d’appliquer la réduction sur le tout.
     <ul>
-      <li>Définir une fonction <code class="highlighter-rouge">eval t</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
+      <li>Définir une fonction <code class="highlighter-rouge">eval t : term -&gt; term</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
     </ul>
   </li>
   <li>On peut représenter une paire <code class="highlighter-rouge">p = (a, b)</code> par un terme <code class="highlighter-rouge">[p] = λf.f a b</code> qui attend une fonction de sélection en argument. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">fst = λx.λy.x</code> et <code class="highlighter-rouge">snd = λx.λy.y</code> tels que <code class="highlighter-rouge">fst [p] --&gt; a</code> et <code class="highlighter-rouge">snd [p] --&gt; b</code>.
