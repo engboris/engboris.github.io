@@ -172,7 +172,7 @@ faisant partie de la définition précédente. Dans le cas habituel, les <code c
 
 <p>Le lambda-calcul pur est le langage de programmation fonctionnelle le plus simple, au coeur du langage OCaml. On peut imaginer définir le lambda-calcul pur
 en OCaml et programmer avec. C’est un langage où l’on ne manipule que des variables, des fonctions et des applications de fonctions. De façon assez surprenante,
-il est aussi puissant que n’importe quel langage de programmation.</p>
+il est aussi puissant que n’importe quel langage de programmation. Le but de ce TP est en quelque sorte de créer un mini-OCaml très basique.</p>
 
 <p>Un lambda-terme est défini par :</p>
 
@@ -190,39 +190,48 @@ il est aussi puissant que n’importe quel langage de programmation.</p>
 
 <ol>
   <li>
-    <p>Définir une fonction <code class="highlighter-rouge">print_lambda t</code> qui affiche un lambda-terme. Par exemple <code class="highlighter-rouge">Fun ("x", App (Var "x", Var "x"))</code> affiche <code class="highlighter-rouge">(λx -&gt; (x x))</code>.</p>
+    <p>Définir <code class="highlighter-rouge">print_lambda t</code> qui affiche un lambda-terme. Par exemple <code class="highlighter-rouge">Fun ("x", App (Var "x", Var "x"))</code> affiche <code class="highlighter-rouge">(λx -&gt; (x x))</code>.</p>
   </li>
   <li>Dans une fonction <code class="highlighter-rouge">let f x = e</code>, on dit que la variable <code class="highlighter-rouge">x</code> est liée c’est-à-dire que si elle apparaît dans <code class="highlighter-rouge">t</code>, elle est locale à la fonction <code class="highlighter-rouge">f</code>. Il existe une notion similaire en lambda-calcul. Par exemple, dans <code class="highlighter-rouge">(λx -&gt; (x y))</code>, la variable <code class="highlighter-rouge">x</code> est liée mais la variable <code class="highlighter-rouge">y</code> est libre.
     <ul>
-      <li>Définir la fonction <code class="highlighter-rouge">freevars : term -&gt; id list</code> qui calcule la liste de toutes les variables libres dans <code class="highlighter-rouge">t</code>.</li>
+      <li>Définir <code class="highlighter-rouge">remove x l</code> qui retire toutes les occurrences de <code class="highlighter-rouge">x</code> dans la liste <code class="highlighter-rouge">l</code>.</li>
+      <li>Définir <code class="highlighter-rouge">freevars : term -&gt; id list</code> qui calcule la liste de toutes les variables libres dans <code class="highlighter-rouge">t</code>.</li>
+    </ul>
+  </li>
+  <li>On aimerait définir <code class="highlighter-rouge">subst x u t</code> qui remplace toutes les occurrences <strong>libres</strong> de la variable <code class="highlighter-rouge">x</code> par <code class="highlighter-rouge">u</code> dans le terme <code class="highlighter-rouge">t</code> (on calcule donc <code class="highlighter-rouge">t[x:=u]</code>). Cependant, si on a une substitution de la forme <code class="highlighter-rouge">(λx -&gt; y x)[y:=x]</code>, cela risque de produire <code class="highlighter-rouge">(λx -&gt; x x)</code> qui a un sens différent. Pour éviter cela, il faut renommer la variable liée de la fonction : <code class="highlighter-rouge">(λz -&gt; y z)[y:=x] = (λz -&gt; x z)</code>.
+    <ul>
+      <li>Définir <code class="highlighter-rouge">fresh_id x vars</code> permettant de produire une variable unique en ajoutant une apostrophe à la variable <code class="highlighter-rouge">x</code> jusqu’à qu’elle soit différente de toutes les variables dans <code class="highlighter-rouge">vars</code>.</li>
+      <li>Définir <code class="highlighter-rouge">subst x u t</code> qui calcule <code class="highlighter-rouge">t[x:=u]</code> sans oublier de gérer l’incohérence énoncée ci-dessus et en utilisant <code class="highlighter-rouge">fresh_id</code>.</li>
     </ul>
   </li>
   <li>
-    <p>Définir une fonction <code class="highlighter-rouge">subst x u t</code> qui remplace toutes les occurrences <strong>libres</strong> de la variable <code class="highlighter-rouge">x</code> par <code class="highlighter-rouge">u</code> dans le terme <code class="highlighter-rouge">t</code> (on calcule donc <code class="highlighter-rouge">t[x:=u]</code>). On peut gérer les cas du type <code class="highlighter-rouge">(λx -&gt; y x)[y:=x]</code> en renommant la variable locale en <code class="highlighter-rouge">(λz -&gt; y z)[y:=x]</code> pour obtenir <code class="highlighter-rouge">(x z)</code> et non <code class="highlighter-rouge">(x x)</code>. On évite ainsi une capture de variable qui changerait le sens du programme.</p>
+    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction : term -&gt; term</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>. Si le terme n’est pas de la bonne forme, il ne change pas.</p>
   </li>
-  <li>
-    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction : term -&gt; term</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>.</p>
-  </li>
-  <li>La fonction de réduction ne suffit pas pour évaluer entièrement un terme. Imaginons par exemple qu’on ait une application <code class="highlighter-rouge">(t u)</code> mais qu’il reste des termes à réduire dans <code class="highlighter-rouge">t</code> ou dans <code class="highlighter-rouge">u</code>. On doit définir une stratégie d’évaluation. Il en existe plusieurs. On choisit la stratégie appel-par-valeur qui n’évalue pas le corps des fonctions et qui, lors d’une application <code class="highlighter-rouge">(t u)</code>, évalue l’argument <code class="highlighter-rouge">u</code> puis la fonction <code class="highlighter-rouge">t</code> avant d’appliquer la réduction sur le tout.
+  <li>La fonction de réduction ne suffit pas pour évaluer entièrement un terme. Il existe plusieurs stratégies pour évaluer totalement un terme. On choisit la stratégie <em>appel-par-valeur</em> qui n’évalue pas le corps des fonctions et qui, lors d’une application <code class="highlighter-rouge">(t u)</code>, évalue l’argument <code class="highlighter-rouge">u</code> <em>puis</em> la fonction <code class="highlighter-rouge">t</code> avant d’appliquer la réduction sur le tout.
     <ul>
-      <li>Définir une fonction <code class="highlighter-rouge">eval t : term -&gt; term</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
+      <li>Définir <code class="highlighter-rouge">eval t : term -&gt; term</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
     </ul>
   </li>
   <li>On peut représenter une paire <code class="highlighter-rouge">p = (a, b)</code> par un terme <code class="highlighter-rouge">[p] = λf.f a b</code> qui attend une fonction de sélection en argument. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">fst = λx.λy.x</code> et <code class="highlighter-rouge">snd = λx.λy.y</code> tels que <code class="highlighter-rouge">fst [p] --&gt; a</code> et <code class="highlighter-rouge">snd [p] --&gt; b</code>.
     <ul>
       <li>Définir un terme <code class="highlighter-rouge">exchange</code> qui échange les éléments d’une paire codée en lambda-calcul.</li>
+      <li>Essayer la fonction sur des exemples.</li>
     </ul>
   </li>
-  <li>On peut représenter un entier naturel <code class="highlighter-rouge">n</code> par <code class="highlighter-rouge">n</code> applications d’une fonction successeur à une constante représentant zéro. On note cet encodage <code class="highlighter-rouge">[n]</code>. Par exemple <code class="highlighter-rouge">[0] = λs.λz.z</code> et <code class="highlighter-rouge">[2] = λs.λz.s (s z)</code> ou encore <code class="highlighter-rouge">[4] = λs.λz.s (s (s z))</code>.
+  <li>On peut représenter un entier naturel <code class="highlighter-rouge">n</code> par <code class="highlighter-rouge">n</code> applications d’une fonction successeur à une constante représentant zéro. On note cet encodage <code class="highlighter-rouge">[n]</code>. Par exemple <code class="highlighter-rouge">[0] = λs.λz.z</code> et <code class="highlighter-rouge">[2] = λs.λz.s (s z)</code> ou encore <code class="highlighter-rouge">[4] = λs.λz.s (s (s z))</code> (<code class="highlighter-rouge">z</code> représente en fait zéro et <code class="highlighter-rouge">s</code> la fonction successeur).
     <ul>
-      <li>Définir une fonction <code class="highlighter-rouge">lambda_to_int [n] = n</code> qui transforme un entier ud lambda-calcul en entier d’OCaml.</li>
+      <li>Définir une fonction <code class="highlighter-rouge">int_to_lambda n</code> qui transforme un entier positif en son encodage dans le lambda-calcul pur.</li>
+      <li>Définir une fonction <code class="highlighter-rouge">lambda_to_int [n] = n</code> qui transforme un entier du lambda-calcul pur en entier d’OCaml.</li>
       <li>Définir un terme <code class="highlighter-rouge">succ [n] = [n+1]</code> qui calcule le successeur de <code class="highlighter-rouge">[n]</code>.</li>
-      <li>Définir un terme <code class="highlighter-rouge">add [n] [m] = [n+m]</code>.</li>
+      <li>Définir un terme <code class="highlighter-rouge">add [n] [m] = [n+m]</code> qui calcule l’addition.</li>
+      <li>Essayer les fonctions sur des exemples.</li>
     </ul>
   </li>
   <li>On peut représenter une liste par une fonction <code class="highlighter-rouge">cons</code> qui relie une tête à une queue. Par exemple <code class="highlighter-rouge">[[1; 2; 3]] = λcons.λempty.cons 1 (cons 2 (cons 3 empty))</code>.
     <ul>
+      <li>Définir <code class="highlighter-rouge">lcons t [l]</code> qui ajoute un terme en tête de la liste <code class="highlighter-rouge">l</code> encodée en lambda-calcul.</li>
       <li>Définir <code class="highlighter-rouge">taille [l]</code> se réduisant en <code class="highlighter-rouge">[n]</code> où <code class="highlighter-rouge">n</code> est la taille de <code class="highlighter-rouge">l</code>.</li>
+      <li>Essayer les fonctions sur des exemples.</li>
     </ul>
   </li>
 </ol>
