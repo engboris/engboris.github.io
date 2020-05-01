@@ -184,8 +184,8 @@ il est aussi puissant que n’importe quel langage de programmation. Le but de c
 </pre></td><td class="code"><pre><span class="kr">type</span> <span class="kt">id</span> <span class="p">=</span> <span class="n">string</span>
 <span class="kr">type</span> <span class="kt">term</span> <span class="p">=</span>
   <span class="p">|</span> <span class="n">Var</span> <span class="kr">of</span> <span class="n">id</span>
-  <span class="p">|</span> <span class="n">Fun</span> <span class="kr">of</span> <span class="p">(</span><span class="n">id</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span>
-  <span class="p">|</span> <span class="n">App</span> <span class="kr">of</span> <span class="p">(</span><span class="n">term</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span>
+  <span class="p">|</span> <span class="n">Fun</span> <span class="kr">of</span> <span class="p">(</span><span class="n">id</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span> <span class="c">(*</span><span class="cm"> cela correspond à (fun x -&gt; t) en OCaml *)</span>
+  <span class="p">|</span> <span class="n">App</span> <span class="kr">of</span> <span class="p">(</span><span class="n">term</span> <span class="n">*</span> <span class="n">term</span><span class="p">)</span> <span class="c">(*</span><span class="cm"> cela correspond à (t u) en OCaml *)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <ol>
@@ -212,9 +212,25 @@ il est aussi puissant que n’importe quel langage de programmation. Le but de c
       <li>Définir <code class="highlighter-rouge">eval t : term -&gt; term</code> qui évalue un terme selon la stratégie appel-par-valeur.</li>
     </ul>
   </li>
-  <li>On peut représenter une paire <code class="highlighter-rouge">p = (a, b)</code> par un terme <code class="highlighter-rouge">[p] = λf.f a b</code> qui attend une fonction de sélection en argument. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">fst = λx.λy.x</code> et <code class="highlighter-rouge">snd = λx.λy.y</code> tels que <code class="highlighter-rouge">fst [p] --&gt; a</code> et <code class="highlighter-rouge">snd [p] --&gt; b</code>.
+  <li>On aimerait maintenant programmer en lambda-calcul. Pour cela on va écrire des fonctions pour nous faciliter la tâche puis on montrera qu’on peut faire des programmes avec des paires et et des entiers positifs. Complétez ces fonctions :</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="n">var</span> <span class="n">x</span> <span class="p">=</span> <span class="n">Var</span> <span class="n">x</span>
+<span class="kr">let</span> <span class="n">app</span> <span class="n">t</span> <span class="n">u</span> <span class="p">=</span> <span class="n">App</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="kr">let</span> <span class="n">func</span> <span class="n">x</span> <span class="n">t</span> <span class="p">=</span> <span class="n">Fun</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="kr">let</span> <span class="n">funcs</span> <span class="n">xs</span> <span class="n">t</span> <span class="p">=</span> <span class="p">...</span> <span class="c">(*</span><span class="cm"> terme fonction avec une liste d'arguments *)</span>
+<span class="kr">let</span> <span class="n">apps</span> <span class="n">f</span> <span class="n">xs</span> <span class="p">=</span> <span class="p">...</span> <span class="c">(*</span><span class="cm"> terme qui applique une liste d'arguments *)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<ol>
+  <li>On peut représenter une paire <code class="highlighter-rouge">p = (a, b)</code> par un terme <code class="highlighter-rouge">[p] = λf.f a b</code> qui attend une fonction de sélection en argument. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">lfst = λx.λy.x</code> et <code class="highlighter-rouge">lsnd = λx.λy.y</code> tels que <code class="highlighter-rouge">lfst [p] --&gt; a</code> et <code class="highlighter-rouge">lsnd [p] --&gt; b</code>.
     <ul>
-      <li>Définir un terme <code class="highlighter-rouge">exchange</code> qui échange les éléments d’une paire codée en lambda-calcul.</li>
+      <li>Définir un terme <code class="highlighter-rouge">exchange</code> tel que <code class="highlighter-rouge">[(a, b)] --&gt; [(b, a)]</code>.</li>
       <li>Essayer la fonction sur des exemples.</li>
     </ul>
   </li>
@@ -222,15 +238,15 @@ il est aussi puissant que n’importe quel langage de programmation. Le but de c
     <ul>
       <li>Définir une fonction <code class="highlighter-rouge">int_to_lambda n</code> qui transforme un entier positif en son encodage dans le lambda-calcul pur.</li>
       <li>Définir une fonction <code class="highlighter-rouge">lambda_to_int [n] = n</code> qui transforme un entier du lambda-calcul pur en entier d’OCaml.</li>
-      <li>Définir un terme <code class="highlighter-rouge">succ [n] = [n+1]</code> qui calcule le successeur de <code class="highlighter-rouge">[n]</code>.</li>
-      <li>Définir un terme <code class="highlighter-rouge">add [n] [m] = [n+m]</code> qui calcule l’addition.</li>
+      <li>Définir un terme <code class="highlighter-rouge">succ</code> tel que  <code class="highlighter-rouge">[n] --&gt; [n+1]</code> qui calcule le successeur de <code class="highlighter-rouge">[n]</code>.</li>
+      <li>Définir un terme <code class="highlighter-rouge">add</code> tel que <code class="highlighter-rouge">add [n] [m] --&gt; [n+m]</code> qui calcule l’addition.</li>
       <li>Essayer les fonctions sur des exemples.</li>
     </ul>
   </li>
   <li>On peut représenter une liste par une fonction <code class="highlighter-rouge">cons</code> qui relie une tête à une queue. Par exemple <code class="highlighter-rouge">[[1; 2; 3]] = λcons.λempty.cons 1 (cons 2 (cons 3 empty))</code>.
     <ul>
-      <li>Définir <code class="highlighter-rouge">lcons t [l]</code> qui ajoute un terme en tête de la liste <code class="highlighter-rouge">l</code> encodée en lambda-calcul.</li>
-      <li>Définir <code class="highlighter-rouge">taille [l]</code> se réduisant en <code class="highlighter-rouge">[n]</code> où <code class="highlighter-rouge">n</code> est la taille de <code class="highlighter-rouge">l</code>.</li>
+      <li>Définir <code class="highlighter-rouge">lcons</code> tel que  <code class="highlighter-rouge">lcons t [l] --&gt; [t::l]</code>.</li>
+      <li>Définir <code class="highlighter-rouge">taille</code> tel que <code class="highlighter-rouge">taille [l] --&gt; [|l|]</code>.</li>
       <li>Essayer les fonctions sur des exemples.</li>
     </ul>
   </li>
