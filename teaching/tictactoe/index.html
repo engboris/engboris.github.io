@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Eng Sambo Boris">
+<meta name="description" content="Eng Boris's webpage. PhD in Computer Science.">
+<title>Eng (Sambo) Boris</title>
+<link rel="canonical" href="https://engboris.github.io//teaching/tictactoe/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+<header>
+  <h1>⊢ <a href="">Eng (Sambo) Boris</a></h1>
+  <div class="sub">PhD Student in Computer Science at Laboratoire d'Informatique de Paris Nord (Université Paris 13, France)</div>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/thoughts/">Thoughts</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+        <span class="sub">engboris@hotmail.fr</span>
+    </div>
+  </nav>
+</header>
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="tic-tac-toe">Tic-tac-toe</h1>
+
+<p>Le jeux de tic-tac-toe se joue à deux joueurs sur un terrain quadrillé de 3x3 cases. Le premier joueur peut placer des croix (X) et le second des cercles (O). Chacun place un symbole tour à tour. Le premier joueur qui aligne trois de ses symboles (horizontalement, verticalement ou en diagonale) gagne la partie.</p>
+
+<p>Nous allons reproduire ce jeu en Python. Pour cela, nous allons découper le programme en plusieurs sous-fonctions qui vont permettre de réutiliser plusieurs fois du code et/ou d’avoir un programme plus clair. Nous allons commencer à partir du programme suivant :</p>
+
+<figure class="highlight"><pre><code class="language-py" data-lang="py"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre><span class="s">'''On définit les symboles de chaque joueur pour pouvoir les changer facilement si besoin'''</span>
+<span class="n">symJ1</span> <span class="o">=</span> <span class="s">"X"</span>
+<span class="n">symJ2</span> <span class="o">=</span> <span class="s">"O"</span>
+
+<span class="s">'''Au dessus, on va écrire des fonctions qui représentent des fonctionnalités que l'on pourra utiliser.'''</span>
+<span class="k">def</span> <span class="nf">blabla1</span><span class="p">():</span>
+  <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">blabla2</span><span class="p">():</span>
+  <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">blabla3</span><span class="p">():</span>
+  <span class="o">...</span>
+
+<span class="s">'''C'est ici qu'on écrit ce que fait le programme. Le terrain est représenté par une liste de listes.'''</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">terrain</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+    <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+    <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+  <span class="p">]</span>
+  <span class="n">tour</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">gagnant</span><span class="p">(</span><span class="n">terrain</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="s">'''Le tour est pair, c'est au tour de J1 !'''</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tour</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="s">'''Le tour est impair, c'est au tour de J2 !'''</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tour</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="n">tour</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="s">'''On active la fonction principale pour lancer le programme'''</span>
+<span class="n">main</span> <span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<ol>
+  <li>
+    <p>Ecrire une fonction <code class="highlighter-rouge">affiche_terrain(t)</code> qui affiche le terrain comme un quadrillage 3x3 (on affiche un espace si la case est vide).</p>
+  </li>
+  <li>
+    <p>Ecrire une fonction <code class="highlighter-rouge">coup(sym, terrain, i, j)</code> qui écrit le symbole <code class="highlighter-rouge">sym</code> à la case <code class="highlighter-rouge">terrain[i][j]</code>.</p>
+  </li>
+  <li>Ecrire une fonction <code class="highlighter-rouge">gagnant(terrain)</code> qui vérifie s’il y a un gagnant et utilise <code class="highlighter-rouge">return</code> pour renvoyer :
+    <ul>
+      <li><code class="highlighter-rouge">0</code> s’il y a match nul</li>
+      <li><code class="highlighter-rouge">1</code> si le joueur 1 a gagné</li>
+      <li><code class="highlighter-rouge">2</code> si le joueur 2 a gagné</li>
+      <li><code class="highlighter-rouge">None</code> si on ne sait pas</li>
+    </ul>
+  </li>
+  <li>Ecrire une fonction <code class="highlighter-rouge">jouer()</code> qui effectue les opérations suivantes :
+    <ul>
+      <li>Affiche un texte pour demander au joueur qui doit jouer d’entrer l’indice de la ligne puis l’indice de la colonne où jouer.</li>
+      <li>Demande à l’utilisateur d’entrer les coordonnées grâce à <code class="highlighter-rouge">input()</code>.</li>
+      <li>Utilise la fonction <code class="highlighter-rouge">coup</code> pour mettre à jour le terrain (ne pas oublier de convertir les coordonnées en entier).</li>
+    </ul>
+  </li>
+  <li>
+    <p>Ecrire une fonction <code class="highlighter-rouge">resultat()</code> qui vérifie s’il y a un gagnant et qui affiche qui a gagné.</p>
+  </li>
+  <li>
+    <p>Compléter le programme donné plus haut avec les fonctions que l’on a défini.</p>
+  </li>
+  <li>Modifier le programme pour que <code class="highlighter-rouge">gagnant(terrain)</code> ne soit pas appelé dans la fonction <code class="highlighter-rouge">resultat()</code>.</li>
+</ol>
+
+<h2 id="extensions">Extensions</h2>
+
+<ol>
+  <li>Adapter le programme pour pouvoir jouer à 1 joueur contre l’ordinateur (le coup de l’ordinateur est choisi au hasard) et proposer un menu pour pouvoir soit jouer à 2 joueur ou seul contre l’ordinateur.</li>
+</ol>
+
+  </article>
+</main>
+
+

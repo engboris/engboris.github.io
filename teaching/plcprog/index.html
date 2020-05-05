@@ -4,7 +4,7 @@
 <meta name="author" content="Eng Sambo Boris">
 <meta name="description" content="Eng Boris's webpage. PhD in Computer Science.">
 <title>Eng (Sambo) Boris</title>
-<link rel="canonical" href="http://localhost:4000/teaching/plcprog/">
+<link rel="canonical" href="https://engboris.github.io//teaching/plcprog/">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="/basic.css" rel="stylesheet">
@@ -92,11 +92,17 @@
       <li>Définir <code class="highlighter-rouge">subst x u t</code> qui calcule <code class="highlighter-rouge">t[x:=u]</code> sans provoquer d’incohérence.</li>
     </ul>
   </li>
-  <li>
-    <p>Définir la beta-reduction <code class="highlighter-rouge">reduction : term -&gt; term</code> qui effectue la reduction <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>. Si le terme n’est pas de la bonne forme, il ne change pas.</p>
+  <li>Définir une fonction <code class="highlighter-rouge">reduction : term -&gt; term</code> qui effectue une étape de réduction sur un terme :
+    <ul>
+      <li>Si le terme est de la forme <code class="highlighter-rouge">(λx -&gt; t) u</code>, il se réduit en <code class="highlighter-rouge">t[x:=u]</code> ce que l’on note <code class="highlighter-rouge">(λx -&gt; t) u --&gt; t[x:=u]</code>.</li>
+      <li>Si le terme est une fonction, on réduit à l’intérieur.</li>
+      <li>Si le terme est une application et que la partie gauche ne se réduit pas, on réduit la partie droite.</li>
+      <li>Si le terme est une application quelconque, on réduit seulement la partie gauche.</li>
+      <li>Sinon, le terme ne change pas.</li>
+    </ul>
   </li>
   <li>
-    <p>Définir une fonction <code class="highlighter-rouge">eval : term -&gt; term</code> qui évalue totalement un terme en tenant compte des réductions à l’intérieur du terme.</p>
+    <p>Définir une fonction <code class="highlighter-rouge">eval : term -&gt; term</code> qui évalue totalement un terme en effectuant des réductions dessus jusqu’à que le terme ne change plus.</p>
   </li>
   <li>Définir une fonction <code class="highlighter-rouge">show_exec : term -&gt; ()</code> qui affiche l’exécution d’un terme étape par étape.</li>
 </ol>
@@ -115,7 +121,7 @@
 <span class="kr">let</span> <span class="n">apps</span> <span class="n">f</span> <span class="n">xs</span> <span class="p">=</span> <span class="p">...</span> <span class="c">(*</span><span class="cm"> terme qui applique une liste d'arguments *)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>b. On peut représenter/simuler/encoder une paire <code class="highlighter-rouge">(a, b)</code> par un terme <code class="highlighter-rouge">〚(a, b)〛 := λf.f a b</code>. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">lfst = λx.λy.x</code> et <code class="highlighter-rouge">lsnd = λx.λy.y</code> que l’on passe en argument à l’encodage du couple. Par exemple, on peut imaginer le terme suivant : <code class="highlighter-rouge">pid = λp.λf.f (p lfst) (p lsnd)</code>  qui prend un couple et le renvoie tel quel.</p>
+<p>b. On peut représenter/simuler/encoder une paire <code class="highlighter-rouge">(a, b)</code> par un terme <code class="highlighter-rouge">〚(a, b)〛 := λf.f a b</code>. Si on veut extraire l’élément à gauche ou à droite on peut utiliser les termes suivants : <code class="highlighter-rouge">lfst = λx.λy.x</code> et <code class="highlighter-rouge">lsnd = λx.λy.y</code> que l’on passe en argument à l’encodage du couple. Par exemple, on peut imaginer le terme suivant : <code class="highlighter-rouge">pid = λp.λf.(f (p lfst) (p lsnd))</code>  qui prend un couple et le renvoie tel quel.</p>
 <ul>
   <li>Essayer le terme <code class="highlighter-rouge">pid</code> sur des exemples pour comprendre son fonctionnement.</li>
   <li>Définir un terme <code class="highlighter-rouge">exchange</code> tel que <code class="highlighter-rouge">〚(a, b)〛 --&gt; 〚(b, a)〛</code>.</li>
