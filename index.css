@@ -22,10 +22,6 @@ body {
   margin: 3px;
 }
 
-.current {
-  background-color: #b583d0;
-}
-
 ul {
   list-style-type: circle;
 }
