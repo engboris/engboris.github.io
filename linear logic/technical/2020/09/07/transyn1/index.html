@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Eng Sambo Boris">
+<meta name="description" content="Eng Boris's webpage. PhD student in Computer Science.">
+<title> Transcendental Syntax for the linear logician through examples › Eng (Sambo) Boris</title>
+<link rel="canonical" href="https://engboris.github.io//linear%20logic/technical/2020/09/07/transyn1/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+        TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js"],
+        Macros: {
+              infer: [`\\begin{array}\[b\]{c c c c}
+              \\style{border-bottom:1px solid black; padding-bottom:7px;}{
+              \\begin{array}\[b\]{c c c c} #2 \\end{array}}
+                    &  \\hspace{-.5em}\\raise{-.6em}{#1} \\\\
+              #3 \\\\\[-50em\]
+              \\end{array}`,3,""
+              ]
+            }
+        }
+        });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<header>
+  <h1>⊢ <a href="">Eng (Sambo) Boris</a></h1>
+  <div class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</div>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  id="selected"  href="/thoughts/">Thoughts</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+        <span class="sub">engboris@hotmail.fr</span>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article  id="post" >
+    
+    <a href="/thoughts">« Return to Thoughts</a>
+    <header>
+      <h1 id="maintitle">Transcendental Syntax for the linear logician through examples</h1>
+      <time datetime="2020-09-07T00:00:00+02:00">September 7, 2020</time>
+      
+      <div>
+      
+      
+      
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(67, 50%, 50%);">linear logic</span>
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(211, 50%, 50%);">technical</span></div>
+      
+    </header>
+    <p><strong>Prerequisite</strong>: linear logic, proof-nets, correctness criterion, first-order term unification</p>
+
+<h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
+
+<ul>
+  <li><strong>What is the Transcendental Syntax about?</strong> The Transcendental Syntax is a programme initiated by Girard which can be seen as the successor of his Geometry of Interaction (GoI) programme. In the same idea, it aims at giving a fully computational foundation for logic where entities such as formulas, proofs, correctness, truth are reconstructed from scratch with computational objects. It can be said to be free from prejudices because we don’t have preconceptions about how the logical objects should be but we still want some fundamental properties in order to have a coherent logic.</li>
+  <li><strong>Where does the model of stars and constellation come from?</strong> The GoI began with a mathematical study of the cut-elimination procedure in the setting of operator algebras. In the third article of GoI, Girard discovered a simplification with the model of flows based on first-order unification. The stellar resolution is simply an extension of this model.</li>
+  <li><strong>Is it related to any other works?</strong> The stellar resolution works with stars which can be connected to each other like atoms or molecules and their interaction cause an annhilation producing a reaction. It seems that this model is able to simulate abstract tile assembly models which are used in DNA computing but also the combinatorial model of Wang tiles. It can also be seen as a generalization of the model of flows used in GoI and of Seiller’s interaction graphs.</li>
+  <li><strong>Why is it interesting?</strong> In the Transcendental Syntax, logic is studied with finite objects without reference to the infinity. Moreover, it generalises flows and interaction graphs which have interesting applications in implicit computational complexity. The Transcendental Syntax has a very general notion of typing by confronting a computational object to a set of tests (usually finite) in order to certify/label it. The more interesting point is that the third article of Transcendental Syntax describes how to construct a model for first-order logic thus giving a computational content to first-order logic in the sense of the Curry-Howard correspondence.</li>
+</ul>
+
+<h1 id="stars-and-constellations">Stars and constellations</h1>
+
+<p>We define rays by the grammar $r ::= +a(t) \mid -a(t) \mid t$ where $+/-$ are polarties, $a$ is a function symbol from a set of <em>colours</em> and $t$ is a first-order term.</p>
+
+<p>A star is a multiset of rays $\sigma = [r_1, …, r_n]$ and a constellation $\Sigma = \sigma_1 + … + \sigma_m$ is a multiset of stars. We consider stars to be equivalent up to renaming.</p>
+
+<p>This is very similar to clauses and logic programs. We can even encode them in our model. For instance, we have the following constellations:
+$\Sigma_\mathbb{N}^{n,m} = [-add(0, y, y)]+[-add(s(x), y, s(z)), +add(x, y, z)]+[+add(s^n(0), s^m(0), r), r]$
+$\Sigma_{family} = [+parent(d, j)]+[+parent(z, d)]+[+parent(s, z)]+[+parent(n, s)]+$
+$[+ancestor(x, y), -parent(x, y)]+[+ancestor(x, z), -parent(x, y), -ancestor(y, z)]+$
+$[-ancestor(j, r), r]$</p>
+
+<h1 id="evaluation-of-constellations">Evaluation of constellations</h1>
+
+<h2 id="actualisation">Actualisation</h2>
+
+<p>From a constellation $\Sigma$, we can construct its <em>unification graph</em> $\Sigma[\mathcal{A}]$ for a set of colours $\mathcal{A}$ telling us which rays can be connected together. It is a graph of stars $\sigma \in \Sigma$ with edges between two stars whenever there are two rays $r_1, r_2$ of opposite polarity such that their underlying terms (without colour) are matchable. The edge is labelled with the equation $r_1 \doteq r_2$. For instance, we have $\Sigma_\mathbb{N}^{n,m}[add] =$
+<img src="/images/posts/transyn1/fig1.svg" /></p>
+
+<p>and $\Sigma_{family}[parent, ancestor] =$
+<img src="/images/posts/transyn1/fig2.svg" /></p>
+
+<p>We can then make actual connexions between <em>occurrences</em> of stars following the unification graph of a constellation. Such a connexion, called a <em>diagram</em> (written $\delta$) has to be a tree and all star variable have to be made distinct. For instance, we can have the following diagram for $\Sigma_\mathbb{N}^{2,2}$:
+<img src="/images/posts/transyn1/fig3.svg" /></p>
+
+<p>Such a diagram can be reduced by annihilating all connected rays and solving the underlying unification problem $\mathcal{P}(\delta) = \{add(0, y_1, y_1) \doteq add(x_2, y_2, z_2), add(s(x_2), y, s(z_2)) \doteq add(x_3, y_3, z_3), add(s(x_3), y, s(z_3)) \doteq add(s(s(0)), s(s(0)), r)\}$. The solution of this problem is the substitution $\theta = \{r \mapsto s(s(s(s(0))))\}$ which is applied on the star of free rays $[y]$. The result $[s(s(s(s(0))))]$ of this procedure is called the <em>actualisation</em> of $\delta$. This can be thought as a chemical reaction having an effect on the non-involved entities.</p>
+
+<h2 id="fusion">Fusion</h2>
+
+<p>TODO</p>
+
+<h2 id="execution">Execution</h2>
+
+<p>The <em>normalization</em> or <em>execution</em> $\mathtt{exec}(\Sigma)$ of a constellation $\Sigma$ construct the set of correct (the underlying unification problem doesn’t fail) saturated (no stars can be added to extend it) diagrams and actualise them all in order to produce a new constellation called the <em>normal form</em>. For $\Sigma_\mathbb{N}^{2,2}$, one can check that beside $\delta$, all other diagrams fail so $\mathtt{exec}(\Sigma_\mathbb{N}^{2,2}) = [s(s(s(s(0))))]$. If the set of such correct saturated diagrams is finite, the constellation is said to be <em>strongly normalising</em>.</p>
+
+<h1 id="interpretation-of-the-computional-content-of-mll">Interpretation of the computional content of MLL</h1>
+
+<p><strong>Intuition.</strong> The idea comes from the GoI: the $⅋/\otimes$ cuts can be seen as administrative/inessential cuts since all they do is basically a rewiring on the premises of the $⅋$ and $\otimes$ nodes connected together. By eliminating all such cuts, we end up with a set of axioms connected by cuts. These axioms represent the essential and computational part of a proof-structure. We only have to encode axioms and cuts.</p>
+
+<p><strong>Example 1.</strong> Let’s take the following cut-elimination $\mathcal{S} \rightarrow \mathcal{S}’$ of MLL proof-structures:</p>
+
+<p><img src="/images/posts/transyn1/fig4.png" style="width:30%" />
+<img src="/images/posts/transyn1/fig5.png" style="width:30%" />
+<img src="/images/posts/transyn1/fig6.png" style="width:30%" /></p>
+
+<p>We translate $\mathcal{S}$ into stars in the following way:</p>
+
+<ol>
+  <li>
+    <p>We associate a first-order term representing an addresses to all conclusions of axioms, relatively to the conclusions of the proof-structure (without considering cuts). We get $p_{A_1^\bot ⅋ A_1}(\mathtt{l} \cdot x)(x),\quad p_{A_1^\bot ⅋ A_1}(\mathtt{r} \cdot x)(x),\quad p_{A_2 \otimes A_3^\bot}(\mathtt{l} \cdot x)(x),\quad p_{A_2 \otimes A_3^\bot}(\mathtt{r} \cdot x)(x),\quad p_{A_2^\bot}(x),\quad p_{A_3}(x)$.</p>
+  </li>
+  <li>
+    <p>Two addresses linked by an axiom link form a binary star. For instance, we have the axiom star: $[p_{A_1^\bot ⅋ A_1}(\mathtt{l} \cdot x)(x), p_{A_1^\bot ⅋ A_1}(\mathtt{r} \cdot x)(x)]$.</p>
+  </li>
+  <li>
+    <p>Two formulas <strong>A</strong> and <strong>B</strong> connected by a cut link form a binary star $[p_A(x), p_B(x)]$.</p>
+  </li>
+  <li>
+    <p>All axiom stars are coloured in the colour “+c” (positive computational) and the cut stars in the colour “-c” (negative computational) in order to allows interaction with the cuts. The cuts will identify two addresses.</p>
+  </li>
+</ol>
+
+<p>The proof-structure becomes the constellation: $
+[\color{Red}{+c.p_{A_1^\bot ⅋ A_1}(\mathtt{l} \cdot x)(x)},\color{Red}{+c.p_{A_1^\bot ⅋ A_1}(\mathtt{r} \cdot x)(x)}]+
+[\color{Red}{+c.p_{A_2 \otimes A_3^\bot}(\mathtt{l} \cdot x)(x)}, \color{Red}{+c.p_{A_2^\bot}(x)}]+
+[\color{Red}{+c.p_{A_2 \otimes A_3^\bot}(\mathtt{r} \cdot x)(x)}, \color{Red}{+c.p_{A_3}(x)}]+$
+$[\color{Brown}{-c.p_{A_1^\bot ⅋ A_1}(x)}, \color{Brown}{-c.p_{A_2 \otimes A_3^\bot}(x)}]$.</p>
+
+<p>The only correct and saturated diagram is created that way (one can check that the others fail):</p>
+
+<hr />
+
+<p><img src="/images/posts/transyn1/ex1-0.svg" style="width:60%" /></p>
+
+<hr />
+
+<p><img src="/images/posts/transyn1/ex1-1.svg" style="width:60%" /></p>
+
+<hr />
+
+<p><img src="/images/posts/transyn1/ex1-2.svg" style="width:60%" /></p>
+
+<p>Since all stars are linked and that the matching is “perfect”, all connected rays disappear and we end up with the star of free rays $[\color{Red}{+c.p_{A_2^\bot}(x)}, \color{Red}{+c.p_{A_3}(x)}]$ which is exactly the translation of
+the normal form $\mathcal{S}’$. We can remark that in this case, the normalisation computes the set of all maximal paths. This corresponds to the interpretation of the cut-elimination in GoI.</p>
+
+<p><strong>Example 2.</strong> If we have the following reduction:</p>
+
+<p><img src="/images/posts/transyn1/fig7.png" style="width:30%" />
+<img src="/images/posts/transyn1/fig8.png" style="width:30%" /></p>
+
+<p>The constellation corresponding to the first proof-structure is: $
+[\color{Red}{+c.p_{A_1^\bot ⅋ A_1}(\mathtt{l} \cdot x)},
+\color{Red}{+c.p_{A_2 \otimes A_3^\bot}(\mathtt{r} \cdot x)}]+
+[\color{Red}{+c.p_{A_2 \otimes A_2^\bot}(\mathtt{l} \cdot x)}, \color{Red}{+c.p_{A_1^\bot ⅋ A_1}(\mathtt{r} \cdot x)}]+$
+$[\color{Brown}{-c.p_{A_1^\bot ⅋ A_1}(x)}, \color{Brown}{-c.p_{A_2 \otimes A_3^\bot}(x)}]$.</p>
+
+<p>By trying to make a saturated diagram, we can end up with:</p>
+
+<p><img src="/images/posts/transyn1/ex2.svg" style="width:60%" /></p>
+
+<p>which contains a cycle. This cycle can be repeated/extended by reusing some stars. It is impossible to leave a free ray since all ray can always be extended by adding occurrences of stars. Therefore, all diagrams are closed and doesn’t define a correct diagram (the star of free is undefined because no empty star can exist). We finally have $\mathtt{exec}(\mathcal{S}) = \emptyset$.</p>
+
+<h1 id="interpretation-of-the-logical-content-of-mll">Interpretation of the logical content of MLL</h1>
+
+<h2 id="the-correctness-criterion-of-danos-regnier">The correctness criterion of Danos-Regnier</h2>
+
+<p>The upper part made of axioms appearing in a proof-structure is called the <em>vehicle</em>. The set of Danos-Regnier switching graphs can be divided into two parts: the upper part (vehicle) is the <em>tested</em> and the lower part (basically a set of syntax trees) is a <em>test</em> against the vehicle. The vehicle holds the computational part of a proof and the test its logical part (type/formula).</p>
+
+<p><img src="/images/posts/transyn1/fig9.png" style="width:60%" /></p>
+
+<p>If by connecting a vehicle to a set of tests, we satisfy specific criterion then the vehicle is certified (as correct in the case of Danos-Regnier). These tests will be translated into <em>ordeals</em> and the set of all ordeals is the <em>gabarit</em>. For instance, we have the following translation of a test into a constellation:</p>
+
+<p><img src="/images/posts/transyn1/test1.png" style="width:30%" /></p>
+
+<p>When connected to the vehicle [TODO]</p>
+
+<p>We can easily check that the only diagrams we can make connect the rays in order to exactly reproduce the structure of the corresponding switching graph. This structure actually appears in the corresponding unification graph. If a switching graph is a tree, then the only diagram will normalise into a star made of conclusions.</p>
+
+<p>If we have the following test instead:</p>
+
+<p><img src="/images/posts/transyn1/test2.png" style="width:30%" /></p>
+
+<p>When connected to the vehicle [TODO], a loop appears in the unification graph and since the matching is perfect (the induced equations are of the shape $t \doteq t$), we can construct infinitely many correct diagrams.</p>
+
+<h2 id="interpretation-of-formulas">Interpretation of formulas</h2>
+
+<p>By the Curry-Howard correspondence, formulas have a role similar to types in programming. If our constellations are seen as computational objects which can be executed, then, formulas are classes of constellations characterising a computational behaviour. We call these classes <em>conducts</em> in our framework.</p>
+
+<ul>
+  <li><strong>Atoms.</strong> We define atoms with a <em>basis of interpretation</em> $\Phi$ associating of each type variable $X_i$ a distinct conduct $\Phi(X_i)$.</li>
+  <li><strong>Negation.</strong> First, we need to choose a <em>criterion of orthogonality</em> opposing a class and its opposite (representing an opposite behaviour). We choose the strong normalisation. If we have a set of constellation $\mathbf{A}$, its dual type, written $\mathbf{A}^\bot$, is the set of all constellations which are strongly normalising when interaction with the constellations of $\mathbf{A}$.</li>
+  <li><strong>Tensor</strong> The tensor $\mathbf{A} \otimes \mathbf{B}$ of two formulas is constructed by pairing all the constellations of $\mathbf{A}$ with the ones of $\mathbf{B}$ by using a disjoint union of constellations.</li>
+  <li><strong>Par and implication</strong> The par and linear implication are defined from the tensor and the orthogonal : $A ⅋ B = (A^\bot \otimes B^\bot)^\bot$ and $A \multimap B = A^\bot ⅋ B$.</li>
+</ul>
+
+<p>TODO</p>
+
+  </article>
+</main>
+
+
+<footer>
+     <span></span> 
+    <a href="/philosophy/2020/04/10/girard-knitting/">Girard's conceptual knitting (version 2) »</a>
+</footer>
+
