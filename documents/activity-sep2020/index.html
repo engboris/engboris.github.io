@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Eng Sambo Boris">
+<meta name="description" content="Eng Boris's webpage. PhD student in Computer Science.">
+<title>Eng (Sambo) Boris</title>
+<link rel="canonical" href="https://engboris.github.io//documents/activity-sep2020/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<link href="/webdoc.css" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<main>
+  <article >
+    
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <p>(Sambo) Boris ENG.</p>
+
+<p>Activity report, september 2020. LIPN (LoVe), Université Sorbonne Paris Nord.</p>
+
+<hr />
+
+<p>To keep it short, I’m interested in simple questions such as what logic and computation are. They are sometimes taken for granted or understood but I think we are still far from a clear understanding.</p>
+
+<h1 id="current-works">Current works</h1>
+
+<p><strong>Transcendental Syntax for multiplicative linear logic.</strong> The <a href="https://girard.perso.math.cnrs.fr/Archives.html">Transcendental Syntax</a> is a programme initiated by <a href="https://girard.perso.math.cnrs.fr/Accueil.html">Jean-Yves Girard</a> suggesting a reconstruction of linear logic from a new model of computation. This programme, following his “Geometry of Interaction” programme, rely on 4 atypical, hyperbolic and cryptic articles made of informal and personal researches without references to the mainstream literature. During my master 2 internship, I had to go through the understanding of the Geometry of Interaction and together with <a href="https://www.seiller.org/">Thomas Seiller</a>, we produced a naive formalisation of his <a href="https://girard.perso.math.cnrs.fr/trsy1.pdf">first paper</a> on the Transcendental Syntax. During the first year of my PhD thesis, we produced a more accurate and rigorous formalisation leading to the submission of the article <a href="https://hal.archives-ouvertes.fr/hal-02895111">“Stellar Resolution: Multiplicatives”</a>. From computational objects, we are able to retrieve the notion of proof and formula/type within multiplicative linear logic.</p>
+
+<p><strong>Stellar Resolution.</strong> The stellar resolution, is an asynchronous model of computation introduced in the <a href="https://girard.perso.math.cnrs.fr/Archives.html">Transcendental Syntax</a> programme of <a href="https://girard.perso.math.cnrs.fr/Accueil.html">Jean-Yves Girard</a>. This model, based on first-order term unification (actually Robinson’s resolution), shows a lot of similarities with other models such as Girard’s flows (mainly studied by Marc Bagnol) and self-assembling abstract tile assembly model (which can be seen as an extension of Wang’s tiles) used in DNA computing and bioinformatics. We have yet to understand the stellar resolution as a computational model independently of the Transcendental Syntax (what is computable, termination analysis, alternative formalisms, connexions to other models or theories etc).</p>
+
+<p><strong>Space complexity of the lambda-calculus.</strong> While the question of complexity is clear for Turing machines (tape cells used and number of steps), it is way more subtle for the lambda-calculus which became a fundamental model of computation with the growth of the studies on the Curry-Howard correspondence. <a href="https://lipn.univ-paris13.fr/~mazza/">Damiano Mazza</a> and I, following our introductory work during my master 1 internship, are trying to study the space complexity of the lambda-calculus by using methods from intersection types, boolean circuits and the Geometry of Interaction. We would like to show that the lambda-calculus constitutes a reasonable cost model (relatively close to Turing machines in term of complexity) in order to provide alternative definition of space complexity classes.</p>
+
+<h1 id="future-works">Future works</h1>
+
+<p><strong>Transcendental Syntax.</strong> I only worked on the <a href="https://girard.perso.math.cnrs.fr/Archives.html">Transcendental Syntax</a> for the multiplicative fragment of linear logic. The full linear logic (+ second order) still has to be reconstructed from the stellar resolution (possibly extensions of it). More interestingly, Girard’s <a href="https://girard.perso.math.cnrs.fr/trsy3.pdf">third article</a> on the Transcendental Syntax describes a computational interpretation of first-order logic. It is something which has not be done yet in the Curry-Howard correspondence and it may potentially have applications to descriptive complexity.</p>
+
+<p><strong>Stellar Resolution and Implicit Computation Complexity.</strong> The model of stellar resolution generalises both Girard’s flows and Seiller interaction graphs. But both also have applications in Implicit Computational Complexity we can explore. For instance, flows (which is a special case of the objects used in the stellar resolution) give a machine-independent characterisation of logarithmic space and polynomial time we should be able to retrieve from our model.</p>
+
+<p><strong>Static analysis and Implicit Computational Complexity.</strong> Following the works of Moyen, Rubiano and Seiller on the analysis of dependencies in static analysis and the works of Jones and Kristiansen in the complexity analysis of imperative programs, Thomas Seiller and Clément Aubert started a new project “StATyC” in which we are interested in the application of methods and tools from Implicit Computation Complexity and their application for the static analysis of compilers.</p>
+
+  </article>
+</main>
+
+

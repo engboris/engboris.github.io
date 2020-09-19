@@ -3,40 +3,22 @@ body {
   margin: 50px;
 }
 
-th {
-  text-align: left;
-}
-
-td {
-  padding-right: 15px;
-}
-
 p {
+  font-size: 14px;
   margin: 0;
-}
-
-#title {
-  font-size: 42px;
-  margin-bottom: 5px;
-}
-
-#subtitle {
-  color: #079992;
 }
 
 .sub {
   color: gray;
 }
 
-h1, h2 {
-  color: #079992;
-  margin-bottom: 0;
+h1, h2, h3, h4, h5, h6 {
+  color: black;
 }
 
 hr {
   border: none;
   margin-bottom: 15px;
-  margin-top: 0;
   border-bottom: 1px solid lightgray;
 }
 
