@@ -113,13 +113,13 @@
 <span class="k">def</span> <span class="nf">affiche_terrain</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
-<span class="k">def</span> <span class="nf">coup</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">terrain</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">coup</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
+
+<span class="k">def</span> <span class="nf">jouer</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">terrain</span><span class="p">):</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
 <span class="k">def</span> <span class="nf">gagnant</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
-
-<span class="k">def</span> <span class="nf">jouer</span><span class="p">():</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
 <span class="k">def</span> <span class="nf">resultat</span><span class="p">():</span>
@@ -170,7 +170,7 @@ X   X   O
 <p>Par exemple, si le terrain est vide, alors <code class="highlighter-rouge">coup(symJ1, terrain, 0, 1)</code> va produire le terrain suivant :</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
-  ['X', None, None],
+  [None, 'X', None],
   [None, None, None],
   [None, None, None]
 ]
@@ -178,7 +178,7 @@ X   X   O
 
 <h2 id="faire-jouer-les-joueurs">Faire jouer les joueurs</h2>
 
-<p>Ecrire une fonction <code class="highlighter-rouge">jouer()</code> qui effectue les opérations suivantes :</p>
+<p>Ecrire une fonction <code class="highlighter-rouge">jouer(sym, terrain)</code> qui effectue les opérations suivantes :</p>
 <ul>
   <li>Affiche un texte pour demander au joueur qui doit jouer d’entrer l’indice de la ligne puis l’indice de la colonne où jouer.</li>
   <li>Demande à l’utilisateur d’entrer les coordonnées grâce à <code class="highlighter-rouge">input()</code> (penser à convertir en entier avec <code class="highlighter-rouge">int()</code>).</li>
@@ -203,14 +203,23 @@ X   X   O
 
 <h2 id="extensions">Extensions</h2>
 
-<ol>
+<ul>
   <li>
     <p>Modifier le programme pour que <code class="highlighter-rouge">gagnant(terrain)</code> ne soit pas appelé dans la fonction <code class="highlighter-rouge">resultat()</code>.</p>
   </li>
   <li>
+    <p>Modifier le programme pour qu’un joueur ne puisse pas jouer sur une case déjà jouée.</p>
+  </li>
+  <li>
+    <p>Modifier le programme pour gérer le cas où le joueur entre une coordonnée entier négatif ou supérieur à 2.</p>
+  </li>
+  <li>
+    <p>Modifier le programme pour gérer le cas où le joueur entre une coordonnée non numérique (par exemple ‘z’).</p>
+  </li>
+  <li>
     <p>Adapter le programme pour pouvoir jouer à 1 joueur contre l’ordinateur (le coup de l’ordinateur est choisi au hasard) et proposer un menu pour pouvoir soit jouer à 2 joueur ou seul contre l’ordinateur.</p>
   </li>
-</ol>
+</ul>
 
   </article>
 </main>
