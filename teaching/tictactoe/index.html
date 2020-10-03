@@ -110,13 +110,13 @@
 <span class="n">symJ2</span> <span class="o">=</span> <span class="s">"O"</span>
 
 <span class="s">'''Au dessus, on va écrire des fonctions qui représentent des fonctionnalités que l'on pourra utiliser.'''</span>
-<span class="k">def</span> <span class="nf">affiche_terrain</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">affiche_terrain</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
 <span class="k">def</span> <span class="nf">coup</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">terrain</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
-<span class="k">def</span> <span class="nf">gagnant</span><span class="p">(</span><span class="n">terrain</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gagnant</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
   <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
 <span class="k">def</span> <span class="nf">jouer</span><span class="p">():</span>
@@ -161,8 +161,7 @@ O   O   O
 X   X   O
 </code></pre></div></div>
 
-<p>Vous pouvez utiliser <code class="highlighter-rouge">print("", endl=' ')</code> pour mettre un espace au lieu d’un saut de ligne à la fin d’un affichage. On peut sauter une
-ligne en affichant <code class="highlighter-rouge">\n</code>. On peut espacer les symboles en affichant <code class="highlighter-rouge">\t</code>.</p>
+<p>Vous pouvez utiliser <code class="highlighter-rouge">print("texte", end='blabla')</code> pour choisir ce que vous voulez afficher à la suite d’un texte (par défaut, on a un saut de ligne après un affichage). On peut sauter une ligne avec <code class="highlighter-rouge">print()</code> et on peut espacer les symboles en affichant le symbole spécial <code class="highlighter-rouge">\t</code>.</p>
 
 <h2 id="appliquer-un-coup-sur-le-terrain">Appliquer un coup sur le terrain</h2>
 
