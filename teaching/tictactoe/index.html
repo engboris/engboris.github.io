@@ -36,7 +36,7 @@
 
 
 <header>
-  <h1>⊢ <a href="">Eng (Sambo) Boris</a></h1>
+  <h1>⊢ <a href="/">Eng (Sambo) Boris</a></h1>
   <span class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</span>
   <span class="sub" style="float: right;">engboris@hotmail.fr</span>
   <nav>
@@ -101,19 +101,29 @@
 30
 31
 32
+33
+34
+35
+36
 </pre></td><td class="code"><pre><span class="s">'''On définit les symboles de chaque joueur pour pouvoir les changer facilement si besoin'''</span>
 <span class="n">symJ1</span> <span class="o">=</span> <span class="s">"X"</span>
 <span class="n">symJ2</span> <span class="o">=</span> <span class="s">"O"</span>
 
 <span class="s">'''Au dessus, on va écrire des fonctions qui représentent des fonctionnalités que l'on pourra utiliser.'''</span>
-<span class="k">def</span> <span class="nf">blabla1</span><span class="p">():</span>
-  <span class="o">...</span>
+<span class="k">def</span> <span class="nf">affiche_terrain</span><span class="p">():</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
-<span class="k">def</span> <span class="nf">blabla2</span><span class="p">():</span>
-  <span class="o">...</span>
+<span class="k">def</span> <span class="nf">coup</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">terrain</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
-<span class="k">def</span> <span class="nf">blabla3</span><span class="p">():</span>
-  <span class="o">...</span>
+<span class="k">def</span> <span class="nf">gagnant</span><span class="p">(</span><span class="n">terrain</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
+
+<span class="k">def</span> <span class="nf">jouer</span><span class="p">():</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
+
+<span class="k">def</span> <span class="nf">resultat</span><span class="p">():</span>
+  <span class="k">return</span> <span class="s">"A COMPLETER"</span>
 
 <span class="s">'''C'est ici qu'on écrit ce que fait le programme. Le terrain est représenté par une liste de listes.'''</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -124,52 +134,83 @@
   <span class="p">]</span>
   <span class="n">tour</span> <span class="o">=</span> <span class="mi">0</span>
   <span class="k">while</span> <span class="p">(</span><span class="n">gagnant</span><span class="p">(</span><span class="n">terrain</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">):</span>
-    <span class="s">'''Le tour est pair, c'est au tour de J1 !'''</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">tour</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="o">...</span>
-    <span class="s">'''Le tour est impair, c'est au tour de J2 !'''</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Le tour est pair, c'est au tour de J1 !"</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">tour</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="o">...</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Le tour est impair, c'est au tour de J2 !"</span><span class="p">)</span>
     <span class="n">tour</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="s">'''On active la fonction principale pour lancer le programme'''</span>
 <span class="n">main</span> <span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<ol>
-  <li>
-    <p>Ecrire une fonction <code class="highlighter-rouge">affiche_terrain(t)</code> qui affiche le terrain comme un quadrillage 3x3 (on affiche un espace si la case est vide).</p>
-  </li>
-  <li>
-    <p>Ecrire une fonction <code class="highlighter-rouge">coup(sym, terrain, i, j)</code> qui écrit le symbole <code class="highlighter-rouge">sym</code> à la case <code class="highlighter-rouge">terrain[i][j]</code>.</p>
-  </li>
-  <li>Ecrire une fonction <code class="highlighter-rouge">gagnant(terrain)</code> qui vérifie s’il y a un gagnant et utilise <code class="highlighter-rouge">return</code> pour renvoyer :
-    <ul>
-      <li><code class="highlighter-rouge">0</code> s’il y a match nul</li>
-      <li><code class="highlighter-rouge">1</code> si le joueur 1 a gagné</li>
-      <li><code class="highlighter-rouge">2</code> si le joueur 2 a gagné</li>
-      <li><code class="highlighter-rouge">None</code> si on ne sait pas</li>
-    </ul>
-  </li>
-  <li>Ecrire une fonction <code class="highlighter-rouge">jouer()</code> qui effectue les opérations suivantes :
-    <ul>
-      <li>Affiche un texte pour demander au joueur qui doit jouer d’entrer l’indice de la ligne puis l’indice de la colonne où jouer.</li>
-      <li>Demande à l’utilisateur d’entrer les coordonnées grâce à <code class="highlighter-rouge">input()</code>.</li>
-      <li>Utilise la fonction <code class="highlighter-rouge">coup</code> pour mettre à jour le terrain (ne pas oublier de convertir les coordonnées en entier).</li>
-    </ul>
-  </li>
-  <li>
-    <p>Ecrire une fonction <code class="highlighter-rouge">resultat()</code> qui vérifie s’il y a un gagnant et qui affiche qui a gagné.</p>
-  </li>
-  <li>
-    <p>Compléter le programme donné plus haut avec les fonctions que l’on a défini.</p>
-  </li>
-  <li>Modifier le programme pour que <code class="highlighter-rouge">gagnant(terrain)</code> ne soit pas appelé dans la fonction <code class="highlighter-rouge">resultat()</code>.</li>
-</ol>
+<h2 id="affichage-du-terrain">Affichage du terrain</h2>
+
+<p>Ecrire une fonction <code class="highlighter-rouge">affiche_terrain(t)</code> qui affiche le terrain comme un quadrillage 3x3 (on affiche un espace si la case est vide).
+Par exemple, si on a</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terrain = [
+  ['X', 'O', 'X'],
+  ['O', 'O', 'O'],
+  ['X', 'X', 'O']
+]
+</code></pre></div></div>
+
+<p>alors l’appel de fonction <code class="highlighter-rouge">affiche_terrain(terrain)</code> produit l’affichage suivant :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X   O   X
+O   O   O
+X   X   O
+</code></pre></div></div>
+
+<p>Vous pouvez utiliser <code class="highlighter-rouge">print("", endl=' ')</code> pour mettre un espace au lieu d’un saut de ligne à la fin d’un affichage. On peut sauter une
+ligne en affichant <code class="highlighter-rouge">\n</code>. On peut espacer les symboles en affichant <code class="highlighter-rouge">\t</code>.</p>
+
+<h2 id="appliquer-un-coup-sur-le-terrain">Appliquer un coup sur le terrain</h2>
+
+<p>Ecrire une fonction <code class="highlighter-rouge">coup(sym, terrain, i, j)</code> qui écrit le symbole <code class="highlighter-rouge">sym</code> à la case <code class="highlighter-rouge">terrain[i][j]</code>.</p>
+
+<p>Par exemple, si le terrain est vide, alors <code class="highlighter-rouge">coup(symJ1, terrain, 0, 1)</code> va produire le terrain suivant :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
+  ['X', None, None],
+  [None, None, None],
+  [None, None, None]
+]
+</code></pre></div></div>
+
+<h2 id="faire-jouer-les-joueurs">Faire jouer les joueurs</h2>
+
+<p>Ecrire une fonction <code class="highlighter-rouge">jouer()</code> qui effectue les opérations suivantes :</p>
+<ul>
+  <li>Affiche un texte pour demander au joueur qui doit jouer d’entrer l’indice de la ligne puis l’indice de la colonne où jouer.</li>
+  <li>Demande à l’utilisateur d’entrer les coordonnées grâce à <code class="highlighter-rouge">input()</code> (penser à convertir en entier avec <code class="highlighter-rouge">int()</code>).</li>
+  <li>Utilise la fonction <code class="highlighter-rouge">coup</code> pour mettre à jour le terrain.</li>
+</ul>
+
+<h2 id="vérifier-la-présence-dun-gagnant">Vérifier la présence d’un gagnant</h2>
+
+<p>Ecrire une fonction <code class="highlighter-rouge">gagnant(terrain)</code> qui vérifie s’il y a un gagnant et renvoie :</p>
+<ul>
+  <li><code class="highlighter-rouge">0</code> s’il y a match nul</li>
+  <li><code class="highlighter-rouge">1</code> si le joueur 1 a gagné</li>
+  <li><code class="highlighter-rouge">2</code> si le joueur 2 a gagné</li>
+  <li><code class="highlighter-rouge">None</code> si on ne sait pas</li>
+</ul>
+
+<h2 id="fin-de-partie">Fin de partie</h2>
+
+<p>Ecrire une fonction <code class="highlighter-rouge">resultat()</code> qui vérifie s’il y a un gagnant et qui affiche qui a gagné avec un message.</p>
+
+<p>Compléter le programme pour que le jeu marche pour deux joueurs.</p>
 
 <h2 id="extensions">Extensions</h2>
 
 <ol>
-  <li>Adapter le programme pour pouvoir jouer à 1 joueur contre l’ordinateur (le coup de l’ordinateur est choisi au hasard) et proposer un menu pour pouvoir soit jouer à 2 joueur ou seul contre l’ordinateur.</li>
+  <li>
+    <p>Modifier le programme pour que <code class="highlighter-rouge">gagnant(terrain)</code> ne soit pas appelé dans la fonction <code class="highlighter-rouge">resultat()</code>.</p>
+  </li>
+  <li>
+    <p>Adapter le programme pour pouvoir jouer à 1 joueur contre l’ordinateur (le coup de l’ordinateur est choisi au hasard) et proposer un menu pour pouvoir soit jouer à 2 joueur ou seul contre l’ordinateur.</p>
+  </li>
 </ol>
 
   </article>
