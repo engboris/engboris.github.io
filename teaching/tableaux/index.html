@@ -63,7 +63,9 @@
       <time datetime=""></time>
       
     </header>
-    <h1 id="tableaux-en-c">Tableaux en C</h1>
+    <h1 id="entraînement-sur-les-tableaux-en-c">Entraînement sur les tableaux en C</h1>
+
+<h2 id="fonctions-sur-les-tableaux">Fonctions sur les tableaux</h2>
 
 <ul>
   <li>Définir les constantes <code class="highlighter-rouge">TRUE 1</code> et <code class="highlighter-rouge">FALSE 0</code> avec <code class="highlighter-rouge">#define</code>.</li>
@@ -84,11 +86,11 @@
     <p><code class="highlighter-rouge">int bounded_by(int tab[], int taille, int limite)</code> qui renvoie <code class="highlighter-rouge">TRUE</code> si tous les éléments de <code class="highlighter-rouge">tab</code> sont inférieurs (&lt;=) à <code class="highlighter-rouge">limite</code> et <code class="highlighter-rouge">FALSE</code> sinon.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">int* reverse(int tab[], int taille)</code> qui renvoie le tableau en entrée à l’envers.</p>
+    <p><code class="highlighter-rouge">int palindrome(int tab[], int taille)</code> qui renvoie <code class="highlighter-rouge">TRUE</code> si le tableau est palindrome et <code class="highlighter-rouge">FALSE</code> sinon. Un tableau est palindrome lorsqu’il est la fusion d’un tableau et de son inverse. Par exemple : <code class="highlighter-rouge">{1, 2, 1}</code> ou <code class="highlighter-rouge">{1, 2, 3, 3, 2, 1}</code>.</p>
   </li>
 </ol>
 
-<h1 id="tester-les-fonctions">Tester les fonctions</h1>
+<h2 id="tester-les-fonctions">Tester les fonctions</h2>
 
 <p>Mettez ces tests dans votre fonction <code class="highlighter-rouge">main</code>. Passez-vous tous les tests ? (1=correct, 0=incorrect) Si ce n’est pas le cas, corrigez vos fonctions (ou les tests s’ils sont incorrects).</p>
 
@@ -117,10 +119,13 @@
 23
 24
 25
+26
 </pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">t0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">t1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">t2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">t3</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">t4</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">t5</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
 
 <span class="n">printf</span><span class="p">(</span><span class="s">"test eqtab : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">eqtab</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
 <span class="n">printf</span><span class="p">(</span><span class="s">"test eqtab : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">!</span><span class="n">eqtab</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
@@ -138,12 +143,37 @@
 <span class="n">printf</span><span class="p">(</span><span class="s">"test bounded_by : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bounded_by</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">));</span>
 <span class="n">printf</span><span class="p">(</span><span class="s">"test bounded_by : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bounded_by</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">));</span>
 
-<span class="n">printf</span><span class="p">(</span><span class="s">"test reverse : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">eqtab</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">"test reverse : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">eqtab</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">"test reverse : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">!</span><span class="n">eqtab</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">"test reverse : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">!</span><span class="n">eqtab</span><span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"test palindrome : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">!</span><span class="n">palindrome</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"test palindrome : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">palindrome</span><span class="p">(</span><span class="n">t4</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"test palindrome : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">palindrome</span><span class="p">(</span><span class="n">t5</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+<h2 id="traitement-sur-les-tableaux">Traitement sur les tableaux</h2>
+
+<ul>
+  <li>Déclarer un tableau <code class="highlighter-rouge">tab</code> et faire les opérations suivantes dans la fonction <code class="highlighter-rouge">main</code> (vous pouvez afficher le résultat à chaque étape et créer plusieurs tableaux différents à chaque fois si vous voulez) :</li>
+</ul>
+
+<ol>
+  <li>
+    <p>créer un nouveau tableau qui contient les mêmes éléments que <code class="highlighter-rouge">tab</code> mais à l’envers.</p>
+  </li>
+  <li>
+    <p>inverser les éléments de <code class="highlighter-rouge">tab</code> sans créer de nouveau tableau (par échange successif).</p>
+  </li>
+  <li>
+    <p>faire “remonter” le plus grand élément de <code class="highlighter-rouge">tab</code> à la fin (dernier indice).</p>
+  </li>
+  <li>
+    <p>utiliser l’idée précédente pour trier <code class="highlighter-rouge">tab</code> de façon croissante. Vous venez de réaliser l’algorithme de “tri à bulles”.</p>
+  </li>
+  <li>
+    <p>modifier le programme pour trier dans l’ordre inverse.</p>
+  </li>
+  <li>
+    <p>créer un programme qui mélange de façon aléatoire les éléments de <code class="highlighter-rouge">tab</code> avec utilisant <code class="highlighter-rouge">rand()</code>.</p>
+  </li>
+</ol>
 
   </article>
 </main>
