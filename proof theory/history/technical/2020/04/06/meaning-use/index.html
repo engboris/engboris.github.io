@@ -197,7 +197,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>In this post, we will investigate the differences between natural deduction and the sequent calculus, two systems introduced by Gentzen during the 20th century. They represent two way of looking at the same object: logic but with a different point of view providing a different understanding. Let’s start with natural deduction <strong>NJ</strong>.</p>
+<p>In this post, we will investigate the differences between natural deduction and the sequent calculus, two systems introduced by Gentzen during the 20th century. They represent two way of looking at logic but with different point of view providing a different understanding. We start with natural deduction <strong>NJ</strong>.</p>
 
 <h1 id="natural-deduction">Natural Deduction</h1>
 
@@ -223,7 +223,7 @@
 
 <p>In the Sequent Calculus, we have either introductions on the left or on the right of a turnstile symbol $\vdash$. We now manipulate both sides of a sequent $A_1, …, A_n \vdash B_1, …, B_k$. A proof ends when all its branches have a same formula on the left and on the right. We created a space divided in two parts where we can act freely on each formulas. The distinction between classical and intuitionistic logic becomes a mere distinction between the restriction of space: either at most one place (<strong>LJ</strong>) or no restriction (<strong>LK</strong>).</p>
 
-<p>Let’s use $A \vdash A$ as the axiom rule. The act of reasoning becomes a manipulation of symbols in space where the negation becomes the exchange between right and left. In <strong>LK</strong>$, we can even break this (artificial) separation by using a monolateral version where all sequents are of the form $\vdash A_1, …, A_n$. Since we work with entities within a same space, we need “structural rules” in order duplicates formulas we want to use several times, discard formulas we don’t need or exchange them so we can exactly connect formulas (as in the axiom rule). In <strong>NJ</strong>, they were implicit in the management of contexts (the axiom rule was $\Gamma, A \vdash A$).</p>
+<p>Let’s use $A \vdash A$ as the axiom rule. The act of reasoning becomes a manipulation of symbols in space where the negation becomes the exchange between right and left. In <strong>LK</strong>, we can even break this (artificial) separation by using a monolateral version where all sequents are of the form $\vdash A_1, …, A_n$. Since we work with entities within a same space, we need “structural rules” in order duplicates formulas we want to use several times, discard formulas we don’t need or exchange them so we can exactly connect formulas (as in the axiom rule). In <strong>NJ</strong>, they were implicit in the management of contexts (the axiom rule was $\Gamma, A \vdash A$).</p>
 
 <p>The existence of structural rules lead to an alternative definition of disjunction and conjunction with a different management of the context. We have the multiplicative and the additive connectives. They are equivalent thanks to the structural rules but by restricting the structural rules, we obtain different connectives leading to Linear Logic.</p>
 
@@ -235,7 +235,7 @@
 
 <p>While in <strong>NJ</strong>, the formula $A \land B$ directly leads to $A$, the system $LJ$ show more details about how can $A \land B$ lead to $A$ in a setting of spatial management of formulas. It is at a “lower-level” (in the sense of programming languages) and decomposes the logical use in a more detailed way.</p>
 
-<p>Moreover, the translation always make a cut rule appear connecting a formula in conclusion and another one in hypothesis thus acting like an extension cord of the logical flow of reasoning. When using the monolateral version of the sequent calculus, we see that the axiom rule and the cut rules are two ways of connecting a formula and its dual in two different ways. The axiom rule connect two dual conclusions and the cut rule connect two dual hypothesis. We revealed a mechanism of interaction within the logical reasoning which can be further explored if we look at things from the right angle. Logic seems now similar to a physical phenomena we’re trying to understand by using mathematical models.</p>
+<p>Moreover, the translation always make a cut rule appear connecting a formula in conclusion and another one in hypothesis thus acting like an extension cord of the logical flow of reasoning. When using the monolateral version of the sequent calculus, we see that the axiom rule and the cut rules are two ways of connecting a formula and its dual in two different ways. The axiom rule connect two dual conclusions and the cut rule connect two dual hypothesis. We revealed a mechanism of interaction within the logical reasoning which can be further explored if we look at things from the right angle. Logic now appears as similar to physical phenomena studied by using mathematical models, a kind of science of interaction, in some sense.</p>
 
   </article>
 </main>
