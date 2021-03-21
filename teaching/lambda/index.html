@@ -3,8 +3,8 @@
 <meta charset="utf-8">
 <meta name="author" content="Boris Sambo ENG">
 <meta name="description" content="Boris ENG's webpage. PhD student in Computer Science.">
-<title> Teaching › Boris ENG</title>
-<link rel="canonical" href="https://engboris.fr//teaching/">
+<title>Boris ENG</title>
+<link rel="canonical" href="https://engboris.fr//teaching/lambda/">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -43,7 +43,7 @@
     <div id="menu">
         <a  href="/">Home</a>
         <a  href="/research/">Research</a>
-        <a  id="selected"  href="/teaching/">Teaching</a>
+        <a  href="/teaching/">Teaching</a>
         <a  href="/thoughts/">Thoughts</a>
         <a  href="/library/">Library</a>
         <a  href="/trivia/">Trivia</a>
@@ -56,45 +56,25 @@
 
 <main>
   <article >
-    
+    <a href="/teaching">« Return to Teaching</a>
     
     <header>
       
       <time datetime=""></time>
       
     </header>
-    <h1 id="university-courses">University courses</h1>
-
-<p><strong>Université Sorbonne Paris Nord 2020/2021</strong></p>
+    <p>Réduire les termes suivants où <strong>I</strong> = λx.x :</p>
 
 <ul>
-  <li>Éléments d’informatique - L1 Math/Info</li>
-  <li>Fondements de la programmation - M1 Info</li>
-  <li>Programmation fonctionnelle - L2 Info</li>
-</ul>
-
-<p><strong>Université Sorbonne Paris Nord 2019/2020</strong></p>
-
-<ul>
-  <li><a href="/teaching/info1/">Éléments d’informatique - L1 PC-SPI</a></li>
-  <li><a href="/teaching/info2/">Informatique 2 - L1 PC-SPI</a></li>
-  <li><a href="/teaching/pf/">Programmation Fonctionnelle - L2 Info</a></li>
-  <li><a href="/teaching/logique/">Logique - L1 Info</a></li>
-</ul>
-
-<h1 id="programming-exercises">Programming exercises</h1>
-
-<ul>
-  <li><a href="/teaching/fold/">Itérateurs en OCaml</a></li>
-  <li><a href="/teaching/tictactoe/">Tic-tac-toe en Python</a></li>
-  <li><a href="/teaching/pfc/">Pierre-feuille-ciseau en C</a></li>
-  <li><a href="/teaching/tableaux/">Tableaux en C</a></li>
-</ul>
-
-<h1 id="theoretical-exercises">Theoretical exercises</h1>
-
-<ul>
-  <li><a href="/teaching/lambda/">Beta-reduction en lambda-calcul</a></li>
+  <li>(λx. x x) a — duplication</li>
+  <li>(λx. x x) (λa. a) — passage de fonction / ordre supérieur</li>
+  <li>(λx. x (λx.x)) y — variable libres/liées</li>
+  <li>(λx. x (λy. x y)) y — capture de variable</li>
+  <li>(λxy. x) a b — fonction à deux entrées et effacement</li>
+  <li>(λxy. x) a — application partielle pour deux entrées</li>
+  <li>(λxy. x) I a b — sur application pour deux entrées</li>
+  <li>(λx. x x) (<strong>I</strong> <strong>I</strong>) — duplication inutile dans une stratégie</li>
+  <li>(λxy. y) (<strong>I</strong> <strong>I</strong>) <strong>I</strong> — différence de complexité selon la stratégie</li>
 </ul>
 
   </article>
