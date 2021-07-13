@@ -197,35 +197,33 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>In this post, we will investigate the differences between natural deduction and the sequent calculus, two systems introduced by Gentzen during the 20th century. They represent two way of looking at logic but with different point of view providing a different understanding. We start with natural deduction <strong>NJ</strong>.</p>
+<p>In this post, we will investigate the differences between natural deduction and the sequent calculus, two systems introduced by Gentzen during the 20th century. They represent two ways of looking at logic. We start with <em>natural deduction</em> called <strong>NJ</strong>.</p>
 
 <h1 id="natural-deduction">Natural Deduction</h1>
 
 <h2 id="conventions-and-their-use">Conventions and their use</h2>
 
-<p>The Natural Deduction represents logic as a set of rules divided into two categories: <em>introduction rules</em> (introducing a symbol) and <em>elimination rules</em> (eliminating a symbol). It is our common language used to describe what inference is. The intuition behind these rules is that the introductions are definitions we use in order to allow reasoning to take place and that the elimination rules are ways of using/consuming these definitions.</p>
+<p>The system <strong>NJ</strong> represents logic as a set of rules divided into two categories: <em>introduction rules</em> (introducing a symbol) and <em>elimination rules</em> (eliminating a symbol). It is our common language used to describe what inference is. The intuition behind these rules is that the introductions are definitions we use in order to allow reasoning to take place and that the elimination rules are ways of using/consuming these definitions.</p>
 
-<p>In the bottom-top reading, we basically manipulate our symbols in the goal/conclusion and introduce new hypotheses with the introduction rule of the implication until we have a conclusion matching an hypothesis (an evidence/assumed statement). Two interesting points appear:</p>
+<p>In the bottom-top reading, we basically manipulate our symbols in the goal/conclusion and introduce new hypotheses with the introduction rule of the implication until we have a conclusion matching a hypothesis (an evidence/assumed statement). Two interesting points appear:</p>
 <ul>
-  <li>the system is intuitionistic by nature due to the fact that we justify a unique statement at each step of the proof</li>
-  <li>although it captures all the mathematical use of logic, it is not so natural. For instance, the introduction of the disjunction introduces $A \lor B$ from $A$. We lost information. It is not something we usually want in practice.</li>
+  <li>the system is naturally intuitionistic due to the fact that we justify a unique statement at each step of the proof;</li>
+  <li>although it captures all the mathematical use of logic, it is not so natural. Think of the introduction of the disjunction introduces $A \lor B$ from $A$ where we lose information. It is not something we usually want in practice.</li>
 </ul>
 
-<p>This system shows that we can see formulas and proofs with the point of view of a set of rules but also that we interpret it as a computational system (simply-typed lambda-calculus) thanks to the Curry-Howard correspondence.</p>
+<p>This system shows that we can see formulas and proofs with the point of view of a set of rules. By the Curry-Howard correspondence, we may also interpret it as a computational system (simply-typed lambda-calculus) manipulating symbols.</p>
 
 <h2 id="harmony">Harmony</h2>
 
-<p>In order to have a consistent logical system, we need an <em>harmony</em> between introductions and eliminations corresponding to the fact that the definition and the use of a convention should be complementary. In Proof Theory, it is translated as the simplification of introductions preceding eliminations. For instance, the succession of rules $\infer[\land e 1]{\infer[\land i]{A \quad B}{A \land B}}{A}$ is exactly the $\pi_1 (A, B)$ for functional programming. They both reduce to <strong>A</strong> thus describing a kind of computation leading to the Curry-Howard correspondence.</p>
+<p>In order to have a consistent logical system, we need an <em>harmony</em> between introductions and eliminations corresponding to the fact that the definition and the use of a convention should be complementary. In proof theory, it is translated as the simplification of introductions preceding eliminations. For instance, the succession of rules $\infer[\land e 1]{\infer[\land i]{A \quad B}{A \land B}}{A}$ is exactly the $\pi_1 (A, B)$ of functional programming. They both reduce to <strong>A</strong> thus describing a sound computation.</p>
 
 <h1 id="sequent-calculus">Sequent Calculus</h1>
 
 <h2 id="logic-from-the-intuition-of-space">Logic from the intuition of space</h2>
 
-<p>In the Sequent Calculus, we have either introductions on the left or on the right of a turnstile symbol $\vdash$. We now manipulate both sides of a sequent $A_1, …, A_n \vdash B_1, …, B_k$. A proof ends when all its branches have a same formula on the left and on the right. We created a space divided in two parts where we can act freely on each formulas. The distinction between classical and intuitionistic logic becomes a mere distinction between the restriction of space: either at most one place (<strong>LJ</strong>) or no restriction (<strong>LK</strong>).</p>
+<p>In the Sequent Calculus, we have either introductions on the left or on the right of a turnstile symbol $\vdash$. We now manipulate both sides of a sequent $A_1, …, A_n \vdash B_1, …, B_k$. A proof ends when all its branches have the same formula on the left and on the right (an axiom). We created a space divided into two parts where we can act freely on each formulas. The distinction between classical and intuitionistic logic becomes a mere distinction between the restriction of space: either at most one place (<strong>LJ</strong>) or no restriction (<strong>LK</strong>).</p>
 
-<p>Let’s use $A \vdash A$ as the axiom rule. The act of reasoning becomes a manipulation of symbols in space where the negation becomes the exchange between right and left. In <strong>LK</strong>, we can even break this (artificial) separation by using a monolateral version where all sequents are of the form $\vdash A_1, …, A_n$. Since we work with entities within a same space, we need “structural rules” in order duplicates formulas we want to use several times, discard formulas we don’t need or exchange them so we can exactly connect formulas (as in the axiom rule). In <strong>NJ</strong>, they were implicit in the management of contexts (the axiom rule was $\Gamma, A \vdash A$).</p>
-
-<p>The existence of structural rules lead to an alternative definition of disjunction and conjunction with a different management of the context. We have the multiplicative and the additive connectives. They are equivalent thanks to the structural rules but by restricting the structural rules, we obtain different connectives leading to Linear Logic.</p>
+<p>The act of reasoning becomes a manipulation of symbols in space where the negation becomes the exchange between right and left. In <strong>LK</strong>, we can even break this (artificial) separation by using a monolateral version where all sequents are of the form $\vdash A_1, …, A_n$, leading to a sort of space of interaction with some rules gathering some formulas with the goal of ultimately connecting a formula and its negation (a sort of resolution of contradiction).</p>
 
 <h2 id="decomposing-use-to-show-its-computational-interactions">Decomposing use to show its computational interactions</h2>
 
@@ -235,14 +233,14 @@
 
 <p>While in <strong>NJ</strong>, the formula $A \land B$ directly leads to $A$, the system $LJ$ show more details about how can $A \land B$ lead to $A$ in a setting of spatial management of formulas. It is at a “lower-level” (in the sense of programming languages) and decomposes the logical use in a more detailed way.</p>
 
-<p>Moreover, the translation always make a cut rule appear connecting a formula in conclusion and another one in hypothesis thus acting like an extension cord of the logical flow of reasoning. When using the monolateral version of the sequent calculus, we see that the axiom rule and the cut rules are two ways of connecting a formula and its dual in two different ways. The axiom rule connect two dual conclusions and the cut rule connect two dual hypothesis. We revealed a mechanism of interaction within the logical reasoning which can be further explored if we look at things from the right angle. Logic now appears as similar to physical phenomena studied by using mathematical models, a kind of science of interaction, in some sense.</p>
+<p>Moreover, the translation always makes a cut rule appear connecting a formula in conclusion and another one in hypothesis thus acting like an extension cord of the logical flow of reasoning. When using the monolateral version of the sequent calculus, we see that the axiom rule and the cut rules are two ways of connecting a formula and its dual in two different ways. The axiom rule connect two dual conclusions and the cut rule connect two dual hypothesis. We revealed a mechanism of interaction within the logical reasoning which can be further explored if we look at things from the right angle. Logic now appears as similar to physical phenomena studied by using mathematical models, a science of interaction, in some sense.</p>
 
   </article>
 </main>
 
 
 <footer>
-    <a href="/philosophy/2020/04/10/girard-knitting/">« Girard's conceptual knitting (version 4)</a>
-    <a href="/proof%20theory/philosophy/history/technical/2018/12/07/intuitionism-classicism/">On Intuitionism and Classicism »</a>
+    <a href="/reflexion/2020/04/10/girard-knitting/">« Girard's conceptual knitting (version 4)</a>
+    <a href="/proof%20theory/history/technical/2018/12/07/intuitionism-classicism/">On Intuitionism and Classicism »</a>
 </footer>
 

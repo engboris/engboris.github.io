@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Sambo ENG">
+<meta name="description" content="Boris ENG's webpage. PhD student in Computer Science.">
+<title> Logical interaction and the social life of proofs › Boris ENG</title>
+<link rel="canonical" href="https://engboris.fr//reflexion/2021/04/20/social-life/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+        TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js"],
+        Macros: {
+              infer: [`\\begin{array}\[b\]{c c c c}
+              \\style{border-bottom:1px solid black; padding-bottom:7px;}{
+              \\begin{array}\[b\]{c c c c} #2 \\end{array}}
+                    &  \\hspace{-.5em}\\raise{-.6em}{#1} \\\\
+              #3 \\\\\[-50em\]
+              \\end{array}`,3,""
+              ]
+            }
+        }
+        });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<header>
+  <h1>⊢ <a href="/">Boris ENG</a></h1>
+  <span class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  id="selected"  href="/thoughts/">Thoughts</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article  id="post" >
+    
+    <a href="/thoughts">« Return to Thoughts</a>
+    <header>
+      <h1 id="maintitle">Logical interaction and the social life of proofs</h1>
+      <time datetime="2021-04-20T00:00:00+02:00">April 20, 2021</time>
+      
+      <div>
+      
+      
+      
+          
+
+          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span class="category" style="background-color: hsl(184, 50%, 50%);">reflexion</span></div>
+      
+    </header>
+    <p><strong>Prerequisite</strong>: Curry-Howard correspondence, linear logic, proof-nets, basic knowledge of Transcendental Syntax</p>
+
+<p>I illustrate the synthetic part of the Transcendental Syntax: the distinction between meaning as factory or use. All references to sociologic phenomena are purely metaphorical.</p>
+
+<h1 id="logical-interaction">Logical interaction</h1>
+
+<p>From the beginnings of the discovery of linear logic, there was the intuition that linear logic was about “interaction” for several good reasons.</p>
+
+<ul>
+  <li>Formulas in linear logic can be seen as limited resources or “concrete” objects. We have a more primitive implication $A \multimap B$ which can be connected to a formula $A$. Both occurrences of $A$ will interact, be destructed and finally produce $B$.</li>
+  <li>The monolateral version of the sequent calculus for linear logic makes this more explicit. The axiom and the cut rule can be seen as two kind of interaction between $A$ and $A^\bot$. The later can be removed by a computational procedure representing a sort of elimination/resolution of contradiction. Proof-nets make this idea more natural.</li>
+  <li>Girard’s geometry of interaction (in its original form) sees the computational content of logic as emerging from local interaction between computational entities studied from general mathematics. In this context, we are interested in interaction between dual objects of the same kinds (permutations, partitions, partial isometries, …).</li>
+</ul>
+
+<p>I believe that Girard’s Transcendental Syntax currently is the only place where we can give a true meaning to the idea of “logical interaction” even though it was a major intuition for a long time.</p>
+
+<h1 id="the-stellar-resolution">The stellar resolution</h1>
+
+<p>In the transcendental syntax, all objects live within the <em>stellar resolution</em> which is a model of computation using <em>constellations</em> as elementary objects. Constellations can be understood as sets of kind of molecules called <em>stars</em> which can interact with each other along compatible <em>rays</em> and form a tiling representing a network. Each such tiling for a constellation <strong>C</strong> (there can be infinitely many of them but finitely many “correct” ones) can be evaluated into a star by a step-by-step edge contraction and the propagation of information to the unconnected rays. This procedure can fail in case of conflict. It is basically a resolution of conflicts in a network (hence the name “stellar resolution”). The set of all evaluations of networks constitutes a new constellation <strong>Ex(C)</strong> called the “execution” of <strong>C</strong>.</p>
+
+<p>I have a funny experiment to illustrate how this model computes. Imagine a social network as a big constellation where each person is a star and the rays are his posts. Let’s say that people propagate some news. Some posts will overlap and interact with each other in order to complete information. Imagine someone writing “Today, something happened”. Another one write “Today, a car accident happened”. So the network now get the information that “something” is “a car accident”. Later, another one says “from my information, it was a bike accident”. Contradiction! The whole network collapses because of its incoherence. The execution of the constellation <strong>Ex(SocialNetwork)</strong> is the set of coherent information we can infer.</p>
+
+<p>This is very similar to the idea of local interaction occurring in physics and biology. Actually, the stellar resolution can be seen as a generalisation of a model called <em>flexible tiles</em> which is used in DNA computing. Moreover, it seems that DNA-based computation is able to simulate Horn clauses and clausal resolution which is very similar to the stellar resolution.</p>
+
+<p>More interestingly, we can make two constellations <strong>C, C’</strong> interact by merging them into a big constellation <strong>C + C’</strong> we can execute into <strong>Ex(C+C’)</strong>. The stellar resolution is a uniform space of entities which can compute by local interaction.</p>
+
+<h1 id="a-sociologic-interpretation">A sociologic interpretation</h1>
+
+<p>It is not the first time that one talks about a “sociology of proofs” to illustrate the interaction occurring in linear logic. Authors such as Samuel Tronçon or Arnaud Valence mention this idea in their PhD thesis. Girard uses the terminology vehicle and format (“gabarit” in French) which is a kind of specification of the vehicle. In his geometry of interaction and some papers of Transcendental Syntax, he also used some terms related to sociology. I would like to try to illustrate the Transcendental Syntax through a friendly sociologic interpretation.</p>
+
+<p>We can see a set of constellations as a society where constellations represent individuals. The Transcendental Syntax then suggests two ways of putting them into groups. If we take the illustration very seriously, an individual is not necessarily a person. The illustration is still coherent if we accept animals, objects or even an abstract notion of environment as individual. The term <em>entity</em> would probably be more general. The model of computation we choose as basis has an effect on the construction of such entities. In our case, we can see both an individual and its environment as entities of the same kind. The asymmetric duality subject/object becomes symmetric in some sense. I didn’t read Hegel so I’m not sure it is related but I believe that it is an instance of the idea that consciousness and reality are made of the same “texture/material”.</p>
+
+<h2 id="typing-by-stereotypes--labelling">Typing by stereotypes / labelling</h2>
+
+<p>We select a sample of finite representative individuals forming a group <strong>~A</strong> representing tests for a category <strong>A</strong> (e.g male, female, potentially criminal, nice people). We would like to judge if an individual <strong>x</strong> can be put into the group <strong>A</strong>. In order to do so, we test <strong>x</strong> against all individuals in <strong>~A</strong> with a definition of what “passing a test” means. If <strong>x</strong> passes all the tests of <strong>~A</strong> then it is part of the group <strong>A</strong>. Such a group is called <em>type</em>.</p>
+
+<p>We can see that because the choice of sample is arbitrary and its association with a concept subjective, <strong>A</strong> can be said to be a stereotype. Clearly, it misses some cases (some individuals considered men not passing the standard tests for men) but has the advantage of being tractable. We can easily check that an individual is part of a group. It provides a kind of relative certainty with respect to the stereotypes (subjective and partial but still a kind of certainty).</p>
+
+<p>If applied to objects, this corresponds to labelling certified objects or validating a vaccine. The tests are not perfect but at least we get what we expect (the vaccine should have an effect against a virus without too many bad secondary effects). This world of labelling is rather convenient/comfortable because we can easily name things and what they are/do. A good factory ensures that a knife can be efficiently used for cooking but I can still kill someone with it and it’s probably not something they especially expect. This leads to Wittgenstein’s idea of meaning-as-use.</p>
+
+<h2 id="typing-by-interaction--use">Typing by interaction / use</h2>
+
+<p>Another way to classify individuals is to look at how they interact with each other. The previous idea of “passing a test” now becomes “two individuals interact correctly” (notice that test and tested become symmetric, of the same kind). We start by choosing a criterion (orthogonality relation) defining what we mean by a good interaction between two individuals. We can form an arbitrary group by selecting any individuals we want. The orthogonal <strong>~A</strong> of a group <strong>A</strong> is the set of all individuals which interacts well with the individuals of <strong>A</strong>. Such a group is called <em>pre-conduct</em> (or <em>pre-behaviour</em>).</p>
+
+<p>This idea of typing is way more flexible but also very complex. Depending on the orthogonality relation, the orthogonal can be very huge. It is very difficult to reason with such notion of typing. An individual can be part of infinitely many types and subtypes naturally exist. However, the advantage is that everyone can be put into a type which is usually not the case with typing by stereotypes.</p>
+
+<p>What we call a <em>conduct</em> or <em>behaviour</em> is a pre-conduct such that <strong>A = ~~A</strong>, which is a closure by interaction implying that <strong>A</strong> is characterised by a set of tests <strong>~A</strong> (possibly infinitely many ones). These tests represent all the possible interaction of a set of constellations <strong>A</strong>. Infinitely many tests for the infinitely many uses of an object.</p>
+
+<h2 id="adequacy">Adequacy</h2>
+
+<p>If there too few types, the society is less expressive which sounds quite boring but also problematic: some individuals are not accepted because their behaviour is not accepted by the defined types. If there are too many accepted behaviours, it becomes chaotic and you will have to remember the pronoun of every individuals. But more importantly, we would like the stereotypes to be at least confirmed sometimes (stereotypes usually do not come from nowhere). It takes the form of an <em>adequacy theorem</em> (similarly to classical realisability) stating that the tests for <strong>A</strong> should ensure that an individual <strong>x</strong> being tested is indeed in the conduct corresponding to <strong>A</strong>. In other words, we would like the stereotypes to be not so wrong although they will usually miss some cases.</p>
+
+<h2 id="cause-and-consequence">Cause and consequence</h2>
+
+<p>It is not obvious in that interactive world of independent entities but it is possible to make a notion of <em>cause</em> emerge. In the case of type as labels, it is the usual notion of logical consequence. No one forbid us from defining the meaning of logical consequence as a symbol with some rules as in natural deduction or sequent calculus and then checking that it works as expected (the so-called <em>harmony</em> in natural deduction or <em>cut-elimination</em> in sequent calculus).</p>
+
+<p>In the case of typing by interaction/use, the notion of cause/consequence is deeply related to the (potentially infinite) interaction/use of entities. If it happens that when a constellation <strong>x</strong> interacts with any constellation in a conduct <strong>A</strong> and the result of that interaction is of conduct <strong>B</strong> then <strong>x</strong> is of conduct <strong>A -&gt; B</strong>. A perfect coffee machine <strong>c</strong> (represented as a constellation) would be in a conduct <strong>Coin -&gt; Coffee</strong> but also in <strong>Credit card -&gt; Coffee</strong> (notice the multiple typing). If we look at the complex machinery of interaction occurring in <strong>c</strong>, the cause of getting a cup of coffee is the interaction between some stars. However, when generalising the idea of consequence to types/conducts, it may be intractable or undecidable to tell what cause some conduct <strong>A</strong> because of the potentially infinite possible interactions. What caused our existence? Can we even know?</p>
+
+<h1 id="digression-dimensions-of-interaction">Digression: dimensions of interaction</h1>
+
+<p>This is a very vague idea but notice that local interactions happen in an atomic scale (DNA, atoms, molecules, …) but can also be studied in a greater scale with proofs and programs but also between entities such as humans, environment etc. Imagine a human interacting with a computer making a program interacting with its environment, itself triggering an electrical interaction in the circuits of the computer. The human user is also subject to an interaction between brain cells.</p>
+
+<p>I am currently wondering if it is possible to seriously talk about such a phenomena of different dimensions/scales of interaction. For instance, is there a kind of hierarchy of structures of interaction? Can we see a constellation as a star and a pre-type as a constellation and so on? Or should we consider a theory of interaction as a sort of toolbox working from a certain point of view?</p>
+
+  </article>
+</main>
+
+
+<footer>
+     <span></span> 
+    <a href="/reflexion/2020/04/10/girard-knitting/">Girard's conceptual knitting (version 4) »</a>
+</footer>
+
