@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris ENG">
+<meta name="description" content="Boris ENG's webpage. PhD student in Computer Science.">
+<title>Boris ENG</title>
+<link rel="canonical" href="https://engboris.fr//teaching/pf/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris ENG</a></h1>
+  <span class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="programmation-fonctionnelle">Programmation Fonctionnelle</h1>
+
+<p><strong>Responsable du cours</strong> : Christian Codognet</p>
+
+<p><strong>Chargé de TP (TP3)</strong> : Moi (eng@lipn.fr)</p>
+
+<h2 id="interprétation">Interprétation</h2>
+
+<p>On écrit le programme dans un fichier .ml et on le charge avec l’interpréteur OCaml (dans lequel on peut écrire et tester les fonctions librement).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ocaml
+#use "fichier.ml";;
+</code></pre></div></div>
+
+<p>Pour quitter :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit 0;;
+</code></pre></div></div>
+
+<h2 id="compilation">Compilation</h2>
+
+<p>On écrit le programme dans un fichier .ml, on le compile pour obtenir un exécutable.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ocamlc fichier.ml -o fichier
+./fichier
+</code></pre></div></div>
+
+<p>Le programme doit contenir des instructions destinées à l’interpréteur. Par exemple :</p>
+
+<figure class="highlight"><pre><code class="language-ml" data-lang="ml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="kr">let</span> <span class="kr">rec</span> <span class="n">fact</span> <span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">int</span><span class="p">)</span> <span class="p">:</span> <span class="n">int</span> <span class="p">=</span> <span class="kr">if</span> <span class="n">n</span> <span class="p">=</span> <span class="mi">1</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="n">*</span> <span class="n">fact</span> <span class="p">(</span><span class="n">n-</span><span class="mi">1</span><span class="p">)</span>
+<span class="kr">let</span> <span class="n">main</span> <span class="p">()</span> <span class="p">=</span> <span class="n">print_int</span> <span class="p">(</span><span class="n">fact</span> <span class="mi">5</span><span class="p">);;</span>
+<span class="n">main</span> <span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Remarque : on a besoin de “;;” avant <code class="language-plaintext highlighter-rouge">main ()</code> pour éviter l’ambiguïté : <code class="language-plaintext highlighter-rouge">main ()</code> serait compris comme
+faisant partie de la définition précédente. Dans le cas habituel, les <code class="language-plaintext highlighter-rouge">let</code> séparent les définitions.</p>
+
+  </article>
+</main>
+
+

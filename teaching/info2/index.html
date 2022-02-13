@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris ENG">
+<meta name="description" content="Boris ENG's webpage. PhD student in Computer Science.">
+<title>Boris ENG</title>
+<link rel="canonical" href="https://engboris.fr//teaching/info2/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris ENG</a></h1>
+  <span class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="informatique-2">Informatique 2</h1>
+
+<p><strong>Responsable du cours</strong> : Kaïs Klai</p>
+
+<p><strong>Chargé de TP (OMI3)</strong> : Moi (eng@lipn.fr)</p>
+
+<h2 id="tp1">TP1</h2>
+
+<h3 id="arithmétique-des-pointeurs">Arithmétique des pointeurs</h3>
+
+<p>Supposons qu’on ait <code class="language-plaintext highlighter-rouge">int T[9] = {12, 23, 34, 45, 56, 67, 78, 89, 90}</code> avec un pointeur <code class="language-plaintext highlighter-rouge">int* p = T</code> se référant à la première
+case du tableau <code class="language-plaintext highlighter-rouge">T</code>. L’adresse du début de T est 5000 et celle de p est 2804.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. *p+2 = 12+2 = 14
+2. *(p+2) = *(5000+2*4) = *5008 = 34 (remarque : c'est pareil que p[2] = T[2])
+3. &amp;p+1 = 2804+1 = 2805
+4. &amp;T[4]-3 = 5000+4*4-3 = 5013
+5. T+3 = 5000+3 = 5003
+6. &amp;T[7]-p = 5000+4*7-2804 = 5028-2804
+7. p+(*p-10) = 2804+(12-10) = 2804+2 = 2806
+8. *(p+*(p+8)-T[7]) = *(p+*(p+8)-89) = *(p+90-89) = *(p+1) = 23
+9. (*(&amp;p))[5]-(*(&amp;p))[2] = p[5]-p[2] = 67-34 = 33 (remarque : *(&amp;p) = p)
+10. *(*(&amp;p)+3)*(*(*(&amp;p)+1)-13) = *(p+3)*(*(p+1)-13) = *(p+3)*(*(p+1)-13) = p[3]*(p[1]-13) = 45*(23-12) = 45*11
+</code></pre></div></div>
+
+<h3 id="compilation">Compilation</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc -c tab.h tab.c
+gcc -c testTab.c
+gcc tab.o testTab.o -o testTab
+./testTab
+</code></pre></div></div>
+
+<h3 id="tabh">tab.h</h3>
+
+<p>Contient les prototypes des fonctions c’est-à-dire qu’on déclare quelles sont les fonctions qu’on va utiliser, leur type de retour et le type des paramètres.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="kt">double</span><span class="o">*</span> <span class="nf">creerTab</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">remplirTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">afficherTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">idTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">estDansTab</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">nbOccTab</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">memValTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">inverserTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="tabc">tab.c</h3>
+
+<p>Contient la définition de chaque fonctions que l’on aimerait utiliser dans notre programme.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include "tab.h"
+</span>
+<span class="kt">double</span><span class="o">*</span> <span class="nf">creerTab</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Demande 'size' cases memoires pour contenir des nombres de type 'double'
+</span>
+  <span class="c1">// Retourne l'adresse de la premiere case memoire de l'espace obtenu
+</span>
+  <span class="k">return</span> <span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">remplirTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Veuillez entrer la valeur de tab[%d] :"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%lg"</span><span class="p">,</span> <span class="n">tab</span><span class="o">+</span><span class="n">i</span><span class="p">);</span> <span class="c1">// Remplit la case à l'adresse tab+i (%d = type double)
+</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">afficherTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%lg "</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">i</span><span class="p">));</span> <span class="c1">// On peut aussi écrire tab[i]
+</span>
+  <span class="p">}</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Renvoie -1 si les deux tableaux sont differents
+</span>
+<span class="c1">// Renvoi 0 si les deux tableaux sont identiques
+</span>
+<span class="kt">int</span> <span class="nf">idTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">tab1</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">tab2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">s1</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">)</span> <span class="c1">// S'ils n'ont pas la meme taille, ils sont differents
+</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tab1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">tab2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Il y a au moins une difference donc ils sont differents
+</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Tous les tests de differences sont passes, donc ils sont identiques
+</span>
+<span class="p">}</span>
+
+<span class="c1">// Renvoie -1 si l'element x n'est pas dans tab
+</span>
+<span class="c1">// Sinon, renvoie la position de l'element
+</span>
+<span class="kt">int</span> <span class="nf">estDansTab</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="k">return</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// On l'a trouve donc on renvoit la valeur du compteur
+</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// On ne l'a pas trouve
+</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">nbOccTab</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">nbOcc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="n">nbOcc</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">nbOcc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Renvoie -1 si un tableau a un element pas present dans l'autre
+</span>
+<span class="c1">// Renvoie 0 si les deux tableaux ont les memes elements
+</span>
+<span class="kt">int</span> <span class="nf">memValTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">tab1</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">tab2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">estDansTab</span><span class="p">(</span><span class="n">tab1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tab2</span><span class="p">,</span> <span class="n">s2</span><span class="p">))</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// On a un element de tab1 qui n'est pas dans tab2
+</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">estDansTab</span><span class="p">(</span><span class="n">tab2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tab1</span><span class="p">,</span> <span class="n">s1</span><span class="p">))</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// On a un element de tab2 qui n'est pas dans tab1
+</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// On inverse chaque case avec son oppose dans le tableau
+</span>
+<span class="c1">// (pour cela il faut une variable temporaire 'x' pour sauvegarder la valeur qu'on met a jour)
+</span>
+<span class="kt">void</span> <span class="nf">inverserTab</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">x</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">tab</span><span class="p">[</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="testtabc">testTab.c</h3>
+
+<p>Contient le coeur du programme où on utilise les fonctions que l’on a défini.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include "tab.h"
+</span>
+<span class="c1">// Fonction affichant le menu et recuperant le choix de l'utilisateur
+</span>
+<span class="kt">int</span> <span class="nf">menu</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">choix</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 0 pour quitter le programme</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 1 pour creer le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 2 pour remplir le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 3 pour afficher le tableau </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 4 pour comparer le tableau a un autre</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 5 pour vérifier si un element est dans le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 6 pour compter un element dans le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 7 pour verifier si le tableau a les memes elements qu'un autre</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tapez 8 pour inverser le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">choix</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">choix</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Programme principal qui traite des tableaux
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">double</span><span class="o">*</span> <span class="n">monTab</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="n">choix</span><span class="p">,</span> <span class="n">lsize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+
+    <span class="cm">/* declarer les autres variables dont vous aurez besoin */</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">choix</span> <span class="o">=</span> <span class="n">menu</span><span class="p">();</span>
+        <span class="k">switch</span><span class="p">(</span><span class="n">choix</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"Au revoir</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">monTab</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"Le tableau est deja cree ! "</span><span class="p">);</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"voulez vous le supprimer et créer un autre (1: oui/ 0: non)?</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="k">else</span>
+                    <span class="p">{</span>
+                        <span class="n">free</span><span class="p">(</span><span class="n">monTab</span><span class="p">);</span>
+                        <span class="n">lsize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"Quelle taille voulez vous pour votre tableau?</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+                <span class="n">monTab</span> <span class="o">=</span> <span class="n">creerTab</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">monTab</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"Il faut d’abord creer le tableau</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"Combien de valeurs?</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lsize</span><span class="p">);</span>
+                    <span class="n">remplirTab</span><span class="p">(</span><span class="n">monTab</span><span class="p">,</span> <span class="n">lsize</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">afficherTab</span><span class="p">(</span><span class="n">monTab</span><span class="p">,</span> <span class="n">lsize</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="c1">// A Remplir...
+</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="c1">// A Remplir...
+</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="c1">// A Remplir...
+</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="c1">// A Remplir...
+</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">8</span><span class="p">:</span>
+                <span class="n">inverserTab</span><span class="p">(</span><span class="n">monTab</span><span class="p">,</span> <span class="n">lsize</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="nl">default:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"Choix erronne</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">choix</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="cm">/* n'oubliez pas de liberer les tableaux alloués dynamiquement */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">monTab</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">monTab</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+  </article>
+</main>
+
+

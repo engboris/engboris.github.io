@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris ENG">
+<meta name="description" content="Boris ENG's webpage. PhD student in Computer Science.">
+<title>Boris ENG</title>
+<link rel="canonical" href="https://engboris.fr//teaching/pfc/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris ENG</a></h1>
+  <span class="sub">PhD Student in Computer Science, Team LoVe, LIPN (Université Sorbonne Paris Nord, France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="pierre-feuille-ciseaux-en-c">pierre-feuille-ciseaux en C</h1>
+
+<p>1 - À partir de ce programme, representez les possibilités du jeu pierre-feuille-ciseaux avec des conditions <code class="language-plaintext highlighter-rouge">if</code> en comparant le coup du joueur 1 et celui du joueur 2 sachant que PIERRE gagne contre CISEAUX, CISEAUX gagne contre FEUILLE et FEUILLE gagne contre PIERRE. On peut fixer une valeur de départ à <code class="language-plaintext highlighter-rouge">coupJ1</code> et <code class="language-plaintext highlighter-rouge">coupJ2</code> pour tester.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#define PIERRE 0
+#define FEUILLE 1
+#define CISEAUX 2
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">coupJ1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">coupJ2</span><span class="p">;</span>
+    <span class="c1">// Remplir ici avec des conditions pour gérer tous les cas
+</span>
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>2 - En utilisant la fonction <code class="language-plaintext highlighter-rouge">scanf</code>, demandez à chaque joueur d’entrer un entier représentant un coup. Je rappelle que <code class="language-plaintext highlighter-rouge">scanf("%d", &amp;x)</code> permet de demander à l’utilisateur d’entrer un entier (comme précisé dans le format d’entrée <code class="language-plaintext highlighter-rouge">%d</code>) et que cet entier sera enregistré à l’adresse de <code class="language-plaintext highlighter-rouge">x</code> (<code class="language-plaintext highlighter-rouge">&amp;x</code>) dans la mémoire.</p>
+
+<p>3 - Demandez à l’utilisateur d’entrer un nombre de manches et réaliser plusieurs manches du jeu automatiquement avec une boucle <code class="language-plaintext highlighter-rouge">for</code>. Déterminez qui est le gagnant en comptant le nombre de victoires de chacun.</p>
+
+<p>4 - Demandez à l’utilisateur d’entrer un mode de jeu (contre l’ordinateur ou contre un joueur). Dans le mode contre l’ordinateur, vous pouvez générer un entier aléatoire entre 0 et 2 avec cette commande après avoir importé la bibliothèque <code class="language-plaintext highlighter-rouge">time.h</code> avec <code class="language-plaintext highlighter-rouge">#include &lt;time.h&gt;</code> :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span> <span class="c1">// seulement une seule fois au début du programme pour initialiser
+</span>
+<span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 3 est exclu</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+  </article>
+</main>
+
+

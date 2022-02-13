@@ -1,0 +1,38 @@
+body {
+  font-family: "Arial";
+  margin: 50px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.sub {
+  color: gray;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: black;
+}
+
+hr {
+  border: none;
+  margin-bottom: 15px;
+  border-bottom: 1px solid lightgray;
+}
+
+a {
+  text-decoration: inherit;
+  transition: color .2s ease-out;
+  color: #6074ad;
+}
+
+a.selected, a:hover {
+  color: reduce(100);
+}
+
+a:hover {
+  opacity: 70%;
+}
+
+/*# sourceMappingURL=webdoc.css.map */

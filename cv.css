@@ -1,0 +1,57 @@
+body {
+  font-family: "Source Sans Pro";
+  margin: 50px;
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  padding-right: 15px;
+}
+
+p {
+  margin: 0;
+}
+
+#title {
+  font-size: 42px;
+  margin-bottom: 5px;
+}
+
+#subtitle {
+  color: #079992;
+}
+
+.sub {
+  color: gray;
+}
+
+h1, h2 {
+  color: #079992;
+  margin-bottom: 0;
+}
+
+hr {
+  border: none;
+  margin-bottom: 15px;
+  margin-top: 0;
+  border-bottom: 1px solid lightgray;
+}
+
+a {
+  text-decoration: inherit;
+  transition: color .2s ease-out;
+  color: #6074ad;
+}
+
+a.selected, a:hover {
+  color: reduce(100);
+}
+
+a:hover {
+  opacity: 70%;
+}
+
+/*# sourceMappingURL=cv.css.map */
