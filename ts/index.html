@@ -62,53 +62,13 @@
       <time datetime=""></time>
       
     </header>
-    <h1 id="transcendentalist-circle">Transcendentalist Circle</h1>
+    <h1 id="working-group-transcendentalist-circle">Working Group “Transcendentalist Circle”</h1>
 
-<p>The <em>Transcendentalist Circle</em> is a (rather informal) discussion group on Girard’s Transcendental Syntax programme. In this section, we describe the events which led to this programme and explain what the Transcendental Syntax is.</p>
+<p>Working group on the foundations of logic and computation, especially in the light of Girard’s Transcendental Syntax. We aim for a transdisciplinary interaction between mathematics, computer science and philosophy inspired by the <a href="https://www.ligc.fr/">LIGC working group</a>.</p>
 
-<p><strong>Towards a computational explanation of logic.</strong> The discovery of the Curry-Howard correspondence led to a reconsideration of logic: some logical systems formally correspond to some typed models of computation. In particular, there is a correspondance between formulas/propositions and types, proofs and programs but also between a logical procedure called “cut-elimination” and the execution of programs. What we have learnt from that is the fact that computation can explain logic in some cases, and that a change of foundation seems needed.</p>
+<p>We organise meeting and presentations.</p>
 
-<p><strong>Expliciting the mechanisms of reasoning.</strong> Girard’s linear logic was introduced in that context and led to a decomposition of the implication of intuitionistic logic <code class="language-plaintext highlighter-rouge">A⇒B</code> into <code class="language-plaintext highlighter-rouge">!A⊸B</code> where <code class="language-plaintext highlighter-rouge">!A</code> makes explicit the fact that <code class="language-plaintext highlighter-rouge">A</code> is used several times and <code class="language-plaintext highlighter-rouge">A⊸B</code> is a linear implication using its premise only once. Formulas are handled like usable resources. Hence, some more primitive operations exist in the traditional and natural conception of reasoning.</p>
-
-<p><strong>The structure of reasoning.</strong> Linear logic led to a new representation of proofs: the proof-nets which are graphs on formulas forgetting inessential details like the order of application of logical rules in Gentzen’s sequent calculus, thus exhibiting a canonical topology of proofs. Interestingly, by forgetting the logical aspect of these graphs, we obtain a new model of computation called <em>proof-structures</em> which are alogical skeletons of proofs computing with a rewiring and contraction of edges. Girard showed that it was possible to assert if a proof-structure is logically correct (corresponding to a proof-net) by using a <em>geometric correctness criterion</em> which was later simplified by Danos and Regnier.</p>
-
-<p><strong>Searching for the frontiers of reasoning.</strong> Girard’s Geometry of Interaction was introduced as a mathematical analysis of proof-nets and their cut-elimination. Proofs are represented with very general mathematical objects from which logical entities were defined. The lesson is that logic can be defined from a very general computational space and that logical phenomena can exist outside of the traditional definitions of logic. In particular, formulas appear as descriptions of computational behaviours.</p>
-
-<p><strong>A new architecture for logic.</strong> Learning from the previous events, the Transcendental Syntax suggests a new architecture for logic where computation is deeply related to logic in general and not only for some systems as in the Curry-Howard correspondence. The main (ambitious) goals are (1) removing the frontier between syntax and semantics so that the logical meaning entirely emerges from syntactic interaction and (2) making explicit the mechanisms of reasoning without any preconception of what is logical. Since logic can exist outside of definitions such as natural deduction or the sequent calculus, we will start from a very general model of computation where computational entities will be formatted/classified by formulas/types. The whole logical activity is illustrated by the following table of Kantian inspiration:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>A posteriori / Explicit</th>
-      <th>A priori / Implicit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Analytic / Raw / Answer / Computation / Object</strong></td>
-      <td>Constat (result)</td>
-      <td>Performance (executable program)</td>
-    </tr>
-    <tr>
-      <td><strong>Synthetic / Meaning / Question / Logic / Subject</strong></td>
-      <td>Usine (typing by correctness criteria)</td>
-      <td>Usage (interactive typing by realisability)</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>The analytic is the space of computation corresponding to a ground for the representation of reality. It is objective because meaningless like how “yes” and “no” are meaningless answers when they are not yet related to a question. Programs are complex structurations of information from which a result may be extracted and explicited by computation. In particular, a program cannot be substituted by the set of its results since it may not produce an answer and simply loop: this is <em>indecidability</em>.</p>
-
-<p>The synthetic is where logic appears and gives a meaning to computational entities. In particular, it is where formulas and types are created as questions for which their proofs (which are basically computational entities satisfying some criteria) are answers. The <em>usage</em> corresponds to the definition of formulas from the cut-elimination (execution) as in later Geometry of Interaction (or ludics). Once an orthogonality relation opposing computational entities is chosen, pre-formulas are defined as set of computational entities <code class="language-plaintext highlighter-rouge">A</code> such that its orthogonal <code class="language-plaintext highlighter-rouge">~A</code> is the set of all orthogonal entities. Formulas will correspond to pre-formulas such that <code class="language-plaintext highlighter-rouge">A = ~~A</code>. Assembling formulas and using orthogonality is sufficient to reconstruct the formulas of linear logic. It corresponds to Wittgenstein’s meaning-as-use and Sellars’ semantic inferentialism.</p>
-
-<p>The <em>usine</em>, the true novelty of Transcendental Syntax, comes from a wish of finite reasoning and feasable checking in the semantic-free space we have constructed for logic (otherwise, reasoning would not be possible). In Kantian terms, we are looking for <em>conditions of possibility</em> of reasoning by expliciting the normative constraints of reasoning. We must be able to assert (in finite time) if a computational object is a proof (an answer) of a given formula. In the usage, given a formula <code class="language-plaintext highlighter-rouge">A</code>, we are able to check if a computational entity <code class="language-plaintext highlighter-rouge">c</code> is in <code class="language-plaintext highlighter-rouge">A</code> by checking if it is orthogonal to all <code class="language-plaintext highlighter-rouge">c'</code> in <code class="language-plaintext highlighter-rouge">~A</code>. However, <code class="language-plaintext highlighter-rouge">~A</code> may be infinite, which corresponds to an infinite testing. The idea of l’usine is that we should restrict to a finite subset <code class="language-plaintext highlighter-rouge">~B</code> of <code class="language-plaintext highlighter-rouge">~A</code> which is sufficient for what we wish to satisfy. It is actually what happens in the theory of proof-nets. The correctness criterion of proof-structures exhibits the tests defining the <em>logically correct</em>. These tests can be materialised as computational entities of the same kind as the representations of proofs (to avoid the externality of semantics) and can be designed in order to ensure a good use or behaviour of computational objects (a correct “cut-elimination” for instance). Actually, although partial, these finite pre-formulas <code class="language-plaintext highlighter-rouge">~B</code> defines types by themselves: if <code class="language-plaintext highlighter-rouge">c</code> passes the tests of <code class="language-plaintext highlighter-rouge">~B</code> (is orthogonal to all <code class="language-plaintext highlighter-rouge">c'</code> of <code class="language-plaintext highlighter-rouge">~B</code>) then it is a proof of <code class="language-plaintext highlighter-rouge">B</code>. This shows that logical correctness is not absolute but a way to format computation. According to Girard, usine and usage are separated by Gödel incompleteness theorems. There is no way to capture all the computational power of reasoning in a way we can finitely manipulate. Formatting is usually either too strict or too laxist.</p>
-
-<h2 id="history">History</h2>
-
-<p>The Transcendentalist Circle has been created by <em>Boris Eng</em>, <em>Davide Barbarossa</em> and <em>Valentin Maestracci</em> at the LIPN (Université Sorbonne Paris Nord) during CIRM’s thematic month in 2022. We are motivated by an insatisfaction regarding the current foundations of mathematical logic. We believe that something has been initiated by Girard, the <a href="https://www.ligc.fr/">LIGC</a> and other logicians/philosophers (for instance, Pistone &amp; Abrusci for their comment on Girard’s Transcendental Syntax), but left inachieved. A transdisciplinary <em>interaction</em> between computer science, mathematics and philosophy is needed to solve the identity crisis of logic. For that purpose, we plan to exchange and develop new ideas with both <em>internal</em> interactions (meetings/discussions between members, programming projects, virtual conferences), and <em>external ones</em> through presentations, articles or other means.</p>
-
-<h2 id="members-15">Members (15)</h2>
+<h2 id="members-16">Members (16)</h2>
 
 <ul>
   <li><a href="https://lipn.univ-paris13.fr/~barbarossa/">Davide Barbarossa</a> (★ Co-founder)
@@ -125,6 +85,7 @@
 <br /><span style="font-size: 16px; color: rgb(80, 80, 80);">Computer science, technical side of the transcendental syntax – Université Sorbonne Paris Nord</span></li>
   <li>Yannis Hausberg
 <br /><span style="font-size: 16px; color: rgb(80, 80, 80);">Philosophy of science – Université Lyon 3</span></li>
+  <li>Jérémy Hervé</li>
   <li>Valentin Maestracci (★ Co-founder)
 <br /><span style="font-size: 16px; color: rgb(80, 80, 80);">Lambda-calculus, type theory, homotopy type theory, Dedukti, directed homotopy theory, rewriting – Università di Bologna</span></li>
   <li>Julien Marquet
@@ -143,13 +104,22 @@
 <br /><span style="font-size: 16px; color: rgb(80, 80, 80);">Links between linear logic and automata theory / combinatorics / computational complexity / algorithmic – Ecole Polytechnique</span></li>
 </ul>
 
-<p>New members are accepted upon approval of all the listed members.</p>
+<p>Contact me to join our discussions on Zulip.</p>
 
 <h2 id="community">Community</h2>
 
 <ul>
   <li><a href="https://transcendentalist-circle.zulipchat.com/">Zulip chat</a> for chatting</li>
   <li><a href="https://git.recursor.wf/">Gitea</a> for collaborative works</li>
+</ul>
+
+<h2 id="past-meetings">Past meetings</h2>
+
+<ul>
+  <li>“Proof-nets and Deep Inference” (April 27, 2022) by Pablo Donato (5 persons).</li>
+  <li>“Computation and Meaning” (March 23, 2022) by Boris Eng (8 persons).</li>
+  <li>“Lambda-calculus and stellar resolution” (March 9, 2022) by Boris Eng and Julien Marquet (6 persons).</li>
+  <li>Round table discussion at CIRM’s “Logic and Interaction” thematic month (February 2022) with Jean-Baptiste Joinet (8 persons).</li>
 </ul>
 
 <h2 id="references-on-transcendental-syntax">References on Transcendental Syntax</h2>
