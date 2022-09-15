@@ -175,6 +175,57 @@
   </li>
 </ol>
 
+<h2 id="quelques-corrections">Quelques corrections</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="cp">#define TRUE 1
+#define FALSE 0
+</span>
+<span class="kt">int</span> <span class="nf">eqtab</span><span class="p">(</span><span class="kt">int</span> <span class="n">tab1</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">tab2</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// Si les deux tableaux n'ont pas la même taille, ils sont forcément différents
+</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">taille1</span> <span class="o">!=</span> <span class="n">taille2</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+		
+	<span class="c1">// Cas où les deux tableaux ont la même taille
+</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">taille1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">// Si trouve une différence en les comparant, les tableaux sont différents
+</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">tab1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">tab2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+			<span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// Si tous les tests ont été passés, les tableaux sont bien égaux
+</span>
+	<span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
   </article>
 </main>
 

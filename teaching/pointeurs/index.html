@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Eng">
+<meta name="description" content="Boris Eng's webpage. ATER at Université Sorbonne Paris Nord, France.">
+<title>Boris Eng</title>
+<link rel="canonical" href="https://engboris.fr//teaching/pointeurs/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris Eng</a></h1>
+  <span class="sub">ATER at Université Sorbonne Paris Nord, France</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+        <a  href="/cv/">CV</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="entraînement-sur-les-pointeurs-en-c">Entraînement sur les pointeurs en C</h1>
+
+<p>Les pointeurs permettent de gérer nous-même certaines opérations sur la mémoire et d’avoir plus de flexibilité lorsqu’on programme. Les utiliser demande une grande rigueur pour éviter de créer des problèmes de mémoire (SEGFAULT, accès non autorisé à la mémoire, accès en dehors des bornes d’un tableau etc).</p>
+
+<p>c</p>
+
+<p>Les tableaux en C sont statiques : on les utilise lorsqu’on traite un nombre spécifique de données dont les bornes sont connues. Avec les pointeurs, on peut simuler un tableau nous-même. Comparons les deux approches :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// Approche par tableau statique
+</span>
+	<span class="kt">int</span> <span class="n">tab</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+	<span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"tab[0] = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"adresse de tab[0] = %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	
+	<span class="c1">// Approche par pointeurs
+</span>
+	<span class="c1">// pointeur pour lequel on autorise une zone de 5 blocs d'entiers dans la mémoire
+</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">tab2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+	<span class="o">*</span><span class="n">tab2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// premier élément du tableau
+</span>
+	<span class="o">*</span><span class="p">(</span><span class="n">tab2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// deuxième élément du tableau : celui à l'adresse de tab2 + 1 bloc
+</span>
+	<span class="o">*</span><span class="p">(</span><span class="n">tab2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="o">*</span><span class="p">(</span><span class="n">tab2</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+	<span class="o">*</span><span class="p">(</span><span class="n">tab2</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">tab2</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"tab2[0] = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">tab2</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"adresse de tab2[0] = %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">tab2</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Ecrire les fonctions suivantes :</p>
+
+<p>(En cours de rédaction)</p>
+
+  </article>
+</main>
+
+

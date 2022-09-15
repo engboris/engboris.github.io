@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Eng">
+<meta name="description" content="Boris Eng's webpage. ATER at Université Sorbonne Paris Nord, France.">
+<title>Boris Eng</title>
+<link rel="canonical" href="https://engboris.fr//teaching/info1_pcspi/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris Eng</a></h1>
+  <span class="sub">ATER at Université Sorbonne Paris Nord, France</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+        <a  href="/cv/">CV</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="eléments-dinformatique">Eléments d’informatique</h1>
+
+<p><strong>Responsable du cours</strong> : Stefano Guerrini</p>
+
+<h2 id="commandes-linux-pour-écrire-et-exécuter-un-programme">Commandes Linux pour écrire et exécuter un programme</h2>
+
+<p>Création de fichier avec Gedit :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gedit nom_fichier.c &amp;
+</code></pre></div></div>
+
+<p>Compilation (transformation du fichier .c vers un fichier exécutable).
+Le paramètre <code class="language-plaintext highlighter-rouge">-Wall</code> affiche les avertissements (ils ne gênent pas la production du programme de sortie mais indique des anomalies).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc -Wall nom_fichier.c -o nom_fichier
+</code></pre></div></div>
+
+<p>Exécution du programme</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./nom_fichier
+</code></pre></div></div>
+
+<h2 id="instructions-de-base-avec-explications">Instructions de base (avec explications)</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+</pre></td><td class="code"><pre><span class="c1">// Permet d'utiliser des identifiants comme EXIT_SUCCESS et d'autres choses
+</span>
+<span class="cp">#include &lt;stdlib.h&gt;
+</span><span class="c1">// Permet d'utiliser printf et scanf
+</span>
+<span class="cp">#include &lt;stdio.h&gt;
+</span><span class="c1">// Permet de fixer une constante N de valeur 5
+</span>
+<span class="cp">#define N 5
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="c1">// Bloc principal du programme (commence par { et termine par })
+</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Déclare une variable 'n' de type entier (int) dans la mémoire
+</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="c1">// Mets la valeur 6 dans la variable n
+</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Déclare une variable 'm' avec la valeur 5
+</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 'm' prend pour valeur 'm+1' (on augmente donc 'm' de 1)
+</span>
+    <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Même chose
+</span>
+    <span class="n">m</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Même chose
+</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Bonjour"</span><span class="p">);</span> <span class="c1">// Affiche le texte "Bonjour" à l'écran
+</span>
+    <span class="c1">// Le premier paramètre "%d" est le format d'affichage indiquant qu'on affiche un entier
+</span>
+    <span class="c1">// Les paramètres suivants sont les entiers correspondant à afficher
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="c1">// On affiche la valeur de n
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d/%d"</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span> <span class="c1">// On affiche la valeur de 'n' et de 'm' séparés par un symbole /
+</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span> <span class="c1">// On permet d'entrer un entier au clavier dont la valeur sera placée dans la variable 'n'
+</span>
+
+    <span class="c1">// Conditions
+</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">6</span><span class="p">))</span> <span class="c1">// Si (n&gt;3 et m&gt;4) ou alors si (n==6) est faux
+</span>
+    <span class="p">{</span>
+        <span class="c1">// On fait quelque chose
+</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="c1">// Sinon (optionnel)
+</span>
+    <span class="p">{</span>
+        <span class="c1">// On fait autre chose
+</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Premier paramètre : on a un compteur 'i' qui démarre à 0
+</span>
+    <span class="c1">// Second paramètre : on continue tant que la condition est valide
+</span>
+    <span class="c1">// Troisième paramètre : le changement effectué sur 'i' à chaque tour
+</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// On fait des opérations en boucle
+</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">)</span> <span class="c1">// On fait des opérations en boucle tant que la condition est valide
+</span>
+    <span class="p">{</span>
+        <span class="c1">// Remarque 1 : c'est une boucle infinie
+</span>
+        <span class="c1">// Remarque 2 : on peut faire la même chose qu'une boucle for avec une boucle while
+</span>
+    <span class="p">}</span>
+
+    <span class="kt">double</span> <span class="n">t</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span> <span class="c1">// On déclare un tableau de réels de taille 5 (5 cases dans la mémoire)
+</span>
+    <span class="kt">double</span> <span class="n">tab</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">.</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">}</span> <span class="c1">// On déclare un tableau de 3 réels avec des valeurs précises
+</span>
+    <span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span> <span class="c1">// On change la première case de 'tab', elle a pour valeur 1.0 (l'indice de la première case est 0)
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"tab[0] = %g"</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// On affiche la valeur de la première case de 'tab'
+</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%g"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tab</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// On change la valeur de la seconde case au clavier
+</span>
+
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">'a'</span><span class="p">;</span> <span class="c1">// Déclaration d'un caractère, chaque caractère est associé à un entier (son code ASCII)
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c"</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span> <span class="c1">// Affichage du caractère contenu dans la variable 'c'
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span> <span class="c1">// Remarque : si on choisit de l'afficher comme entier, cela affiche le code ASCII associé
+</span>
+    <span class="kt">char</span> <span class="n">text</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s">"Bonjour"</span><span class="p">;</span> <span class="c1">// Une chaîne de caractère (texte) se traite comme un tableau de caractères
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c"</span><span class="p">,</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// Affiche 'B'
+</span>
+
+    <span class="c1">// Une matrice est un tableau dont les cases contiennent des tableaux. On a donc un tableau 3x3
+</span>
+    <span class="kt">int</span> <span class="n">mat</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">},</span>
+        <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">}</span>
+    <span class="p">};</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// Affiche l'entier à la ligne 0 et à la colonne 1, c'est-à-dire 2
+</span>
+    <span class="c1">// Pour afficher une matrice, on affiche les éléments case par case en parcourant chaque ligne
+</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">ligne</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">ligne</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="n">ligne</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Le code ci-dessous permet d'afficher une ligne de la matrice
+</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">colonne</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">colonne</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="n">colonne</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">mat</span><span class="p">[</span><span class="n">ligne</span><span class="p">][</span><span class="n">colonne</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// On saute une ligne après avoir affiché une ligne
+</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span> <span class="c1">// Indique que le programme s'est terminé correctement
+</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="exemple--recherche-du-maximum-dun-tableau-dentier">Exemple : recherche du maximum d’un tableau d’entier</h2>
+
+<p>On souhaite recherche l’entier le plus grand d’un tableau d’entiers.</p>
+
+<ul>
+  <li>Algorithme</li>
+</ul>
+
+<p>On décrit informellement le fonctionnement du programme. Il s’agit d’une étape
+de conception avant la réalisation (écriture du programme lui-même). Les règles
+de rédactions peuvent varier.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Nom : Max
+Entrée :
+Sortie :
+
+Algorithme
+On déclare tab (tableau d'entiers)
+On déclare max (entier)
+max = tab[0]
+Pour tout élément x de tab (à partir du second) :
+    Si x &gt; max :
+        max = x
+Fin de boucle
+Affiche max
+Retour : OK
+</code></pre></div></div>
+
+<ul>
+  <li>Écriture du programme</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#define N 5
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Déclaration d'un tableau de taille 5
+</span>
+    <span class="kt">int</span> <span class="n">tab</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+    <span class="c1">// On suppose que le premier élément est le plus grand puis on vérifie si c'est bien le cas
+</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// i prend pour valeur les entiers de 1 à N-1
+</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span> <span class="c1">// On vérifie si la case qu'on regarde est plus grande que le max
+</span>
+        <span class="p">{</span>
+            <span class="c1">// Si oui, il devient le nouveau max
+</span>
+            <span class="n">max</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Le max est : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>Trace de programme</li>
+</ul>
+
+<p>On a une colonne pour ligne, une ligne par données, et la sortie. On met seulement
+les lignes intéressantes (où une donnée est modifiée ou un affichage est effectué).
+Si on exécute le programme, on a l’évolution suivante des données :</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ligne</th>
+      <th>tab</th>
+      <th>max</th>
+      <th>i</th>
+      <th>affichage</th>
+      <th>commentaire (optionnel)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8</td>
+      <td>{1, 5, 10, 7, 8}</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td> </td>
+      <td>1</td>
+      <td> </td>
+      <td> </td>
+      <td>On suppose que 1 est le max</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td> </td>
+      <td> </td>
+      <td>1</td>
+      <td> </td>
+      <td>On commence la boucle à tab[1]</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td> </td>
+      <td>5</td>
+      <td> </td>
+      <td> </td>
+      <td>On fait 5&gt;1, le max devient 5</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td> </td>
+      <td> </td>
+      <td>2</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td> </td>
+      <td>10</td>
+      <td> </td>
+      <td> </td>
+      <td>On fait 10&gt;5, le max devient 10</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td> </td>
+      <td> </td>
+      <td>3</td>
+      <td> </td>
+      <td>On compare 7&gt;10, on ne change rien</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td> </td>
+      <td> </td>
+      <td>4</td>
+      <td> </td>
+      <td>On compare 8&gt;10, on ne change rien</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>“Le max est 10”</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+  </article>
+</main>
+
+
