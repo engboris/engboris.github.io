@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Eng">
+<meta name="description" content="Boris Eng's webpage. ATER at Université Sorbonne Paris Nord, France.">
+<title>Boris Eng</title>
+<link rel="canonical" href="https://engboris.fr//teaching/java/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris Eng</a></h1>
+  <span class="sub">ATER at Université Sorbonne Paris Nord, France</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+        <a  href="/cv/">CV</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="eléments-dinformatique">Eléments d’informatique</h1>
+
+<p><strong>Responsable du cours</strong> : Marc Champesme</p>
+
+<h2 id="correction-du-tp2">Correction du TP2</h2>
+
+<p><strong>Exercice 1</strong></p>
+
+<p>Creation d’un nouveau fichier <code class="language-plaintext highlighter-rouge">ObjetZork.java</code>. Attention, le nom du fichier doit correspondre au nom de la classe et du constructeur.</p>
+
+<p>Je rappelle que <code class="language-plaintext highlighter-rouge">this</code> se réfère à la classe elle-même. Si on écrit <code class="language-plaintext highlighter-rouge">this.poids</code>, il s’agit de l’attribut <code class="language-plaintext highlighter-rouge">poids</code> de la classe dans laquelle on est.</p>
+
+<p>Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire ou ce dont vous avez besoin.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObjetZork</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">nom</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">poids</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">boolean</span> <span class="n">transportable</span><span class="o">;</span>
+	
+	<span class="cm">/**
+	 *  Initialise les objets avec un nom, une description et un poids.
+	 *  En particulier, on aimerait que le poids soit supérieur à 0.
+	 * 
+	 *  @param  nom           Nom de l'objet.
+	 *  @param  description   Description de l'objet.
+	 *  @param  poids         Poids de l'objet &gt;= 0.
+	 *  @param  transportable Indique si l'objet est transportable.
+	 */</span>
+	 <span class="kd">public</span> <span class="nf">ObjetZork</span><span class="o">(</span><span class="nc">String</span> <span class="n">nom</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="kt">int</span> <span class="n">poids</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">transp</span><span class="o">)</span> <span class="o">{</span>
+	 	<span class="k">this</span><span class="o">.</span><span class="na">nom</span> <span class="o">=</span> <span class="n">nom</span><span class="o">;</span>
+	 	<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+	 	<span class="k">this</span><span class="o">.</span><span class="na">poids</span> <span class="o">=</span> <span class="n">poids</span><span class="o">;</span>
+	 	<span class="k">this</span><span class="o">.</span><span class="na">transportable</span> <span class="o">=</span> <span class="n">transp</span><span class="o">;</span>
+	 <span class="o">}</span>
+	 
+	 <span class="cm">/**
+	 *  Récupère le nom de l'objet.
+	 *
+	 *  @return  Nom de l'objet.
+	 */</span>
+	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNom</span><span class="o">()</span> <span class="o">{</span>
+	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">;</span>
+	 <span class="o">}</span>
+	 
+	 <span class="cm">/**
+	 *  Récupère la description de l'objet.
+	 *
+	 *  @return  Description de l'objet.
+	 */</span>
+	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">;</span>
+	 <span class="o">}</span>
+	 
+	 <span class="cm">/**
+	 *  Récupère le poids de l'objet.
+	 *
+	 *  @return  Poids de l'objet.
+	 */</span>
+	 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPoids</span><span class="o">()</span> <span class="o">{</span>
+	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span><span class="o">;</span>
+	 <span class="o">}</span>
+	 
+	 <span class="cm">/**
+	 *  Indique si l'objet est transportable.
+	 *
+	 *  @return  Renvoie vrai si l'objet est transportable et faux sinon.
+	 */</span>
+	 <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">estTransportable</span><span class="o">()</span> <span class="o">{</span>
+	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">transportable</span><span class="o">;</span>
+	 <span class="o">}</span>
+	 
+	 <span class="cm">/**
+	 *  Affiche les détails d'un objet.
+	 */</span>
+	 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">affiche</span><span class="o">()</span> <span class="o">{</span>
+	 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nom : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">);</span>
+	 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Description : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">);</span>
+	 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Poids : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span><span class="o">);</span>
+	 	<span class="k">if</span> <span class="o">(</span><span class="n">estTransportable</span><span class="o">())</span>
+	 		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cet objet est transportable."</span><span class="o">);</span>
+	 	<span class="k">else</span>
+	 		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cet objet n'est pas transportable."</span><span class="o">);</span>
+	 <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Exercice 2</strong></p>
+
+<p>Modification du fichier <code class="language-plaintext highlighter-rouge">Piece.java</code>. On commence par ajouter les attributs permettant de gérer les objets d’une pièce avec un tableau (n’hésitez pas à chercher sur internet si vous ne savez pas comment ça marche).</p>
+
+<p>On utilise un tableau simple en Java mais on verra plus tard dans le cours des listes plus pratiques.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Piece</span> <span class="o">{</span>
+	<span class="o">...</span>
+
+	<span class="kd">private</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">objets</span><span class="o">;</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On ajoute un nouveau constructeur (il est possible d’avoir plusieurs constructeurs avec paramètres différents) qui permet d’initialiser les objets présents dans la pièce au départ.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>     <span class="cm">/**
+	 *  Constructeur alternatif qui permet de choisir une liste d'objets
+	 *  de départ.
+	 *
+	 * @param  description  Description de la piece.
+	 * @param  objets       Liste d'objets dans la pièce.
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sorties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="n">objets</span><span class="o">;</span>
+	<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On ajoute les méthodes que l’on veut. J’en propose certaines qui me viennent à l’esprit mais vous pouvez ajouter ce que vous voulez.</p>
+
+<p>J’avais proposé une méthode compliquée à certains en TP pour gérer le tableau mais je pense que je vais proposer plus simple. Par exemple, pour ajouter un élément, je construis un nouveau tableau plus grand qui va remplacer le tableau d’objets de la salle. Pour supprimer, je mets <code class="language-plaintext highlighter-rouge">null</code> à la place de l’objet. Puis on ignorera à chaque fois les cases qui contiennent <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+<p>Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code class="language-plaintext highlighter-rouge">ArrayList</code>.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="cm">/**
+	 *  Ajoute des objets dans la salle.
+	 *
+	 * @param o L'objet que l'on souhaite ajouter.
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouterObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// On construit un nouveau tableau plus grand
+</span>
+		<span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">new_objets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjetZork</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+		<span class="c1">// On place le nouvel objet à la dernière case
+</span>
+		<span class="n">new_objets</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">=</span> <span class="n">o</span><span class="o">;</span>
+		<span class="c1">// On remplace notre liste d'objets par la nouvelle
+</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="n">new_objets</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Supprmie un objet spécifique dans la salle.
+	 *
+	 * @param o L'objet que l'on souhaite supprimer.
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
+				<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Affiche la liste des objets dans la salle.
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afficheObjets</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Voici la liste des objets dans la salle :"</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">affiche</span><span class="o">();</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-------------------------------------"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Je vous propose ensuite de faire quelques tests dans <code class="language-plaintext highlighter-rouge">Jeu.java</code> pour ajouter des objets dans certaines pièces (en modifiant la méthode <code class="language-plaintext highlighter-rouge">creerPieces</code>) puis afficher automatiquement la liste des objets (en modifiant la méthode <code class="language-plaintext highlighter-rouge">deplacerVersAutrePiece</code>) quand on entre dans une salle. Vous pouvez ensuite lancer le programme pour voir si ça fonctionne.</p>
+
+  </article>
+</main>
+
+

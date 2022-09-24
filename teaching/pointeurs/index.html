@@ -67,7 +67,7 @@
 
 <p>Les pointeurs permettent de gérer nous-même certaines opérations sur la mémoire et d’avoir plus de flexibilité lorsqu’on programme. Les utiliser demande une grande rigueur pour éviter de créer des problèmes de mémoire (SEGFAULT, accès non autorisé à la mémoire, accès en dehors des bornes d’un tableau etc).</p>
 
-<p>c</p>
+<h2 id="tableaux-dynamiques">Tableaux dynamiques</h2>
 
 <p>Les tableaux en C sont statiques : on les utilise lorsqu’on traite un nombre spécifique de données dont les bornes sont connues. Avec les pointeurs, on peut simuler un tableau nous-même. Comparons les deux approches :</p>
 
@@ -130,7 +130,89 @@
 
 <p>Ecrire les fonctions suivantes :</p>
 
-<p>(En cours de rédaction)</p>
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void reverse(int* tab, int taille)</code> qui inverse les éléments d’un tableau représenté par un pointeur.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void fusion(int* tab1, int* tab2, int taille1, int taille2)</code> qui colle <code class="language-plaintext highlighter-rouge">tab2</code> à la suite de <code class="language-plaintext highlighter-rouge">tab1</code>.</p>
+  </li>
+</ol>
+
+<p>Faisons une petite expérience. Imaginons que nous représentons des messages avec des chaînes de caractère de type <code class="language-plaintext highlighter-rouge">char*</code> se terminant par <code class="language-plaintext highlighter-rouge">\0</code>. On représente une boîte aux lettres par un pointeur sur des messages. On a donc ces types :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="k">typedef</span> <span class="kt">char</span><span class="o">*</span> <span class="n">message</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">message</span><span class="o">*</span> <span class="n">boite</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Ecrire les fonctions suivantes :</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">int est_vide(boite b)</code> qui renvoie 1 si la boite est vide et 0 sinon.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void ajouter_message(boite b, message m)</code> qui ajoute le message <code class="language-plaintext highlighter-rouge">m</code> à la boîte <code class="language-plaintext highlighter-rouge">b</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void lire(boite b)</code> qui affiche le premier message puis le jette.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void jeter(boite b)</code> qui jette le premier message sans le lire.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void lire_tout(boite b)</code> qui lit tous les messages d’une boîte en jetant les lettres à chaque fois.</p>
+  </li>
+</ol>
+
+<h2 id="pointeurs-et-structures--listes-chaînées">Pointeurs et structures : listes chaînées</h2>
+
+<p>Une liste chaînée est une liste formée de noeuds indépendants qui sont liés ensemble. On n’y accède pas par des indices mais en suivant une chaîne de pointeurs. Un avantage est que les éléments ne sont pas à la suite dans la mémoire. Il est facile de supprimer un élément ou d’en ajouter un au milieu. On va utiliser le type suivant :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">Noeud</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">valeur</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">Noeud</span><span class="o">*</span> <span class="n">suivant</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Noeud</span> <span class="n">Noeud</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Voici un exemple de liste chaînée contenant 1, 2 et 3 à la suite.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">Noeud</span> <span class="n">n3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">};</span>
+<span class="n">Noeud</span> <span class="n">n2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n3</span><span class="p">};</span>
+<span class="n">Noeud</span> <span class="n">n1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n2</span><span class="p">};</span>
+<span class="n">Noeud</span><span class="o">*</span> <span class="n">tete</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">n1</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Ecrivez les fonctions suivantes :</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void afficher(Noeud* tete)</code> qui prend la tête d’une liste chaînée et affiche tous les éléments qui la suivent.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void ajouter_debut(Noeud* tete, Noeud* new)</code> qui ajoute un nouvel élément en tête de la liste chaînée.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void ajouter_fin(Noeud* tete, Noeud* new)</code> qui ajoute un nouvel élément à la fin de la liste chaînée.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">void supprimer(Noeud* tete, int v)</code> qui supprime tous les éléments qui ont pour valeur <code class="language-plaintext highlighter-rouge">v</code>.</p>
+  </li>
+</ol>
 
   </article>
 </main>
