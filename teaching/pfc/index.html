@@ -63,7 +63,7 @@
       <time datetime=""></time>
       
     </header>
-    <h1 id="pierre-feuille-ciseaux-en-c">pierre-feuille-ciseaux en C</h1>
+    <h1 id="pierre-feuille-ciseaux-en-c">Pierre-feuille-ciseaux en C</h1>
 
 <p>1 - À partir de ce programme, representez les possibilités du jeu pierre-feuille-ciseaux avec des conditions <code class="language-plaintext highlighter-rouge">if</code> en comparant le coup du joueur 1 et celui du joueur 2 sachant que PIERRE gagne contre CISEAUX, CISEAUX gagne contre FEUILLE et FEUILLE gagne contre PIERRE. On peut fixer une valeur de départ à <code class="language-plaintext highlighter-rouge">coupJ1</code> et <code class="language-plaintext highlighter-rouge">coupJ2</code> pour tester.</p>
 
@@ -94,11 +94,7 @@
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>2 - En utilisant la fonction <code class="language-plaintext highlighter-rouge">scanf</code>, demandez à chaque joueur d’entrer un entier représentant un coup. Je rappelle que <code class="language-plaintext highlighter-rouge">scanf("%d", &amp;x)</code> permet de demander à l’utilisateur d’entrer un entier (comme précisé dans le format d’entrée <code class="language-plaintext highlighter-rouge">%d</code>) et que cet entier sera enregistré à l’adresse de <code class="language-plaintext highlighter-rouge">x</code> (<code class="language-plaintext highlighter-rouge">&amp;x</code>) dans la mémoire.</p>
-
-<p>3 - Demandez à l’utilisateur d’entrer un nombre de manches et réaliser plusieurs manches du jeu automatiquement avec une boucle <code class="language-plaintext highlighter-rouge">for</code>. Déterminez qui est le gagnant en comptant le nombre de victoires de chacun.</p>
-
-<p>4 - Demandez à l’utilisateur d’entrer un mode de jeu (contre l’ordinateur ou contre un joueur). Dans le mode contre l’ordinateur, vous pouvez générer un entier aléatoire entre 0 et 2 avec cette commande après avoir importé la bibliothèque <code class="language-plaintext highlighter-rouge">time.h</code> avec <code class="language-plaintext highlighter-rouge">#include &lt;time.h&gt;</code> :</p>
+<p>2 - Modifier le programme pour jouer contre l’ordinateur. Le joueur joue en entrant un entier et l’ordinateur choisit son coup aléatoirement. Vous pouvez générer un entier aléatoire entre 0 et 2 avec cette commande après avoir importé la bibliothèque <code class="language-plaintext highlighter-rouge">time.h</code> avec <code class="language-plaintext highlighter-rouge">#include &lt;time.h&gt;</code> :</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -106,6 +102,268 @@
 </span>
 <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 3 est exclu</span>
 </pre></td></tr></tbody></table></code></pre></figure>
+
+<p>3 - Demandez à l’utilisateur d’entrer un nombre de manches et réaliser plusieurs manches du jeu automatiquement avec une boucle <code class="language-plaintext highlighter-rouge">for</code>. Déterminez qui est le gagnant en comptant le nombre de victoires de chacun.</p>
+
+<h1 id="correction">Correction</h1>
+
+<details>
+    <summary>Première version (énumération des coups gagnants)</summary>
+    
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+</span>
+<span class="cp">#define FALSE 0
+#define TRUE 1
+</span>
+<span class="cp">#define PIERRE 0
+#define FEUILLE 1
+#define CISEAUX 2
+</span>
+<span class="kt">void</span> <span class="nf">affiche_coup</span><span class="p">(</span><span class="kt">int</span> <span class="n">coup</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">coup</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="n">PIERRE</span><span class="p">:</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"pierre"</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">FEUILLE</span><span class="p">:</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"feuille"</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">CISEAUX</span><span class="p">:</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"ciseaux"</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default:</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"[invalide]"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">coupJ</span><span class="p">,</span> <span class="n">coupO</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">ptsJ</span><span class="p">,</span> <span class="n">ptsO</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">nb_manches</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">tours_restants</span><span class="p">;</span>
+  <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span> <span class="c1">// initialise l'aléatoire
+</span>
+
+  <span class="c1">// On demande à l'utilisateur d'entrer un nombre de manches valides (supérieur à 0)
+</span>
+  <span class="k">do</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Combien de fois voulez-vous jouer ? </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">nb_manches</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">nb_manches</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">tours_restants</span> <span class="o">=</span> <span class="n">nb_manches</span><span class="p">;</span>
+
+  <span class="c1">// Boucle principale du jeu
+</span>
+  <span class="k">do</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Que voulez-vous jouer ? (PIERRE=0, FEUILLE=1, CISEAUX=2)</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">coupJ</span><span class="p">);</span> <span class="c1">// Récupération du coup du joueur
+</span>
+    <span class="n">coupO</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">3</span><span class="p">;</span>  <span class="c1">// Calcul du coup de l'ordinateur
+</span>
+
+    <span class="c1">// Vérification du gagnant de la manche
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"* Vous avez joué "</span><span class="p">);</span>
+    <span class="n">affiche_coup</span><span class="p">(</span><span class="n">coupJ</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">* L'ordinateur a joué "</span><span class="p">);</span>
+    <span class="n">affiche_coup</span><span class="p">(</span><span class="n">coupO</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Résultat : "</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">coupO</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"égalité</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">PIERRE</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">CISEAUX</span><span class="p">)</span> <span class="o">||</span>
+             <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">CISEAUX</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">FEUILLE</span><span class="p">)</span> <span class="o">||</span>
+             <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">FEUILLE</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">PIERRE</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez gagné</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsJ</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez perdu</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsO</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">tours_restants</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">tours_restants</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="c1">// Vérification du gagnant final
+</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">-----------------------</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">ptsJ</span> <span class="o">&gt;</span> <span class="n">ptsO</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Vous avez gagné la partie !"</span><span class="p">);</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ptsJ</span> <span class="o">==</span> <span class="n">ptsO</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Il n'y aucun gagnant."</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Vous avez perdu la partie..."</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</details>
+
+<details>
+    <summary>Deuxième version (comparaison et modulo)</summary>
+    Dans la première version, on vérifie qui a gagné la manche avec une condition :
+    
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>    <span class="k">if</span> <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">coupO</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"égalité</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">((</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">PIERRE</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">CISEAUX</span><span class="p">)</span> <span class="o">||</span>
+             <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">CISEAUX</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">FEUILLE</span><span class="p">)</span> <span class="o">||</span>
+             <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">FEUILLE</span> <span class="o">&amp;&amp;</span> <span class="n">coupO</span> <span class="o">==</span> <span class="n">PIERRE</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez gagné</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsJ</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez perdu</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsO</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+</pre></td></tr></tbody></table></code></pre></figure>
+
+    On la remplace par ça :
+    
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>    <span class="k">if</span> <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="n">coupO</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"égalité</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">coupJ</span> <span class="o">==</span> <span class="p">(</span><span class="n">coupO</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez gagné</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsJ</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"vous avez perdu</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">ptsO</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</details>
 
 
   </article>
