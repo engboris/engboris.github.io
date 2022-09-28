@@ -171,44 +171,44 @@
 	 <span class="o">}</span>
 	 
 	 <span class="cm">/**
-	 *  Récupère le nom de l'objet.
-	 *
-	 *  @return  Nom de l'objet.
-	 */</span>
+	  *  Récupère le nom de l'objet.
+	  *
+	  *  @return  Nom de l'objet.
+	  */</span>
 	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNom</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">;</span>
 	 <span class="o">}</span>
 	 
 	 <span class="cm">/**
-	 *  Récupère la description de l'objet.
-	 *
-	 *  @return  Description de l'objet.
-	 */</span>
+	  *  Récupère la description de l'objet.
+	  *
+	  *  @return  Description de l'objet.
+	  */</span>
 	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">;</span>
 	 <span class="o">}</span>
 	 
 	 <span class="cm">/**
-	 *  Récupère le poids de l'objet.
-	 *
-	 *  @return  Poids de l'objet.
-	 */</span>
+	  *  Récupère le poids de l'objet.
+	  *
+	  *  @return  Poids de l'objet.
+	  */</span>
 	 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPoids</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span><span class="o">;</span>
 	 <span class="o">}</span>
 	 
 	 <span class="cm">/**
-	 *  Indique si l'objet est transportable.
-	 *
-	 *  @return  Renvoie vrai si l'objet est transportable et faux sinon.
-	 */</span>
+	  *  Indique si l'objet est transportable.
+	  *
+	  *  @return  Renvoie vrai si l'objet est transportable et faux sinon.
+	  */</span>
 	 <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">estTransportable</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">transportable</span><span class="o">;</span>
 	 <span class="o">}</span>
 	 
 	 <span class="cm">/**
-	 *  Affiche les détails d'un objet.
-	 */</span>
+	  *  Affiche les détails d'un objet.
+	  */</span>
 	 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">affiche</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nom : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">);</span>
 	 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Description : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">);</span>
@@ -255,7 +255,7 @@
 10
 11
 12
-</pre></td><td class="code"><pre>     <span class="cm">/**
+</pre></td><td class="code"><pre>    <span class="cm">/**
 	 *  Constructeur alternatif qui permet de choisir une liste d'objets
 	 *  de départ.
 	 *
@@ -312,7 +312,26 @@
 35
 36
 37
-</pre></td><td class="code"><pre><span class="cm">/**
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+</pre></td><td class="code"><pre>    <span class="cm">/**
 	 *  Ajoute des objets dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite ajouter.
@@ -330,7 +349,7 @@
 	<span class="o">}</span>
 	
 	<span class="cm">/**
-	 *  Supprmie un objet spécifique dans la salle.
+	 *  Supprime un objet spécifique dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite supprimer.
 	 */</span>
@@ -351,6 +370,25 @@
 				<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">affiche</span><span class="o">();</span>
 			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-------------------------------------"</span><span class="o">);</span>
 		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  @param   o	L'objet que l'on cherche.
+	 *  @return  Renvoie vrai si la salle contient l'objet o et faux sinon.
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
+				<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  @return  Renvoie le tableau d'objets de la salle.
+	 */</span>
+	<span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getObjets</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">;</span>
 	<span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
