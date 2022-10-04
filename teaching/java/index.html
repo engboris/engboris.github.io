@@ -63,19 +63,17 @@
       <time datetime=""></time>
       
     </header>
-    <h1 id="eléments-dinformatique">Eléments d’informatique</h1>
+    <h1 id="programmation-orientée-objet">Programmation orientée objet</h1>
 
 <p><strong>Responsable du cours</strong> : Marc Champesme</p>
 
-<h2 id="correction-du-tp2">Correction du TP2</h2>
+<details>
+    <summary>ObjetZork.java</summary>
+<span>
+Je rappelle que <code class="language-plaintext highlighter-rouge">this</code> se réfère à la classe elle-même. Si on écrit <code class="language-plaintext highlighter-rouge">this.poids</code>, il s’agit de l’attribut <code class="language-plaintext highlighter-rouge">poids</code> de la classe dans laquelle on est.
 
-<p><strong>Exercice 1</strong></p>
-
-<p>Creation d’un nouveau fichier <code class="language-plaintext highlighter-rouge">ObjetZork.java</code>. Attention, le nom du fichier doit correspondre au nom de la classe et du constructeur.</p>
-
-<p>Je rappelle que <code class="language-plaintext highlighter-rouge">this</code> se réfère à la classe elle-même. Si on écrit <code class="language-plaintext highlighter-rouge">this.poids</code>, il s’agit de l’attribut <code class="language-plaintext highlighter-rouge">poids</code> de la classe dans laquelle on est.</p>
-
-<p>Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire ou ce dont vous avez besoin.</p>
+Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire ou ce dont vous avez besoin.
+</span>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -155,7 +153,7 @@
 	<span class="kd">private</span> <span class="kt">boolean</span> <span class="n">transportable</span><span class="o">;</span>
 	
 	<span class="cm">/**
-	 *  Initialise les objets avec un nom, une description et un poids.
+	 *  Initialise les objets avec un nom, une description et un poids. 
 	 *  En particulier, on aimerait que le poids soit supérieur à 0.
 	 * 
 	 *  @param  nom           Nom de l'objet.
@@ -221,11 +219,15 @@
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p><strong>Exercice 2</strong></p>
+</details>
 
-<p>Modification du fichier <code class="language-plaintext highlighter-rouge">Piece.java</code>. On commence par ajouter les attributs permettant de gérer les objets d’une pièce avec un tableau (n’hésitez pas à chercher sur internet si vous ne savez pas comment ça marche).</p>
+<details>
+    <summary>Modification de Piece.java</summary>
+<span>
+Modification du fichier <code class="language-plaintext highlighter-rouge">Piece.java</code>. On commence par ajouter les attributs permettant de gérer les objets d’une pièce avec un tableau (n’hésitez pas à chercher sur internet si vous ne savez pas comment ça marche).
 
-<p>On utilise un tableau simple en Java mais on verra plus tard dans le cours des listes plus pratiques.</p>
+On utilise un tableau simple en Java mais on verra plus tard dans le cours des listes plus pratiques.
+</span>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -241,7 +243,9 @@
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>On ajoute un nouveau constructeur (il est possible d’avoir plusieurs constructeurs avec paramètres différents) qui permet d’initialiser les objets présents dans la pièce au départ.</p>
+
+On ajoute un nouveau constructeur (il est possible d'avoir plusieurs constructeurs avec paramètres différents) qui permet d'initialiser les objets présents dans la pièce au départ.
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -255,7 +259,7 @@
 10
 11
 12
-</pre></td><td class="code"><pre>    <span class="cm">/**
+</pre></td><td class="code"><pre>	<span class="cm">/**
 	 *  Constructeur alternatif qui permet de choisir une liste d'objets
 	 *  de départ.
 	 *
@@ -269,11 +273,14 @@
 	<span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>On ajoute les méthodes que l’on veut. J’en propose certaines qui me viennent à l’esprit mais vous pouvez ajouter ce que vous voulez.</p>
 
-<p>J’avais proposé une méthode compliquée à certains en TP pour gérer le tableau mais je pense que je vais proposer plus simple. Par exemple, pour ajouter un élément, je construis un nouveau tableau plus grand qui va remplacer le tableau d’objets de la salle. Pour supprimer, je mets <code class="language-plaintext highlighter-rouge">null</code> à la place de l’objet. Puis on ignorera à chaque fois les cases qui contiennent <code class="language-plaintext highlighter-rouge">null</code>.</p>
+<span>
+On ajoute les méthodes que l’on veut. J’en propose certaines qui me viennent à l’esprit mais vous pouvez ajouter ce que vous voulez.
 
-<p>Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code class="language-plaintext highlighter-rouge">ArrayList</code>.</p>
+J’avais proposé une méthode compliquée à certains en TP pour gérer le tableau mais je pense que je vais proposer plus simple. Par exemple, pour ajouter un élément, je construis un nouveau tableau plus grand qui va remplacer le tableau d’objets de la salle. Pour supprimer, je mets <code class="language-plaintext highlighter-rouge">null</code> à la place de l’objet. Puis on ignorera à chaque fois les cases qui contiennent <code class="language-plaintext highlighter-rouge">null</code>.
+
+Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code class="language-plaintext highlighter-rouge">ArrayList</code>. 
+</span>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -331,7 +338,7 @@
 54
 55
 56
-</pre></td><td class="code"><pre>    <span class="cm">/**
+</pre></td><td class="code"><pre>	<span class="cm">/**
 	 *  Ajoute des objets dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite ajouter.
@@ -392,7 +399,58 @@
 	<span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Je vous propose ensuite de faire quelques tests dans <code class="language-plaintext highlighter-rouge">Jeu.java</code> pour ajouter des objets dans certaines pièces (en modifiant la méthode <code class="language-plaintext highlighter-rouge">creerPieces</code>) puis afficher automatiquement la liste des objets (en modifiant la méthode <code class="language-plaintext highlighter-rouge">deplacerVersAutrePiece</code>) quand on entre dans une salle. Vous pouvez ensuite lancer le programme pour voir si ça fonctionne.</p>
+
+<span>
+Je vous propose ensuite de faire quelques tests dans <code class="language-plaintext highlighter-rouge">Jeu.java</code> pour ajouter des objets dans certaines pièces (en modifiant la méthode <code class="language-plaintext highlighter-rouge">creerPieces</code>) puis afficher automatiquement la liste des objets (en modifiant la méthode <code class="language-plaintext highlighter-rouge">deplacerVersAutrePiece</code>) quand on entre dans une salle. Vous pouvez ensuite lancer le programme pour voir si ça fonctionne.
+</span>
+</details>
+
+<details>
+    <summary>Equals &amp; Hashcode pour ObjetZork.java</summary>
+    <span>
+    Il est parfois utile de redéfinir la méthode <code class="language-plaintext highlighter-rouge">equals</code> qui permet de dire si deux objets sont égaux pour la personnaliser et choisir nous-même ce que signifie être égal pour deux objets. Par exemple : 
+	</span>
+	
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>	<span class="nd">@override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span> <span class="o">==</span> <span class="n">obj</span><span class="o">.</span><span class="na">poids</span> <span class="o">&amp;&amp;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">description</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">nom</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">transportable</span> <span class="o">==</span> <span class="n">obj</span><span class="o">.</span><span class="na">transportable</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+</pre></td></tr></tbody></table></code></pre></figure>
+
+	<span>
+    Tester l’égalité peut être coûteux et inefficace dans certains cas où on doit faire énormément de comparaisons. Pour cette raison, Java stocke un code dans les objets qui s’appelle <em>hashcode</em>. Le principe est que si deux objets sont censés être égaux alors ils doivent avoir le même hashcode (mais la réciproque n’est pas forcément vraie, on a pas besoin d’unicité). Pour redéfinir le hashcode, doit respecter le “contrat” qui donne des indications sur ce qu’on doit respecter pour la définition. Pour des raisons techniques, dans la documentation Java, il est souvent choisi de multiplier le hashcode des chaînes de caractère par 31 (je rappelle que les chaînes de caractère sont des objets). Similairement, pour les booléens <code class="language-plaintext highlighter-rouge">true</code> et <code class="language-plaintext highlighter-rouge">false</code>, on choisit habituellement 1231 et 1237. On pourrait donc avoir le code suivant :
+	</span>
+	
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>	<span class="nd">@override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span> <span class="o">+</span> <span class="mi">31</span><span class="o">*</span><span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span> <span class="mi">31</span><span class="o">*</span><span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span>
+		<span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">transportable</span> <span class="o">?</span> <span class="mi">1231</span> <span class="o">:</span> <span class="mi">1237</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</details>
+
+<details>
+    <summary>Joueur.java</summary>
+    <span>
+    C’est presque la même chose que la classe <code class="language-plaintext highlighter-rouge">Piece.java</code>: les deux sont des objets qui peuvent contenir des <code class="language-plaintext highlighter-rouge">ObjetZork</code>. Il y a donc à peu près les mêmes fonctions. La seule différence est le sens : on “ajoute” ou “supprime” un objet d’une salle mais un joueur “porte” ou “jette” un objet. Grâce à l’héritage de classe, il est possible de dire que les deux classes sont filles d’une autre classe plus générale permettant le transport d’<code class="language-plaintext highlighter-rouge">ObjetZork</code>. 
+	</span>
+</details>
 
   </article>
 </main>
