@@ -651,9 +651,126 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 
 <details>
     <summary>Joueur.java</summary>
-    <span>
-    C’est presque la même chose que la classe <code class="language-plaintext highlighter-rouge">Piece.java</code>: les deux sont des objets qui peuvent contenir des <code class="language-plaintext highlighter-rouge">ObjetZork</code>. Il y a donc à peu près les mêmes fonctions. La seule différence est le sens : on “ajoute” ou “supprime” un objet d’une salle mais un joueur “porte” ou “jette” un objet. Grâce à l’héritage de classe, il est possible de dire que les deux classes sont filles d’une autre classe plus générale permettant le transport d’<code class="language-plaintext highlighter-rouge">ObjetZork</code>. 
-	</span>
+    
+<figure class="highlight"><pre><code class="language-java" data-lang="java">    <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.EnumMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="cm">/**
+ *	@invariant this.poids_sac&lt;this.POIDS_MAX
+ *  @invariant this.poids_sac = somme(o.getPoids()) pour o dans this.sac
+ **/</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Joueur</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">sac</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">poids_sac</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">POIDS_MAX</span> <span class="o">=</span> <span class="mi">50</span><span class="o">;</span>
+
+	<span class="cm">/**
+	 *  Initialise un joueur avec un sac vide par défaut.
+	 *  @ensures this.poids_sac = 0
+	 *  @ensures this.sac != null
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Joueur</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">poids_sac</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sac</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;();</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 *  Constructeur alternatif qui permet de choisir une liste d'objets
+	 *  de départ dans le sac du joueur.
+	 *
+	 * @param  objets       Liste d'objets dans la pièce.
+	 * 
+	 * @requires this.objets != null
+	 * @ensures  this.poids_sac = somme(o.getPoids()) pour o dans this.sac
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Joueur</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sac</span> <span class="o">=</span> <span class="n">objets</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span> <span class="o">:</span> <span class="n">objets</span><span class="o">)</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">poids_sac</span> <span class="o">+=</span> <span class="n">o</span><span class="o">.</span><span class="na">getPoids</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Ajoute des objets dans le sac du joueur.
+	 *
+	 * @param o L'objet que l'on souhaite ajouter.
+	 * @ensures this.possede(o)
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouterObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Supprime un objet spécifique dans le sac du joueur.
+	 *
+	 * @param o L'objet que l'on souhaite supprimer.
+	 * @param !this.possede(o)
+	 * @requires o != null
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Vérifie si un objet est possédé par le joueur.
+	 *
+	 * @return Vrai si le sac contient o et sinon faux
+	 * @requires o != null
+	 * @ensures \result &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.sac.size(); this.sac.get(i)==o
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">possede</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Vérifie combien de fois un objet est dans le sac du joueur.
+	 *
+	 * @return Le nombre de fois que l'objet 'o' est dans le sac
+	 * @requires o != null
+	 * @ensures \result&gt;=0 &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.sac.size(); this.sac.get(i)==o
+	 */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">obj</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
+				<span class="n">nb</span><span class="o">++;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">nb</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Affiche la liste des objets dans le sac.
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afficheObjets</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Voici la liste des objets dans votre sac :"</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">o</span><span class="o">.</span><span class="na">affiche</span><span class="o">();</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-------------------------------------"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Permet de porter un objet et le mettre dans son sac.
+	 * 
+	 *  @param o L'objet que l'on souhaite porter
+	 *  @requires o != null
+	 *  @ensures this.possede(o)
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">porter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">estTransportable</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">getPoids</span><span class="o">()+</span><span class="k">this</span><span class="o">.</span><span class="na">poids_sac</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="o">.</span><span class="na">POIDS_MAX</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">this</span><span class="o">.</span><span class="na">poids_sac</span> <span class="o">+=</span> <span class="n">o</span><span class="o">.</span><span class="na">getPoids</span><span class="o">();</span>
+				<span class="k">this</span><span class="o">.</span><span class="na">ajouterObjet</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>	
+			<span class="o">}</span>
+		<span class="o">}</span>		
+		<span class="k">else</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cet objet ne peut pas être transporté. "</span><span class="o">);</span>					
+	<span class="o">}</span>
+<span class="o">}</span>
+    </code></pre></figure>
+
 </details>
 
   </article>
