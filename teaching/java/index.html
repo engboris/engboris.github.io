@@ -146,7 +146,30 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 69
 70
 71
-</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObjetZork</span> <span class="o">{</span>
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+</pre></td><td class="code"><pre><span class="cm">/**
+ *	@invariant getNom() != null;
+ *	@invariant getPoids() &gt;= 0;
+ *	@invariant getDescription() != null;
+ **/</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObjetZork</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="nc">String</span> <span class="n">nom</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="kt">int</span> <span class="n">poids</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
@@ -160,6 +183,13 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  @param  description   Description de l'objet.
 	 *  @param  poids         Poids de l'objet &gt;= 0.
 	 *  @param  transportable Indique si l'objet est transportable.
+	 *
+	 *	@requires	nom != null;
+	 *	@requires	description != null;
+	 *	@requires	poids &gt;= 0;
+	 *	@ensures	getNom() != null;
+	 *	@ensures	getDescription() != null;
+	 *	@ensures	getPoids() &gt;= 0; 
 	 */</span>
 	 <span class="kd">public</span> <span class="nf">ObjetZork</span><span class="o">(</span><span class="nc">String</span> <span class="n">nom</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="kt">int</span> <span class="n">poids</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">transp</span><span class="o">)</span> <span class="o">{</span>
 	 	<span class="k">this</span><span class="o">.</span><span class="na">nom</span> <span class="o">=</span> <span class="n">nom</span><span class="o">;</span>
@@ -172,6 +202,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	  *  Récupère le nom de l'objet.
 	  *
 	  *  @return  Nom de l'objet.
+	  *	 @pure
 	  */</span>
 	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNom</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">;</span>
@@ -181,6 +212,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	  *  Récupère la description de l'objet.
 	  *
 	  *  @return  Description de l'objet.
+	  *	 @pure
 	  */</span>
 	 <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">;</span>
@@ -190,6 +222,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	  *  Récupère le poids de l'objet.
 	  *
 	  *  @return  Poids de l'objet.
+	  *	 @pure
 	  */</span>
 	 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPoids</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span><span class="o">;</span>
@@ -199,6 +232,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	  *  Indique si l'objet est transportable.
 	  *
 	  *  @return  Renvoie vrai si l'objet est transportable et faux sinon.
+	  *	 @pure
 	  */</span>
 	 <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">estTransportable</span><span class="o">()</span> <span class="o">{</span>
 	 	<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">transportable</span><span class="o">;</span>
@@ -414,6 +448,34 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 188
 189
 190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
 </pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.EnumMap</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
@@ -434,6 +496,10 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
  * @author     Marc Champesme (pour la traduction francaise)
  * @version    1.2
  * @since      August 2000
+ *
+ *	@invariant	getDescription() != null;
+ *	@invariant	getSorties() != null;
+ *	@invariant	getObjets() != null;
  */</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Piece</span> <span class="o">{</span>
@@ -443,13 +509,16 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	<span class="kd">private</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;</span> <span class="n">sorties</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">;</span>
 
-
 	<span class="cm">/**
 	 *  Initialise une piece décrite par la chaine de caractères spécifiée.
 	 *  Initialement, cette piece ne possède aucune sortie. La description fournie
 	 *  est une courte phrase comme "la bibliothèque" ou "la salle de TP".
 	 *
 	 * @param  description  Description de la piece.
+	 * @requires description != null;
+	 * @ensures	 getDescription() != null;
+	 * @ensures	 getSorties() != null;
+	 * @ensures	 getObjets() != null;
 	 */</span>
 	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
@@ -463,6 +532,12 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *
 	 * @param  description  Description de la piece.
 	 * @param  objets       Liste d'objets dans la pièce.
+	 *
+	 * @requires	description != null;
+	 * @requires 	objets != null;
+	 * @ensures	getDescription() != null;
+	 * @ensures getObjets() != null;
+	 * @ensures getSorties() != null;	
 	 */</span>
 	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
@@ -480,6 +555,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 * @param  est    La sortie est
 	 * @param  sud    La sortie sud
 	 * @param  ouest  La sortie ouest
+	 *
+	 * @ensures getSorties() != null;
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSorties</span><span class="o">(</span><span class="nc">Piece</span> <span class="n">nord</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">est</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">sud</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">ouest</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">if</span> <span class="o">(</span><span class="n">nord</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -502,6 +579,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  de la création de cette instance).
 	 *
 	 * @return    Description de cette piece
+	 * @pure
 	 */</span>
 	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionCourte</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">description</span><span class="o">;</span>
@@ -517,6 +595,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  cette piece.
 	 *
 	 * @return    Description affichable de cette piece
+	 * @pure
 	 */</span>
 	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionLongue</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="s">"Vous etes dans "</span> <span class="o">+</span> <span class="n">description</span> <span class="o">+</span> <span class="s">".\n"</span> <span class="o">+</span> <span class="n">descriptionSorties</span><span class="o">();</span>
@@ -529,6 +608,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  description longue d'une piece.
 	 *
 	 * @return    Une description des sorties de cette pièce.
+	 * @pure
 	 */</span>
 	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionSorties</span><span class="o">()</span> <span class="o">{</span>
 		<span class="nc">String</span> <span class="n">resulString</span> <span class="o">=</span> <span class="s">"Sorties:"</span><span class="o">;</span>
@@ -545,8 +625,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  renvoie null.
 	 *
 	 * @param  direction  La direction dans laquelle on souhaite se déplacer
-	 * @return            Piece atteinte lorsque l'on se déplace dans la direction
-	 *      spécifiée ou null.
+	 * @return            Piece atteinte lorsque l'on se déplace dans la direction spécifiée ou null.
+	 * @pure
 	 */</span>
 	<span class="kd">public</span> <span class="nc">Piece</span> <span class="nf">pieceSuivante</span><span class="o">(</span><span class="nc">Direction</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">sorties</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
@@ -556,6 +636,9 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Ajoute des objets dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite ajouter.
+	 * @requires o != null;
+	 * @ensures this.objets.size() != 0;
+	 * @ensures \exists int i; i&gt;=0 &amp;&amp; i&lt;this.objets.size(); this.objets.get(i).equals(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouterObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -565,6 +648,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Supprime un objet spécifique dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite supprimer.
+	 * @requires o != null;
+	 * @requires this.objets.size() = \old(this.objets.size() - 1)
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -574,6 +659,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Vérifie si un objet est dans la pièce.
 	 *
 	 * @return Vrai si la pièce contient o et sinon faux
+	 * @requires o != null;
+	 * @ensures \result &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.objets.size(); this.objets.get(i).equals(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -583,6 +670,9 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Vérifie combien de fois un objet est dans une pièce.
 	 *
 	 * @return Le nombre de fois que l'objet 'o' est dans la pièce
+	 * @requires o != null;
+	 * @ensures \result &gt; 0 &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.objets.size(); this.objets.get(i).equals(o);
+	 * @pure
 	 */</span>
 	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="kt">int</span> <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -657,8 +747,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 
 <span class="cm">/**
- *	@invariant this.poids_sac&lt;this.POIDS_MAX
- *  @invariant this.poids_sac = somme(o.getPoids()) pour o dans this.sac
+ *	@invariant this.poids_sac &lt; this.POIDS_MAX;
  **/</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Joueur</span> <span class="o">{</span>
@@ -668,8 +757,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 
 	<span class="cm">/**
 	 *  Initialise un joueur avec un sac vide par défaut.
-	 *  @ensures this.poids_sac = 0
-	 *  @ensures this.sac != null
+	 *  @ensures this.poids_sac = 0;
+	 *  @ensures this.sac != null;
 	 */</span>
 	<span class="kd">public</span> <span class="nf">Joueur</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">poids_sac</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -682,8 +771,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *
 	 * @param  objets       Liste d'objets dans la pièce.
 	 * 
-	 * @requires this.objets != null
-	 * @ensures  this.poids_sac = somme(o.getPoids()) pour o dans this.sac
+	 * @requires this.objets != null;
+	 * @ensures  this.poids_sac &gt;= 0;
 	 */</span>
 	<span class="kd">public</span> <span class="nf">Joueur</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">sac</span> <span class="o">=</span> <span class="n">objets</span><span class="o">;</span>
@@ -695,7 +784,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Ajoute des objets dans le sac du joueur.
 	 *
 	 * @param o L'objet que l'on souhaite ajouter.
-	 * @ensures this.possede(o)
+	 * @requires o != null;
+	 * @ensures this.possede(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouterObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -706,7 +796,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *
 	 * @param o L'objet que l'on souhaite supprimer.
 	 * @param !this.possede(o)
-	 * @requires o != null
+	 * @requires o != null;
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -716,8 +806,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Vérifie si un objet est possédé par le joueur.
 	 *
 	 * @return Vrai si le sac contient o et sinon faux
-	 * @requires o != null
-	 * @ensures \result &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.sac.size(); this.sac.get(i)==o
+	 * @requires o != null;
+	 * @ensures \result &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.objets.size(); this.objets.get(i).equals(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">possede</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
@@ -727,8 +817,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Vérifie combien de fois un objet est dans le sac du joueur.
 	 *
 	 * @return Le nombre de fois que l'objet 'o' est dans le sac
-	 * @requires o != null
-	 * @ensures \result&gt;=0 &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.sac.size(); this.sac.get(i)==o
+	 * @requires o != null;
+	 * @ensures \result&gt;=0 &lt;==&gt; \exists int i; i&gt;=0 &amp;&amp; i&lt;this.objets.size(); this.objets.get(i).equals(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="kt">int</span> <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -755,8 +845,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Permet de porter un objet et le mettre dans son sac.
 	 * 
 	 *  @param o L'objet que l'on souhaite porter
-	 *  @requires o != null
-	 *  @ensures this.possede(o)
+	 *  @requires o != null;
+	 *  @ensures this.possede(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">porter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">estTransportable</span><span class="o">())</span> <span class="o">{</span>
