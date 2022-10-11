@@ -222,65 +222,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 </details>
 
 <details>
-    <summary>Modification de Piece.java</summary>
-<span>
-Modification du fichier <code class="language-plaintext highlighter-rouge">Piece.java</code>. On commence par ajouter les attributs permettant de gérer les objets d’une pièce avec un tableau (n’hésitez pas à chercher sur internet si vous ne savez pas comment ça marche).
-
-On utilise un tableau simple en Java mais on verra plus tard dans le cours des listes plus pratiques.
-</span>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Piece</span> <span class="o">{</span>
-	<span class="o">...</span>
-
-	<span class="kd">private</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">objets</span><span class="o">;</span>
-	<span class="o">...</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-
-On ajoute un nouveau constructeur (il est possible d'avoir plusieurs constructeurs avec paramètres différents) qui permet d'initialiser les objets présents dans la pièce au départ.
-
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre>	<span class="cm">/**
-	 *  Constructeur alternatif qui permet de choisir une liste d'objets
-	 *  de départ.
-	 *
-	 * @param  description  Description de la piece.
-	 * @param  objets       Liste d'objets dans la pièce.
-	 */</span>
-	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">sorties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="n">objets</span><span class="o">;</span>
-	<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-
-<span>
-On ajoute les méthodes que l’on veut. J’en propose certaines qui me viennent à l’esprit mais vous pouvez ajouter ce que vous voulez.
-
-J’avais proposé une méthode compliquée à certains en TP pour gérer le tableau mais je pense que je vais proposer plus simple. Par exemple, pour ajouter un élément, je construis un nouveau tableau plus grand qui va remplacer le tableau d’objets de la salle. Pour supprimer, je mets <code class="language-plaintext highlighter-rouge">null</code> à la place de l’objet. Puis on ignorera à chaque fois les cases qui contiennent <code class="language-plaintext highlighter-rouge">null</code>.
-
-Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code class="language-plaintext highlighter-rouge">ArrayList</code>. 
-</span>
+    <summary>Piece.java</summary>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -338,21 +280,285 @@ Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code 
 54
 55
 56
-</pre></td><td class="code"><pre>	<span class="cm">/**
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.EnumMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="cm">/**
+ *  Une piece dans un jeu d'aventure. &lt;p&gt;
+ *
+ *  Cette classe fait partie du logiciel Zork, un jeu d'aventure simple en mode
+ *  texte.&lt;/p&gt; &lt;p&gt;
+ *
+ *  Une "Piece" represente un des lieux dans lesquels se déroule l'action du
+ *  jeu. Elle est reliée a au plus quatre autres "Piece" par des sorties. Les
+ *  sorties sont étiquettées "nord", "est", "sud", "ouest". Pour chaque
+ *  direction, la "Piece" possède une référence sur la piece voisine ou null
+ *  s'il n'y a pas de sortie dans cette direction.&lt;/p&gt;
+ *
+ * @author     Michael Kolling
+ * @author     Marc Champesme (pour la traduction francaise)
+ * @version    1.2
+ * @since      August 2000
+ */</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Piece</span> <span class="o">{</span>
+ 	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+	<span class="c1">// mémorise les sorties de cette piece.
+</span>
+	<span class="kd">private</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;</span> <span class="n">sorties</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">;</span>
+
+
+	<span class="cm">/**
+	 *  Initialise une piece décrite par la chaine de caractères spécifiée.
+	 *  Initialement, cette piece ne possède aucune sortie. La description fournie
+	 *  est une courte phrase comme "la bibliothèque" ou "la salle de TP".
+	 *
+	 * @param  description  Description de la piece.
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sorties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;();</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 *  Constructeur alternatif qui permet de choisir une liste d'objets
+	 *  de départ.
+	 *
+	 * @param  description  Description de la piece.
+	 * @param  objets       Liste d'objets dans la pièce.
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Piece</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sorties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EnumMap</span><span class="o">&lt;</span><span class="nc">Direction</span><span class="o">,</span> <span class="nc">Piece</span><span class="o">&gt;(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="n">objets</span><span class="o">;</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 *  Définie les sorties de cette piece. A chaque direction correspond ou bien
+	 *  une piece ou bien la valeur null signifiant qu'il n'y a pas de sortie dans
+	 *  cette direction.
+	 *
+	 * @param  nord   La sortie nord
+	 * @param  est    La sortie est
+	 * @param  sud    La sortie sud
+	 * @param  ouest  La sortie ouest
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSorties</span><span class="o">(</span><span class="nc">Piece</span> <span class="n">nord</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">est</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">sud</span><span class="o">,</span> <span class="nc">Piece</span> <span class="n">ouest</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">nord</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">sorties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">NORD</span><span class="o">,</span> <span class="n">nord</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">est</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">sorties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">EST</span><span class="o">,</span> <span class="n">est</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">sud</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">sorties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">SUD</span><span class="o">,</span> <span class="n">sud</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">ouest</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">sorties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">Direction</span><span class="o">.</span><span class="na">OUEST</span><span class="o">,</span> <span class="n">ouest</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 *  Renvoie la description de cette piece (i.e. la description spécifiée lors
+	 *  de la création de cette instance).
+	 *
+	 * @return    Description de cette piece
+	 */</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionCourte</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 *  Renvoie une description de cette piece mentionant ses sorties et
+	 *  directement formatée pour affichage, de la forme: &lt;pre&gt;
+	 *  Vous etes dans la bibliothèque.
+	 *  Sorties: nord ouest&lt;/pre&gt; Cette description utilise la chaine de caractères
+	 *  renvoyée par la méthode descriptionSorties pour décrire les sorties de
+	 *  cette piece.
+	 *
+	 * @return    Description affichable de cette piece
+	 */</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionLongue</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"Vous etes dans "</span> <span class="o">+</span> <span class="n">description</span> <span class="o">+</span> <span class="s">".\n"</span> <span class="o">+</span> <span class="n">descriptionSorties</span><span class="o">();</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 *  Renvoie une description des sorties de cette piece, de la forme: &lt;pre&gt;
+	 *  Sorties: nord ouest&lt;/pre&gt; Cette description est utilisée dans la
+	 *  description longue d'une piece.
+	 *
+	 * @return    Une description des sorties de cette pièce.
+	 */</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">descriptionSorties</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">resulString</span> <span class="o">=</span> <span class="s">"Sorties:"</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Direction</span> <span class="n">sortie</span> <span class="o">:</span>  <span class="n">sorties</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">resulString</span> <span class="o">+=</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">sortie</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">resulString</span><span class="o">;</span>
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+	 *  Renvoie la piece atteinte lorsque l'on se déplace a partir de cette piece
+	 *  dans la direction spécifiée. Si cette piece ne possède aucune sortie dans cette direction,
+	 *  renvoie null.
+	 *
+	 * @param  direction  La direction dans laquelle on souhaite se déplacer
+	 * @return            Piece atteinte lorsque l'on se déplace dans la direction
+	 *      spécifiée ou null.
+	 */</span>
+	<span class="kd">public</span> <span class="nc">Piece</span> <span class="nf">pieceSuivante</span><span class="o">(</span><span class="nc">Direction</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">sorties</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
 	 *  Ajoute des objets dans la salle.
 	 *
 	 * @param o L'objet que l'on souhaite ajouter.
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouterObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-		<span class="c1">// On construit un nouveau tableau plus grand
-</span>
-		<span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">new_objets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjetZork</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-		<span class="c1">// On place le nouvel objet à la dernière case
-</span>
-		<span class="n">new_objets</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">=</span> <span class="n">o</span><span class="o">;</span>
-		<span class="c1">// On remplace notre liste d'objets par la nouvelle
-</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">objets</span> <span class="o">=</span> <span class="n">new_objets</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 	
 	<span class="cm">/**
@@ -361,10 +567,30 @@ Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code 
 	 * @param o L'objet que l'on souhaite supprimer.
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
-				<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Vérifie si un objet est dans la pièce.
+	 *
+	 * @return Vrai si la pièce contient o et sinon faux
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 *  Vérifie combien de fois un objet est dans une pièce.
+	 *
+	 * @return Le nombre de fois que l'objet 'o' est dans la pièce
+	 */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">obj</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
+				<span class="n">nb</span><span class="o">++;</span>
 		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">nb</span><span class="o">;</span>
 	<span class="o">}</span>
 	
 	<span class="cm">/**
@@ -372,37 +598,15 @@ Plus tard, on découvrira des listes plus pratiques pour gérer ça comme <code 
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afficheObjets</span><span class="o">()</span> <span class="o">{</span>
 		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Voici la liste des objets dans la salle :"</span><span class="o">);</span>
-		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-				<span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">affiche</span><span class="o">();</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">o</span><span class="o">.</span><span class="na">affiche</span><span class="o">();</span>
 			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-------------------------------------"</span><span class="o">);</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
-	
-	<span class="cm">/**
-	 *  @param   o	L'objet que l'on cherche.
-	 *  @return  Renvoie vrai si la salle contient l'objet o et faux sinon.
-	 */</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">))</span>
-				<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-		<span class="o">}</span>
-		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-	<span class="o">}</span>
-	
-	<span class="cm">/**
-	 *  @return  Renvoie le tableau d'objets de la salle.
-	 */</span>
-	<span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getObjets</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">objets</span><span class="o">;</span>
-	<span class="o">}</span>
+<span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-
-<span>
-Je vous propose ensuite de faire quelques tests dans <code class="language-plaintext highlighter-rouge">Jeu.java</code> pour ajouter des objets dans certaines pièces (en modifiant la méthode <code class="language-plaintext highlighter-rouge">creerPieces</code>) puis afficher automatiquement la liste des objets (en modifiant la méthode <code class="language-plaintext highlighter-rouge">deplacerVersAutrePiece</code>) quand on entre dans une salle. Vous pouvez ensuite lancer le programme pour voir si ça fonctionne.
-</span>
 </details>
 
 <details>
