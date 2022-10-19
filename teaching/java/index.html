@@ -67,6 +67,204 @@
 
 <p><strong>Responsable du cours</strong> : Marc Champesme</p>
 
+<h2 id="révision--anatomie-commentée-dun-programme-java">Révision : anatomie commentée d’un programme Java</h2>
+
+<ul>
+  <li>Fichier <code class="language-plaintext highlighter-rouge">Main.java</code>. C’est l’unique fichier qui contient la fonction principale (main). On peut l’appeler comme on veut mais c’est elle qu’on doit lancer avec la commande <code class="language-plaintext highlighter-rouge">java Main</code>.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span> <span class="c1">// importe toutes les fonctionnalités de base de Java (dont ArrayList). On peut aussi importer un par un les modules, par exemple en faisant 'import java.util.ArrayList;'
+</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+		<span class="c1">// on met ce que fait le programme quand on le lance
+</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>Fichier <code class="language-plaintext highlighter-rouge">Blabla.java</code></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Blabla</span> <span class="o">{</span>
+	<span class="cm">/* --------------------
+		Attributs
+	   -------------------- */</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">a</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">float</span> <span class="n">b</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">c</span><span class="o">;</span>
+	
+	<span class="cm">/* --------------------
+		Constructeurs
+	   -------------------- */</span>
+	<span class="cm">/* Permet d'initialiser les objets avec des valeurs lorsqu'on
+	   les créé avec 'Blabla b = new Blabla(...)'. On peut en avoir plusieurs. */</span>
+	<span class="kd">public</span> <span class="nf">Blabla</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 'this' se réfère à la classe actuelle, il est facultatif lorsqu'il n'y a pas d'ambiguïtés.
+</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">a</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> 
+		<span class="k">this</span><span class="o">.</span><span class="na">b</span> <span class="o">=</span> <span class="mf">3.5</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">c</span> <span class="o">=</span> <span class="s">"salut"</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="c1">// les constructeurs sont distingués par leurs paramètres
+</span>
+	<span class="kd">public</span> <span class="nf">Blabla</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">float</span> <span class="n">b</span><span class="o">,</span> <span class="nc">String</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// si on n'utilise pas 'this', alors il y a une confusion entre les attributs et les paramètres
+</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/* --------------------
+		Méthodes
+	   -------------------- */</span>
+	
+	<span class="cm">/* cette fonction est appelée 'accesseur' ou 'getter'. Elle permet
+	   de récupérer un attribut à partir d'un objet. On l'utilise en
+	   faisant 'b.getA()' sur un objet 'b' de classe 'Blabla' */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getA</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">a</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/* cette fonction est appelée 'mutateur' ou 'setter'. Elle permet
+	   de modifier un attribut à partir d'un objet. On l'utilise en
+	   faisant 'b.setA(valeur)' sur un objet 'b' de classe 'Blabla' */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setA</span><span class="o">(</span><span class="kt">int</span> <span class="n">newVal</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">a</span> <span class="o">=</span> <span class="n">newVal</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/* ----- Guide des annotations de contrat -----
+	 *
+	 * @invariant propriété qui ne change pas pendant l'exécution
+	 * @requires  condition (sur les paramètres en général) que
+	              l'on souhaite avoir avant l'exécution pour
+	              assurer le bon fonctionnement de la fonction
+	 * @ensures   propriété assurée par la fonction après exécution
+	 * @param     nom_du_parametre	description_du_parametre
+	 * @return    description du retour de la fonction
+	              (quel est le résultat de la fonction)
+	 */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">f</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// ...
+</span>
+		<span class="k">return</span> <span class="mi">3</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>Fichier <code class="language-plaintext highlighter-rouge">BlablaNonMutable.java</code></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="c1">// les instances de cette classe ne peuvent pas être modifiées après création (on doit donc les initialiser par leur constructeur).
+</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">BlablaNonMutable</span> <span class="o">{</span>
+	<span class="c1">// cet attribut ne peut pas être modifié
+</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">BLABLA</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+	
+	<span class="cm">/* cet attribut ne peut pas être modifié mais est aussi partagé
+	   entre toutes les instances (sinon chacun aurait sa propre variable) */</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">BLOBLO</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> 
+	
+	<span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">blabla</span><span class="o">()</span> <span class="o">{</span>
+		<span class="cm">/* Cette fonction ne peut pas être redéfinie dans
+		   des sous-classes par héritage à cause du mot-clé 'final' */</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="projet-zork">Projet Zork</h2>
+
 <details>
     <summary>ObjetZork.java</summary>
 <span>
@@ -913,8 +1111,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	 *  Supprime un objet spécifique dans le sac du joueur.
 	 *
 	 * @param o L'objet que l'on souhaite supprimer.
-	 * @param !this.possede(o)
 	 * @requires o != null;
+	 * @ensures !this.possede(o);
 	 */</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirerObjet</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">sac</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
