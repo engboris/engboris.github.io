@@ -69,9 +69,11 @@
 
 <h2 id="révision--anatomie-commentée-dun-programme-java">Révision : anatomie commentée d’un programme Java</h2>
 
-<ul>
-  <li>Fichier <code class="language-plaintext highlighter-rouge">Main.java</code>. C’est l’unique fichier qui contient la fonction principale (main). On peut l’appeler comme on veut mais c’est elle qu’on doit lancer avec la commande <code class="language-plaintext highlighter-rouge">java Main</code>.</li>
-</ul>
+<details>
+    <summary>Explications</summary>
+<span>
+* Fichier <code class="language-plaintext highlighter-rouge">Main.java</code>. C’est l’unique fichier qui contient la fonction principale (main). On peut l’appeler comme on veut mais c’est elle qu’on doit lancer avec la commande <code class="language-plaintext highlighter-rouge">java Main</code>.
+</span>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -91,9 +93,11 @@
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<ul>
-  <li>Fichier <code class="language-plaintext highlighter-rouge">Blabla.java</code></li>
-</ul>
+
+<span>
+* Fichier <code class="language-plaintext highlighter-rouge">Blabla.java</code>
+</span>
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -225,9 +229,11 @@
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<ul>
-  <li>Fichier <code class="language-plaintext highlighter-rouge">BlablaNonMutable.java</code></li>
-</ul>
+
+<span>
+* Fichier <code class="language-plaintext highlighter-rouge">BlablaNonMutable.java</code>
+</span>
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -262,6 +268,8 @@
 	
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
+
+</details>
 
 <h2 id="projet-zork">Projet Zork</h2>
 
@@ -910,7 +918,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 5
 6
 7
-</pre></td><td class="code"><pre>	<span class="nd">@override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+</pre></td><td class="code"><pre>	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span> <span class="o">==</span> <span class="n">obj</span><span class="o">.</span><span class="na">poids</span> <span class="o">&amp;&amp;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">description</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">nom</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
@@ -928,7 +936,7 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 3
 4
 5
-</pre></td><td class="code"><pre>	<span class="nd">@override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+</pre></td><td class="code"><pre>	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">poids</span> <span class="o">+</span> <span class="mi">31</span><span class="o">*</span><span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span> <span class="mi">31</span><span class="o">*</span><span class="k">this</span><span class="o">.</span><span class="na">nom</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span>
 		<span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">transportable</span> <span class="o">?</span> <span class="mi">1231</span> <span class="o">:</span> <span class="mi">1237</span><span class="o">);</span>
 	<span class="o">}</span>
@@ -1179,6 +1187,150 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 </pre></td></tr></tbody></table></code></pre></figure>
 
 </details>
+
+<h2 id="tp-formes-géométriques-polygone">TP formes géométriques (Polygone)</h2>
+
+<p>On veut créer des classes pour plusieurs formes géométriques en utilisant l’héritage :</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Polygone</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Quadrilatere</span> <span class="kd">extends</span> <span class="nc">Polygone</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="nc">Quadrilatere</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Carre</span> <span class="kd">extends</span> <span class="nc">Rectangle</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="nc">Polygone</span> <span class="o">{...}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Voici pour chaque classes les attributs et méthodes que vous devez avoir (n’oubliez pas d’ajouter les invariants et contrats en commentaires) :</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Polygone</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Point2D</span><span class="o">[]</span> <span class="n">mesSommets</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">Polygone</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Point2D</span><span class="o">&gt;</span> <span class="n">lp</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// constructeur
+</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbSommets</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère le nombre de sommets
+</span>
+	<span class="kd">public</span> <span class="nc">Point2D</span> <span class="nf">getSommet</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère le sommmet d'indice i
+</span>
+	<span class="kd">public</span> <span class="nc">Line2D</span> <span class="nf">getCote</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère le côté d'indice i
+</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">lgCote</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère la longueur du côté d'indice i
+</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">perimetre</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// renvoie le perimètre du polygone
+</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">translate</span><span class="o">(</span><span class="kt">double</span> <span class="n">dx</span><span class="o">,</span> <span class="kt">double</span> <span class="n">dy</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// déplace la forme
+</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">symetrieOx</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// renverse la forme sur l'axe x
+</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">symetrieOy</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// renverse la forme sur l'axe y
+</span>
+	<span class="kd">public</span> <span class="nc">Polygone</span> <span class="nf">addSommet</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// ajoute un sommet
+</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">Polygone</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// affiche les informations du polygone
+</span>
+ 
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Quadrilatere</span> <span class="kd">extends</span> <span class="nc">Polygone</span> <span class="o">{</span>
+	<span class="c1">// constructeur
+</span>
+	<span class="kd">public</span> <span class="nf">Quadrilatere</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p2</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p3</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p4</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="nc">Quadrilatere</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">lgH</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">lgV</span><span class="o">;</span>
+
+	<span class="c1">// constructeurs
+</span>
+    <span class="kd">public</span> <span class="nf">Rectangle</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p0</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Rectangle</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p0</span><span class="o">,</span> <span class="kt">double</span> <span class="n">lgH</span><span class="o">,</span> <span class="kt">double</span> <span class="n">lgV</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">lgCoteH</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère le côté horizontal
+</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">lgCoteV</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère le côté vertical
+</span>
+
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">double</span> <span class="nf">perimetre</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">surface</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// calcul l'aire du rectangle
+</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Carre</span> <span class="kd">extends</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+	<span class="c1">// constructeur
+</span>
+    <span class="kd">public</span> <span class="nf">Carre</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p0</span><span class="o">,</span> <span class="kt">double</span> <span class="n">cote</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">lgCote</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// récupère la longueur des côtés
+</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">double</span> <span class="nf">perimetre</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="nc">Polygone</span> <span class="o">{</span>
+	<span class="c1">// constructeur
+</span>
+    <span class="kd">public</span> <span class="nf">Triangle</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p0</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
 
   </article>
 </main>
