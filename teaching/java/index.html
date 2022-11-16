@@ -1190,7 +1190,10 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 
 <h2 id="tp-formes-géométriques-polygone">TP formes géométriques (Polygone)</h2>
 
-<p>On veut créer des classes pour plusieurs formes géométriques en utilisant l’héritage :</p>
+<details>
+    <summary>Détails</summary>
+On veut créer des classes pour plusieurs formes géométriques en utilisant l'héritage :
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1204,7 +1207,9 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="nc">Polygone</span> <span class="o">{...}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Voici pour chaque classes les attributs et méthodes que vous devez avoir (n’oubliez pas d’ajouter les invariants et contrats en commentaires) :</p>
+
+Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oubliez pas d'ajouter les invariants et contrats en commentaires) :
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1257,6 +1262,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+
+
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -1267,6 +1274,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 	<span class="kd">public</span> <span class="nf">Quadrilatere</span><span class="o">(</span><span class="nc">Point2D</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p2</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p3</span><span class="o">,</span> <span class="nc">Point2D</span> <span class="n">p4</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
+
+
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -1302,6 +1311,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+
+
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -1320,6 +1331,8 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+
+
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -1331,6 +1344,376 @@ Vous pouvez mettre les méthodes que vous voulez selon ce que vous voulez faire 
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+</details>
+
+<h2 id="tp-zork-et-héritage">TP Zork et héritage</h2>
+
+<p>Il faut d’abord prendre le fichier suivant qui définit ce qu’est un conteneur et l’ajouter au projet Java :</p>
+
+<details>
+    <summary>Conteneur.java</summary>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+</pre></td><td class="code"><pre><span class="kn">package</span> <span class="nn">zork</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Conteneur d'ObjetZork. Les éléments contenus ne sont pas ordonnés et un
+ * conteneur peut contenir plusieurs exemplaires d'un même ObjetZork (au sens de
+ * equals).
+ *
+ * @author Sujeevan ASEERVATHAM
+ * @author Marc Champesme
+ * @version 3 janvier 2021
+ * @since 29 mars 2007
+ * 
+ * @invariant !contient(null);
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Conteneur</span> <span class="o">{</span>
+
+	<span class="cm">/**
+	 * Renvoie le nombre d'exemplaires de l'objet specifié presents dans ce
+	 * conteneur. La presence d'un objet est testée en utilisant la méthode equals
+	 * de la classe ObjetZork.
+	 *
+	 * @param oz Objet dont on cherche à connaitre le npmbre d'exemplaires.
+	 * @return le nombre d'exemplaires de l'objet specifié.
+	 * 
+	 * @ensures \result &gt;= 0;
+	 * @ensures contient(oz) &lt;==&gt; \result &gt; 0;
+	 * @ensures !contient(oz) &lt;==&gt; \result == 0;
+	 * @ensures \result &lt;= getNbObjets();
+	 * 
+	 * @pure
+	 */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Renvoie true si le conteneur contient au moins un exemplaire de l'objet
+	 * specifié. La présence d'un objet est testée en utilisant la méthode equals de
+	 * la classe ObjetZork. L'argument doit être non &lt;code&gt;null&lt;/code&gt;.
+	 *
+	 * @param oz Objet dont on cherche à savoir s'il est present.
+	 * @return true si ce conteneur possede au moins un exemplaire de l'objet
+	 *         specifié ; false sinon.
+	 * 
+	 * @ensures (getNbObjets() == 0) ==&gt; !\result;
+	 * @ensures (contientCombienDe(oz) &gt; 0) ==&gt; \result;
+	 * 
+	 * @pure
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Renvoie le nombre d'ObjetZork dans ce conteneur. Chaque occurence de chaque
+	 * objet est comptée.
+	 *
+	 * @return Le nombre d'ObjetZork dans ce conteneur.
+	 * 
+	 * @ensures \result &gt;= 0;
+	 * 
+	 * @pure
+	 * 
+	 */</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbObjets</span><span class="o">();</span>
+
+	<span class="cm">/**
+	 * Retourne une nouvelle instance de tableau d'ObjetZork, dont la taille est le
+	 * nombre d'éléments de ce conteneur. Le tableau renvoyé contient tous les
+	 * ObjetZork contenus dans ce conteneur.
+	 *
+	 * @return Un tableau d'ObjetZork contenant tous les éléments de ce conteneur..
+	 * 
+	 * @ensures \result != null;
+	 * @ensures \result.length == getNbObjets();
+	 * @ensures (\forall int i; i &gt;= 0 &amp;&amp; i &lt; \result.length; contient(\result[i]));
+	 * 
+	 * @pure
+	 */</span>
+	<span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getTabObjets</span><span class="o">();</span>
+
+	<span class="cm">/**
+	 * Indique si l'ObjetZork peut être ajouté dans ce conteneur
+	 *
+	 * @param oz L'objet à ajouter.
+	 * @return true si l'objet peut être ajouté ; false sinon.
+	 * 
+	 * @ensures (oz == null) ==&gt; !\result;
+	 * 
+	 * @pure
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">ajoutPossible</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Ajoute l'objet specifié au conteneur. Si l'objet est déjà présent, un
+	 * exemplaire supplémentaire de cet objet y est ajouté. La presence d'un objet
+	 * est testée en utilisant la methode equals de la classe ObjetZork.
+	 *
+	 * @param oz L'objet à ajouter dans ce conteneur
+	 * 
+	 * @throws NullPointerException     si l'élément spécifié est null
+	 * @throws IllegalArgumentException si certaines propriétés de l'objet spécifié
+	 *                                  empèchent son ajout
+	 * 
+	 * @requires ajoutPossible(oz);
+	 * @ensures contient(oz);
+	 * @ensures contientCombienDe(oz) == \old(contientCombienDe(oz)) + 1;
+	 * 
+	 */</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Retire un exemplaire de l'objet specifié du conteneur si cet objet y est
+	 * present. Renvoie true si cet objet était effectivement présent dans ce
+	 * conteneur et que l'objet a pu être effectivement retiré ; renvoie false
+	 * sinon. La présence d'un objet est testée en utilisant la méthode equals de la
+	 * classe ObjetZork. 
+	 *
+	 * @param oz Objet dont un exemplaire doit être retirer de ce conteneur
+	 * @return true si cet objet etait effectivement present ; false sinon.
+	 * 
+	 * 
+	 * @ensures \old(contient(oz)) &lt;==&gt; \result;
+	 * 
+	 * @ensures \old(contient(oz)) 
+	 * 			&lt;==&gt; (contientCombienDe(oz)  == \old(contientCombienDe(oz)) - 1);
+	 * @ensures \old(contientCombienDe(oz) &lt;= 1) ==&gt; !contient(oz);
+	 * @ensures \old(contientCombienDe(oz) &gt; 1) &lt;==&gt; contient(oz);
+	 * 
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">);</span>
+
+	<span class="cm">/**
+	 * Renvoie true si le Conteneur spécifié est non &lt;code&gt;null&lt;/code&gt; et contient
+	 * les mêmes ObjetZork (au sens de equals) en autant d'exemplaires.
+	 *
+	 * @param c Le Conteneur à comparer avec ce conteneur.
+	 * @return true si le Conteneur spécifié contient les mêmes ObjetZork en autant
+	 *         d'exemplaires
+	 * 
+	 * @old ObjetZork[] thisTab = this.getTabObjets();
+	 * @ensures (c == null) ==&gt; !\result;
+	 * @ensures (getNbObjets() != c.getNbObjets()) ==&gt; !\result;
+	 * @ensures \result &lt;==&gt; (c != null)  
+	 * 		&amp;&amp; (getNbObjets() == c.getNbObjets())
+	 * 		&amp;&amp; (\forall int i; i &gt;= 0 &amp;&amp; i &lt; getNbObjets(); 
+	 * 				this.contientCombienDe(thisTab[i]) == c.contientCombienDe(thisTab[i]));
+	 * 
+	 * @pure
+	 * 
+	 */</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">);</span>
+
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</details>
+
+<p>Il faut ensuite développer les classes suivantes :</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">lesObjets</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">nbObjets</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">ArrayConteneur</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="kd">public</span> <span class="nf">ArrayConteneur</span><span class="o">(</span><span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">objets</span><span class="o">,</span> <span class="kt">int</span> <span class="n">nbObjets</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getTabObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayListConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">lesObjets</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">ArrayListConteneur</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="kd">public</span> <span class="nf">ArrayListConteneur</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">contientCombienDe</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contient</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getTabObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On termine en modifiant Joueur.java et Piece.java de sorte à ce qu’ils héritent de ArrayListConteneur pour pouvoir contenir des ObjetZork de façon uniforme.</p>
 
   </article>
 </main>
