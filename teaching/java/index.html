@@ -1346,7 +1346,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 
 </details>
 
-<h2 id="tp-zork-et-héritage">TP Zork et héritage</h2>
+<h2 id="tp-zork-et-héritage-avec-exceptions">TP Zork et héritage avec exceptions</h2>
 
 <p>Il faut d’abord prendre le fichier suivant qui définit ce qu’est un conteneur et l’ajouter au projet Java :</p>
 
@@ -1714,6 +1714,54 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>On termine en modifiant Joueur.java et Piece.java de sorte à ce qu’ils héritent de ArrayListConteneur pour pouvoir contenir des ObjetZork de façon uniforme.</p>
+
+<p>On ajoute des activations d’erreurs avec <code class="language-plaintext highlighter-rouge">throw</code>. Typiquement, on les utilise dans les cas où les conditions de @requires sont invalides. Par exemple :</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre>	<span class="cm">/**
+	 * Initalise un joueur ne transportant aucun objet et dont le nom est la
+	 * chaîne de caractères spécifiée. Le poids maximal est initialisé à 10.
+	 *
+	 * @requires nom != null;
+	 * @ensures getNom().equals(nom);
+	 * @ensures getPoidsMax() == 10;
+	 * @ensures getPoids() == 0;
+	 * @ensures getNbObjets() == 0;
+	 *
+	 * @param nom	Le nom du joueur
+	 *
+	 * @throws NullPointerException	si le nom spécifié est null
+	 */</span>
+	<span class="kd">public</span> <span class="nf">Joueur</span><span class="o">(</span><span class="nc">String</span> <span class="n">nom</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">nom</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">(</span><span class="s">"Le nom du Joueur doit être non null"</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nom</span> <span class="o">=</span> <span class="n">nom</span><span class="o">;</span>
+		<span class="n">poidsMax</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+	<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Regarder le cours pour plus d’informations sur les types d’erreurs : <a href="https://moodlelms.univ-paris13.fr/mod/resource/view.php?id=97740">https://moodlelms.univ-paris13.fr/mod/resource/view.php?id=97740</a></p>
 
   </article>
 </main>
