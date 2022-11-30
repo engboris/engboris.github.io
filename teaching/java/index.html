@@ -1348,6 +1348,8 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 
 <h2 id="tp-zork-et-héritage-avec-exceptions">TP Zork et héritage avec exceptions</h2>
 
+<h3 id="héritage">Héritage</h3>
+
 <p>Il faut d’abord prendre le fichier suivant qui définit ce qu’est un conteneur et l’ajouter au projet Java :</p>
 
 <details>
@@ -1642,7 +1644,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	 * @old ObjetZork[] thisTab = this.getTabObjets();
 	 * @ensures (c == null) ==&gt; !\result;
 	 * @ensures (getNbObjets() != c.getNbObjets()) ==&gt; !\result;
-	 * @ensures \result &lt;==&gt; (c != null)  
+	 * @ensures \result &lt;==&gt; (c != null)
 	 * 		&amp;&amp; (getNbObjets() == c.getNbObjets())
 	 * 		&amp;&amp; (\forall int i; i &gt;= 0 &amp;&amp; i &lt; getNbObjets(); 
 	 * 				this.contientCombienDe(thisTab[i]) == c.contientCombienDe(thisTab[i]));
@@ -1672,6 +1674,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 11
 12
 13
+14
 </pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="n">lesObjets</span><span class="o">;</span>
 	<span class="kd">private</span> <span class="kt">int</span> <span class="n">nbObjets</span><span class="o">;</span>
@@ -1684,6 +1687,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">ajoutPossible</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -1699,6 +1703,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 10
 11
 12
+13
 </pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayListConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">lesObjets</span><span class="o">;</span>
 	<span class="kd">public</span> <span class="nf">ArrayListConteneur</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
@@ -1710,10 +1715,13 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">ajoutPossible</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>On termine en modifiant Joueur.java et Piece.java de sorte à ce qu’ils héritent de ArrayListConteneur pour pouvoir contenir des ObjetZork de façon uniforme.</p>
+
+<h3 id="exceptions">Exceptions</h3>
 
 <p>On ajoute des activations d’erreurs avec <code class="language-plaintext highlighter-rouge">throw</code>. Typiquement, on les utilise dans les cas où les conditions de @requires sont invalides. Par exemple :</p>
 
@@ -1762,6 +1770,17 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Regarder le cours pour plus d’informations sur les types d’erreurs : <a href="https://moodlelms.univ-paris13.fr/mod/resource/view.php?id=97740">https://moodlelms.univ-paris13.fr/mod/resource/view.php?id=97740</a></p>
+
+<h3 id="généricité">Généricité</h3>
+
+<p>Les conteneurs ne peuvent manipuler que des ObjetZork. Cependant, ils pourraient très bien traiter n’importe quels types d’objets de façon générique.</p>
+
+<p>Modifier <code class="language-plaintext highlighter-rouge">ArrayListConteneur</code> (et pourquoi pas <code class="language-plaintext highlighter-rouge">ArrayConteneur</code> si vous voulez) pour traiter n’importe quel type d’objet et utiliser cette classe pour gérer des <code class="language-plaintext highlighter-rouge">ObjetZork</code> dans <code class="language-plaintext highlighter-rouge">Joueur</code> et <code class="language-plaintext highlighter-rouge">Piece</code>.</p>
+
+<p>Tester avec une fonction <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<p>PS : je viens d’inventer le sujet un peu avant le TP car je savais pas trop quoi donner donc peut-être que ça va changer.</p>
+
 
   </article>
 </main>
