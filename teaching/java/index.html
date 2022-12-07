@@ -1503,11 +1503,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 146
 147
 148
-149
-150
-</pre></td><td class="code"><pre><span class="kn">package</span> <span class="nn">zork</span><span class="o">;</span>
-
-<span class="cm">/**
+</pre></td><td class="code"><pre><span class="cm">/**
  * Conteneur d'ObjetZork. Les éléments contenus ne sont pas ordonnés et un
  * conteneur peut contenir plusieurs exemplaires d'un même ObjetZork (au sens de
  * equals).
@@ -1631,7 +1627,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	 * @ensures \old(contientCombienDe(oz) &gt; 1) &lt;==&gt; contient(oz);
 	 * 
 	 */</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">);</span>
 
 	<span class="cm">/**
 	 * Renvoie true si le Conteneur spécifié est non &lt;code&gt;null&lt;/code&gt; et contient
@@ -1685,7 +1681,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getTabObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
-	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">ajoutPossible</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
 <span class="o">}</span>
@@ -1704,7 +1700,11 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 11
 12
 13
-</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayListConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
+14
+15
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ArrayListConteneur</span> <span class="kd">implements</span> <span class="nc">Conteneur</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">lesObjets</span><span class="o">;</span>
 	<span class="kd">public</span> <span class="nf">ArrayListConteneur</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="kd">public</span> <span class="nf">ArrayListConteneur</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">ObjetZork</span><span class="o">&gt;</span> <span class="n">objets</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
@@ -1713,7 +1713,7 @@ Voici pour chaque classes les attributs et méthodes que vous devez avoir (n'oub
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNbObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">ObjetZork</span><span class="o">[]</span> <span class="nf">getTabObjets</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ajouter</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
-	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">retirer</span><span class="o">(</span><span class="nc">Object</span> <span class="n">oz</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">memeContenu</span><span class="o">(</span><span class="nc">Conteneur</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
 	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">ajoutPossible</span><span class="o">(</span><span class="nc">ObjetZork</span> <span class="n">oz</span><span class="o">);</span>
 <span class="o">}</span>
