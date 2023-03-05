@@ -1,12 +1,1 @@
-{
-	"version": 3,
-	"file": "webdoc.css",
-	"sources": [
-		"webdoc.sass"
-	],
-	"sourcesContent": [
-		"body {\n  font-family: \"Arial\";\n  margin: 50px; }\n\np {\n  font-size: 16px; }\n\n.sub {\n  color: gray; }\n\nh1, h2, h3, h4, h5, h6 {\n  color: black; }\n\nhr {\n  border: none;\n  margin-bottom: 15px;\n  border-bottom: 1px solid lightgray; }\n\na {\n  text-decoration: inherit;\n  transition: color .2s ease-out;\n  &.selected, &:hover {\n    color: reduce(100); }\n  color: rgb(96, 116, 173); }\n\na:hover {\n  opacity: 70%; }\n"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,WAAW,EAAE,OAAO;EACpB,MAAM,EAAE,IAAI;CAAG;;AAEjB,AAAA,CAAC,CAAC;EACA,SAAS,EAAE,IAAI;CAAG;;AAEpB,AAAA,IAAI,CAAC;EACH,KAAK,EAAE,IAAI;CAAG;;AAEhB,AAAA,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,CAAC;EACrB,KAAK,EAAE,KAAK;CAAG;;AAEjB,AAAA,EAAE,CAAC;EACD,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,IAAI;EACnB,aAAa,EAAE,mBAAmB;CAAG;;AAEvC,AAAA,CAAC,CAAC;EACA,eAAe,EAAE,OAAO;EACxB,UAAU,EAAE,kBAAkB;EAG9B,KAAK,EAAE,OAAiB;CAAG;;AAL7B,AAGE,CAHD,AAGE,SAAS,EAHZ,CAAC,CAGe,KAAK,CAAC;EAClB,KAAK,EAAE,WAAW;CAAG;;AAGzB,AAAA,CAAC,CAAC,KAAK,CAAC;EACN,OAAO,EAAE,GAAG;CAAG"
-}
+{"version":3,"sourceRoot":"","sources":["webdoc.sass"],"names":[],"mappings":"AAAA;EACE;EACA;;;AAEF;EACE;;;AAEF;EACE;;;AAEF;EACE;;;AAEF;EACE;EACA;EACA;;;AAEF;EACE;EACA;EAGA;;AAFA;EACE;;;AAGJ;EACE","sourcesContent":["body\r\n  font-family: \"Arial\"\r\n  margin: 50px\r\n\r\np\r\n  font-size: 16px\r\n\r\n.sub\r\n  color: gray\r\n\r\nh1, h2, h3, h4, h5, h6\r\n  color: black\r\n\r\nhr\r\n  border: none\r\n  margin-bottom: 15px\r\n  border-bottom: 1px solid lightgray\r\n\r\na\r\n  text-decoration: inherit\r\n  transition: color .2s ease-out\r\n  &.selected, &:hover\r\n    color: reduce(100)\r\n  color: rgb(96, 116, 173)\r\n\r\na:hover\r\n  opacity: 70%\r\n"],"file":"webdoc.css"}

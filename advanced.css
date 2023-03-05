@@ -1,5 +1,5 @@
 header, footer, aside li {
-  padding: .5em 1.5em;
+  padding: 0.5em 1.5em;
 }
 
 button {
@@ -24,8 +24,8 @@ input.fancy, button.fancy {
 }
 
 input.fancy {
-  font-size: .8em;
-  padding: .9em 1.2em;
+  font-size: 0.8em;
+  padding: 0.9em 1.2em;
 }
 
 input.fancy:focus {
@@ -33,7 +33,7 @@ input.fancy:focus {
 }
 
 button.fancy {
-  padding: .42em 1.2em;
+  padding: 0.42em 1.2em;
   border-top: 3px solid transparent !important;
   border-bottom: 3px solid transparent;
 }
@@ -69,7 +69,6 @@ nav li {
 nav.blue li:hover {
   background: rgba(148, 148, 148, 0.12);
 }
-
 nav.blue li.selected {
   background: #4b6fff;
   color: white;
@@ -79,15 +78,12 @@ nav.fancy li:hover, nav.fancy li.selected {
   background: rgba(148, 148, 148, 0.06);
   box-shadow: 4px 0 #4b6fff inset, 0 1px rgba(148, 148, 148, 0.06);
 }
-
 nav.fancy li.border, nav.fancy li:only-of-type {
   box-shadow: 0 1px rgba(148, 148, 148, 0.12);
 }
-
-nav.fancy li.border:hover, nav.fancy li.border.selected, nav.fancy li:only-of-type:hover, nav.fancy li.selected:only-of-type {
+nav.fancy li.border:hover, nav.fancy li.border.selected, nav.fancy li:only-of-type:hover, nav.fancy li:only-of-type.selected {
   box-shadow: 4px 0 #4b6fff inset, 0 1px rgba(148, 148, 148, 0.12), 0 1px rgba(148, 148, 148, 0.06);
 }
-
 nav.fancy li.red:hover {
   box-shadow: 4px 0 #ff3a4c inset, 0 1px rgba(148, 148, 148, 0.06);
 }
@@ -124,7 +120,7 @@ nav.fancy li.red:hover {
 }
 
 .show, .hide {
-  transition: .2s opacity ease-out;
+  transition: 0.2s opacity ease-out;
 }
 
 .color.red-hover:hover {
@@ -151,15 +147,15 @@ nav.fancy li.red:hover {
   border-color: #4b6fff;
 }
 
-input[type="search"] {
+input[type=search] {
   -webkit-appearance: textfield;
 }
 
-input[type="number"] {
+input[type=number] {
   -moz-appearance: textfield;
 }
 
-input[type="number"]:hover {
+input[type=number]:hover {
   -moz-appearance: number-input;
 }
 

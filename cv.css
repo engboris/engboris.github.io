@@ -42,10 +42,9 @@ hr {
 
 a {
   text-decoration: inherit;
-  transition: color .2s ease-out;
-  color: #6074ad;
+  transition: color 0.2s ease-out;
+  color: rgb(96, 116, 173);
 }
-
 a.selected, a:hover {
   color: reduce(100);
 }
