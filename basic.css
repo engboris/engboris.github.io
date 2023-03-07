@@ -80,6 +80,7 @@ figure {
   padding: 15px;
 }
 .highlight pre {
+  tab-size: 4;
   box-shadow: none;
   margin-top: 0px;
   border: none;

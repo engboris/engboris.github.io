@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Eng">
+<meta name="description" content="Boris Eng's webpage. ATER at Université Sorbonne Paris Nord, France.">
+<title>Boris Eng</title>
+<link rel="canonical" href="https://engboris.fr//teaching/reseaux/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris Eng</a></h1>
+  <span class="sub">ATER at Université Sorbonne Paris Nord, Villetaneuse (France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+        <a  href="/cv/">CV</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="système-et-réseaux">Système et Réseaux</h1>
+
+<p>Quelques notes par rapport à ce que j’ai vu en TP ou aux questions que j’ai eues.</p>
+
+<h2 id="processus-avec-fork">Processus avec fork()</h2>
+
+<p><strong>Mousse au chocolat commentée</strong></p>
+
+<p>Les points à retenir est que <code class="language-plaintext highlighter-rouge">fork()</code> sépare l’exécution en deux. On a un processus père et un processus fils qui continuent tous les deux le code qui suit. On a donc besoin d’un <code class="language-plaintext highlighter-rouge">switch</code> pour qu’ils exécutent des instructions différentes (sinon ils feraient la même chose). Ça marche car la commande <code class="language-plaintext highlighter-rouge">fork()</code> a un résultat différent selon si on est le père ou le fils. Ensuite, la commande <code class="language-plaintext highlighter-rouge">wait(NULL)</code> permet d’attendre la terminaison d’<em>un</em> fils. Si cela renvoie <code class="language-plaintext highlighter-rouge">-1</code> alors il n’y a plus de fils disponible. L’instruction <code class="language-plaintext highlighter-rouge">while (wait(NULL) != -1);</code> permet donc d’attendre la terminaison de <em>tous</em> les fils.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="n">fork</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="cm">/* ----------------------------------
+		   Cas d'une erreur
+		   ---------------------------------- */</span>
+		<span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+			<span class="n">perror</span><span class="p">(</span><span class="s">"fork"</span><span class="p">);</span>
+			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+			
+		<span class="cm">/* ----------------------------------
+		   Cas du premier fils qui en commande 6 autres
+		   ---------------------------------- */</span>
+		<span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="cm">/* - Le fils "commandant" créé 6 autres fils
+			   - Chaque fils va separer blanc et jaune en parallèle
+			   - Le premier fils va attendre leur fin  pour battre les blancs en neige */</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="k">switch</span> <span class="p">(</span><span class="n">fork</span><span class="p">())</span>
+				<span class="p">{</span>
+					<span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+						<span class="n">perror</span><span class="p">(</span><span class="s">"fork"</span><span class="p">);</span>
+						<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+					<span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+						<span class="n">separer_blanc_jaune</span><span class="p">();</span> <span class="c1">// Chaque petit fils travaille en parallèle
+</span>
+						<span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Chaque petit-fils termine
+</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			<span class="k">while</span> <span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// On attend la fin des petit-fils
+</span>
+			<span class="n">battre_blancs_neige</span><span class="p">();</span> <span class="c1">// Le premier fils peut travailler
+</span>
+			<span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Le premier fils termine
+</span>
+			
+		<span class="cm">/* ----------------------------------
+		   Cas du père (qui renvoie son PID)
+		   ---------------------------------- */</span>
+		<span class="nl">default:</span>
+			<span class="cm">/* Le père créé un nouveau fils pour qu'il
+			   s'occupe du chocolat puis il va attendre
+			   la fin de son travail. Je crois que cette partie
+			   n'est pas spécialement utile */</span>
+			<span class="k">switch</span> <span class="p">(</span><span class="n">fork</span><span class="p">())</span>
+			<span class="p">{</span>
+				<span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+					<span class="n">perror</span><span class="p">(</span><span class="s">"fork"</span><span class="p">);</span>
+					<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+					<span class="n">casser_chocolat</span><span class="p">();</span>
+					<span class="n">faire_fondre_chocolat</span><span class="p">();</span>
+					<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+			<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Le père attend la fin de ses deux fils
+</span>
+	<span class="c1">// Le père peut enfin travailler pour tout mettre ensemble
+</span>
+	<span class="n">melanger_jaunes_choco</span><span class="p">();</span>
+	<span class="n">incorporer_blancs_neige</span><span class="p">();</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"PID %d : la mousse est terminée !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Ci-dessus, j’illustre ce qu’il se passe avec une arborescence. Il faut cliquer sur les flèches. Cela permet aussi de dessiner l’arbre de processus.</p>
+
+<details>
+	<summary>Père : fork()</summary>
+	
+	<div style="margin-left: 20px;">
+		<details>
+			<summary>Père : fork(), attend tous ses fils puis mélange tout puis termine</summary>
+			<div style="margin-left: 20px;">
+				<details>
+					<summary>Fils 2 : travaille avec le chocolat</summary>
+					Termine
+				</details>
+			</div>
+		</details>
+		<details>
+			<summary>Fils 1 : 6 fois fork(), attend tous les fils puis bats les blancs en neige et termine</summary>
+			<div style="margin-left: 20px;">
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+				<details>
+					<summary>Petit-fils: sépare le blanc du jaune d'oeuf</summary>
+					Termine
+				</details>
+			</div>
+		</details>
+	</div>
+</details>
+
+<h2 id="threads">Threads</h2>
+
+<p>Il faut faire attention, ce n’est pas la même chose que les processus. Les processus sont vraiment comme deux programmes séparés et indépendants qu’on lance sur le terminal. Ils n’ont pas de mémoire partagée. Les threads existent dans un <em>même</em> programme donc ils ont une mémoire partagée (ils ont accès aux mêmes variables globales).</p>
+
+<p>L’idée est que chaque thread va lancer une fonction particulière en parallèle d’autres threads. Une petite difficulté est que pour être générique, le résultat et les paramètres des fonctions de threads doivent être de type <code class="language-plaintext highlighter-rouge">void*</code>. On manipule donc des adresses dans la mémoire partout et non directement des valeurs. La conséquence est que l’on doit faire des cast (conversion de types) pour pouvoir récupérer la valeur derrière et la manipuler.</p>
+
+<p><strong>Somme et produit en parallèle</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+</pre></td><td class="code"><pre><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="c1">
+</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="c1">
+</span><span class="cp">
+#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="c1">
+</span><span class="cp">
+#define N_DFT 8 // argument par défaut du programme
+</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">somme</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">n</span><span class="p">);</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">produit</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">n</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+	<span class="n">pthread_t</span> <span class="n">th1</span><span class="p">,</span> <span class="n">th2</span><span class="p">;</span>
+	
+	<span class="c1">// si l'utilisateur lance le programme avec un argument alors on l'utilise, sinon on utilise N_DFT comme entrée
+</span>
+	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="n">N_DFT</span> <span class="o">:</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> 
+	
+	<span class="c1">// Ces variables permettront de stocker les résultats de fonction
+</span>
+	<span class="kt">void</span> <span class="o">*</span><span class="n">res_somme</span><span class="p">,</span> <span class="o">*</span><span class="n">res_prod</span><span class="p">;</span>
+	
+	<span class="c1">// On lance un premier thread avec la fonction 'somme' et on lui donne l'adresse de l'entier 'n'
+</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">th1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">somme</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">))</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">"pthread_create somme"</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// On fait pareil avec un second thread qui lance 'produit'
+</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">th2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">produit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">))</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">"pthread_create produit"</span><span class="p">);</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// On attend la fin des deux threads et on stocke leur résultat
+</span>
+	<span class="n">pthread_join</span><span class="p">(</span><span class="n">th1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">res_somme</span><span class="p">);</span>
+	<span class="n">pthread_join</span><span class="p">(</span><span class="n">th2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">res_prod</span><span class="p">);</span>
+	
+	<span class="c1">// L'affichage doit utiliser des casts pour récupérer les valeurs aux adresses qu'on a utilisé
+</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"n : %d, somme : %d, produit : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span>
+	<span class="o">*</span><span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">res_somme</span><span class="p">),</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">res_prod</span><span class="p">));</span>
+	
+	<span class="c1">// On libère les variables utilisées pour stocker le résultat
+</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">res_somme</span><span class="p">);</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">res_prod</span><span class="p">);</span>
+	
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">somme</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// On extrait un entier à partir de l'adresse vers void donnée en paramètre
+</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">n</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="c1">// On alloue de la mémoire pour stocker le résultat
+</span>
+	<span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">num</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+		<span class="o">*</span><span class="n">res</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+	
+<span class="kt">void</span> <span class="o">*</span><span class="nf">produit</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">n</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+	<span class="o">*</span><span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">num</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+		<span class="o">*</span><span class="n">res</span> <span class="o">*=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Produit de matrices</strong></p>
+
+<p>Comme dans l’exercice 2 du TP2, il est possible de créer des tableaux ou matrices de threads, chacun lançant une fonction (on utilisera donc des boucles for pour lancer les threads ou faire des <code class="language-plaintext highlighter-rouge">pthread_join</code> pour attendre la fin des threads et récupérer les résultats). Dans ce cas-là ça permet de diviser le travail pour chaque ligne. Une leçon à retenir de cet exercice est qu’on peut diviser le travail mais au bout d’un moment, la parellélisation aura des limites en efficacité (on n’est pas toujours plus efficace en rajoutant plus de threads).</p>
+
+<h2 id="sémaphores-et-synchronisation">Sémaphores et synchronisation</h2>
+
+<p>Il y a parfois des opérations qu’on ne veut pas faire en même temps. Pour gérer ça, on utilise des sémaphores pour poser des verrous et interdire/autoriser l’accès à la suite du code. Les zones du code qu’on veut protéger sont les <em>sections critiques</em>, on ne veut pas qu’il y ait un certain nombre de threads en même temps dessus (mais en réalité c’est plus compliqué, on peut voir ça comme prendre/libérer des places mais un seul thread peut prendre plusieurs places comme on le verra par la suite). La <em>valeur</em> d’un sémaphore représente la capacité maximale de threads dans la section critique.</p>
+<ul>
+  <li>L’instruction <code class="language-plaintext highlighter-rouge">sem_wait</code> regarde la valeur d’un sémaphore en paramètre. Si elle est supérieure à 0, on continue (il y a une place libre) et on décrémente la valeur (pour prendre la place), sinon il n’y a pas de place libre et on est mis en attente.</li>
+  <li>L’instruction <code class="language-plaintext highlighter-rouge">sem_post</code> augmente la valeur de 1 (pour dire qu’une place se libère). Cela permet en particulier de débloquer ceux qui étaient bloqués.</li>
+</ul>
+
+<p>Dans le TD3, Exercice 1, on a un exercice avec des fonctions <code class="language-plaintext highlighter-rouge">faire_des_trucs_de_hop();</code> et <code class="language-plaintext highlighter-rouge">faire_des_trucs_de_plop();</code>. Le point clé est que ces deux opérations ne prennent pas le même temps. Le premier prend une unité de temps et le second deux. Les autres opérations ont un temps négligeable qu’on peut ignorer. On utilise un tableau de sémaphores. Cela nous permet de passer en paramètre plusieurs sémaphores en même temps. Il y a une alternance entre les deux : l’un débloque l’autre.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sem_tab+1</code> est de valeur de départ 3</li>
+  <li><code class="language-plaintext highlighter-rouge">sem_tab</code> est de valeur de départ 0</li>
+</ul>
+
+<p>On se retrouve avec l’exécution parallèle suivante où je fais seulement les premières étapes.</p>
+
+<p><strong>Temps 0</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- continue et sem_tab+1 = 2
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- bloqué car sem_tab = 0
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 1</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- bloqué car sem_tab = 0
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 2</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> 
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- bloqué car sem_tab = 0
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> 
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- on débloque plop
+</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- débloqué car sem_tab = 1
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- continue et sem_tab+1 = 1
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- débloqué car sem_tab = 1
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 3</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 4</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- sem_tab = 2
+</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- bloqué car sem_tab+1 = 0
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 5</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- bloqué car sem_tab+1 = 0
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> 
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- débloqué car sem_tab+1 = 1
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> 
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- réveille hop
+</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// &lt;--------------------- débloqué car sem_tab+1 = 1
+</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span> <span class="c1">// &lt;--------------------- continue car sem_tab = 1
+</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> 
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Temps 6</strong></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">hop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_hop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"hop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">plop</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">sem_t</span> <span class="o">*</span><span class="n">sem_tab</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">sem_tab</span><span class="p">);</span>
+		<span class="n">faire_des_trucs_de_plop</span><span class="p">();</span> <span class="c1">// &lt;---------------------
+</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"plop</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">sem_tab</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Bon je m’arrête ici…</p>
+
+<p><strong>Million.c</strong></p>
+
+<p>Dans l’exercice 1 du TP3, on voulait incrémenter un compteur avec N threads.</p>
+
+<p>On a la fonction suivante qui est lancée sur chaque thread :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">bosser</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">sem_wait</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="o">++</span><span class="n">incremente_moi</span><span class="p">;</span>
+		<span class="n">sem_post</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>L’idée est qu’on veut que chaque thread incrémente une fois puis passe la main à un autre thread. Ainsi, tous les threads vont alterner l’incrémentation. On voit que le <code class="language-plaintext highlighter-rouge">sem_wait</code> et <code class="language-plaintext highlighter-rouge">sem_post</code> entourent la section critique. On aurait très bien pu mettre la boucle for dans la section critique mais du coup chaque thread aurait incrémenté N fois avant de passer la main. On aimerait quelque chose de plus fluide.</p>
+
+<p><strong>Synchronisation de tâches</strong></p>
+
+<p>Pour l’exercice 2 et 3 du TP3 sur Moodle, je pense que la correction n’est pas bonne.</p>
+
+<p>L’idée, quand on veut synchroniser des tâches est d’avoir un sémaphore qui signale la fin d’une tâche pour :</p>
+<ul>
+  <li>bloquer les threads qui ne peuvent commencer avant la fin de la tâche avec <code class="language-plaintext highlighter-rouge">sem_wait</code></li>
+  <li>annoncer la fin de la tâche avec <code class="language-plaintext highlighter-rouge">sem_post</code></li>
+</ul>
+
+<p>Si on regarde ces deux fonctions qui représentent deux blocs de tâches AC et BD :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="o">*</span><span class="nf">threadAC</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">tache_a</span><span class="p">();</span>
+	<span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b_fini</span><span class="p">);</span>
+	<span class="n">tache_c</span><span class="p">();</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">threadBD</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">tache_b</span><span class="p">();</span>
+	<span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b_fini</span><span class="p">);</span>
+	<span class="n">tache_d</span><span class="p">();</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On voit que la tâche A se lance sans dépendance mais par contre, un <code class="language-plaintext highlighter-rouge">sem_wait</code> bloque le lancement de la tâche C. On doit d’abord débloquer le verrou en terminant la tâche B. Dans l’autre fonction, on a la tâche puis un <code class="language-plaintext highlighter-rouge">sem_post</code> juste après.</p>
+
+<h2 id="mutex">Mutex</h2>
+
+<p>Les mutex sont des cas particuliers de sémaphore à valeur 1 et ils sont donc exclusifs. Soit l’unique place est prise dans la section critique soit elle est libre.</p>
+
+<p>Dans les exercices, on demande principalement de mettre les <code class="language-plaintext highlighter-rouge">pthread_mutex_lock</code> et <code class="language-plaintext highlighter-rouge">pthread_mutex_unlock</code> aux bons endroits.</p>
+
+<p><strong>Belmondo &amp; Depardieu</strong></p>
+
+<p>Dans le premier exercice du TP4, on veut synchroniser un dialogue. Il y a deux sections critiques où on ne veut pas d’accès en même temps :</p>
+<ul>
+  <li>l’incrémentation du compteur de phrase pour que l’un prépare son texte puis passe la main à l’autre pour une autre phrase</li>
+  <li>la lecture du texte pour pas que les deux personnages parlent en même temps.</li>
+</ul>
+
+<p>Le petit point subtil est que l’incrémentation est déplacée au début des fonctions. La raison est que l’on veut que les deux personnages préparent le bon texte.</p>
+<ul>
+  <li>le premier personnage qui accède au lock bloque la section critique</li>
+  <li>il récupère le compteur de phrase et le stocke</li>
+  <li>il incrémente le compteur de phrase pour passer la main à l’autre personnage</li>
+  <li>il sort de la section critique avec un lock</li>
+  <li>l’autre personnage lit donc la phrase suivante et fait la même chose</li>
+</ul>
+
+<p>Sans faire ça, on pourrait avoir les deux personnages qui préparent la même phrase au début.</p>
+
+<p><strong>Barrière</strong></p>
+
+<p>Dans l’exercice 2 du TP4, on a une fonction qui affiche un couple avec un chiffre puis une lettre. On veut d’abord afficher tous les chiffres puis toutes les lettres.</p>
+
+<p>L’idée est de d’abord laisser l’affichage des lettres libre, puis ensuite on aura un <code class="language-plaintext highlighter-rouge">sem_wait</code> qui va bloquer l’affichage de la lettre. On utilise un démare <code class="language-plaintext highlighter-rouge">tous_finis</code> qui nous indique que toutes les threads ont affiché leur chiffre.</p>
+
+<p>Pour faire ça, on a une section critique avec mutex où chaque thread va vérifier augmenter un compteur global pour dire qu’il a bien terminé d’afficher son chiffre puis vérifier si tout le monde a fini. Si c’est le cas on libère le sémaphore <code class="language-plaintext highlighter-rouge">tous_finis</code> ce qui déclenche l’affichage de toutes les lettres.</p>
+
+
+  </article>
+</main>
+
+
