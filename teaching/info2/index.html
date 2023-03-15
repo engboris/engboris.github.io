@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="author" content="Boris Eng">
+<meta name="description" content="Boris Eng's webpage. ATER at Université Sorbonne Paris Nord, France.">
+<title>Boris Eng</title>
+<link rel="canonical" href="https://engboris.fr//teaching/info2/">
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="/basic.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
+<script type="text/javascript" src="/carousel.js"></script>
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<header>
+  <h1>⊢ <a href="/">Boris Eng</a></h1>
+  <span class="sub">ATER at Université Sorbonne Paris Nord, Villetaneuse (France)</span>
+  <span class="sub" style="float: right;">[last name][first name]@hotmail.fr</span>
+  <nav>
+    <div id="menu">
+        <a  href="/">Home</a>
+        <a  href="/research/">Research</a>
+        <a  href="/teaching/">Teaching</a>
+        <a  href="/library/">Library</a>
+        <a  href="/trivia/">Trivia</a>
+        <a  href="/cv/">CV</a>
+    </div>
+    <div>
+        
+    </div>
+  </nav>
+</header>
+
+<main>
+  <article >
+    <a href="/teaching">« Return to Teaching</a>
+    
+    <header>
+      
+      <time datetime=""></time>
+      
+    </header>
+    <h1 id="programmation-2">Programmation 2</h1>
+
+<h2 id="comptage-du-nombre-ditérations">Comptage du nombre d’itérations</h2>
+
+<p>Quand vous avez une boucle for :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="p">...</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>entre <code class="language-plaintext highlighter-rouge">0</code> et <code class="language-plaintext highlighter-rouge">n</code> (exclus), alors on a <code class="language-plaintext highlighter-rouge">n</code> étapes (car on commence à <code class="language-plaintext highlighter-rouge">0</code>). Plus généralement, si on avait <code class="language-plaintext highlighter-rouge">i=k</code> alors on aurait <code class="language-plaintext highlighter-rouge">n-k</code> étapes. Par contre si on a deux boucles imbriquées :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">...</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>alors on a <code class="language-plaintext highlighter-rouge">n*m</code> étapes. Attention, si on a <code class="language-plaintext highlighter-rouge">&lt;=</code> à la place de <code class="language-plaintext highlighter-rouge">&lt;</code> alors on a une étape de plus (par exemple pour <code class="language-plaintext highlighter-rouge">i&lt;=n</code> on fait <code class="language-plaintext highlighter-rouge">n+1</code> étapes). La mise à jour du compteur (paramètre du <code class="language-plaintext highlighter-rouge">for</code>) influence aussi le nombre d’étapes. Si on avait <code class="language-plaintext highlighter-rouge">i+=2</code> ou <code class="language-plaintext highlighter-rouge">i = i + 2</code> alors on avancerait deux par deux et on aurait <code class="language-plaintext highlighter-rouge">n/2</code> étapes pour le compteur <code class="language-plaintext highlighter-rouge">i</code>.</p>
+
+<h2 id="comptage-du-nombre-dappels-récursifs">Comptage du nombre d’appels récursifs</h2>
+
+<p>Pour les fonctions récursives c’est un peu plus subtil. Je rappelle que l’idée est d’avoir une définition d’une fonction par récurrence puis de la transformer en C avec des conditions et un rappel récursif. Par exemple pour la puissance, on aurait :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puiss(n, k) = { 1 si k=0
+              { n*puiss(n, k-1) sinon
+</code></pre></div></div>
+
+<p>Qui devient</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="kt">double</span> <span class="nf">puiss</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">else</span>
+		<span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="n">puiss</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Si on veut compter le nombre d’étapes, on remarque que seul <code class="language-plaintext highlighter-rouge">k</code> décrémente à chaque appel récursif. Donc le nombre d’appels sera <code class="language-plaintext highlighter-rouge">k</code>. Plus généralement, l’idée est de définir le nombre d’appels par récurrences, par exemple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cpuiss(n, k) = { 0 si k=0
+               { 1+Cpuiss(n, k-1) sinon
+</code></pre></div></div>
+
+<p>On peut ensuite calculer le nombre d’appels et le prouver par récurrence. Par exemple on pourrait montrer que <code class="language-plaintext highlighter-rouge">Cpuiss(n, k) = k</code>. Si on veut compter le nombre d’appels pour <code class="language-plaintext highlighter-rouge">puiss(2, 5)</code> alors on aura <code class="language-plaintext highlighter-rouge">Cpuiss(2, 5) = 5</code>.</p>
+
+<p>Si on a une fonction dont le nombre d’appels se divise successivement par <code class="language-plaintext highlighter-rouge">n</code> alors on aura un logarithme de base <code class="language-plaintext highlighter-rouge">n</code>. Prenons un exemple simple :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(n) = { 0 si n=1
+       { 1+f((n-1)/2)) si n est impair
+       { 1+f(n/2) si n est pair
+</code></pre></div></div>
+
+<p>On a une somme de 1 un nombre de <code class="language-plaintext highlighter-rouge">k</code> fois pour chaque appels récursifs. Ce nombre de fois correspond au nombre de division par 2 qu’on peut faire sur <code class="language-plaintext highlighter-rouge">n</code>. On a donc l’expression <code class="language-plaintext highlighter-rouge">n*(1/2^k) = n/(2^k)</code>. On s’arrête quand <code class="language-plaintext highlighter-rouge">n=1</code> donc on veut résoudre l’équation <code class="language-plaintext highlighter-rouge">n/(2^k) = 1</code> pour <code class="language-plaintext highlighter-rouge">k</code>. On a :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n/(2^k) = 1
+&lt;=&gt; log2(n/(2^k)) = log2(1)
+&lt;=&gt; log2(n/(2^k)) = 0
+&lt;=&gt; log2(n) - log2(2^k) = 0
+&lt;=&gt; log2(n) - k = 0
+&lt;=&gt; log2(n) = k
+</code></pre></div></div>
+
+<p>Donc le nombre d’étapes est <code class="language-plaintext highlighter-rouge">log2(n) = ln(n)/ln(2)</code> (tronqué si on est sur des entiers).</p>
+
+<p>Maintenant, prenons l’exemple de la fonction :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="kt">double</span> <span class="nf">puiss_rap</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">puiss_rap</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">puiss_rap</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>La relation de récurrence du nombre d’appels est :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cpuiss_rap(x, n) = { 0 si n=0
+				   { 1+Cpuiss(x*x), (n-1)/2) si n impair
+                   { 1+Cpuiss(x*x, n/2) si n pair
+</code></pre></div></div>
+
+<p>On se retrouve avec la même chose que la fonction <code class="language-plaintext highlighter-rouge">f</code> sauf que l’on s’arrête à <code class="language-plaintext highlighter-rouge">n=0</code> et non <code class="language-plaintext highlighter-rouge">n=1</code>. Donc on se retrouve avec un appel en plus. On a donc un nombre d’appel de <code class="language-plaintext highlighter-rouge">log(n)+1</code>. Pour en être sûr on peut le prouver par récurrence (je ne le fais pas ici).</p>
+
+<p>Pour les coefficients binomiaux, on a cette définition par récurrence :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin(n, p) = { 0 si p &gt; n
+            { 1 si p=0 ou p=n
+			{ bin(n-1, p) + bin(n-1, p-1) si 0&lt;p&lt;n
+</code></pre></div></div>
+
+<p>et la définition par récurrence suivante pour le nombre d’appels :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cbin(n, p) = { 0 si p &gt; n
+             { 0 si p=0 ou p=n
+			 { 2 + Cbin(n-1, p) + Cbin(n-1, p-1) si 0&lt;p&lt;n
+</code></pre></div></div>
+
+<p>Remarquez qu’on a deux appels récursifs plus ceux obtenus par les sous-appels dans la troisième ligne. On peut calculer le nombre d’appels pour des petites valeurs mais la formule qui permet de calculer directement est plus compliquée à obtenir. Une fois qu’on l’a obtenue, on la prouve par récurrence pour s’assurer que tout marche.</p>
+
+<h2 id="récursion-non-terminale">Récursion (non-)terminale</h2>
+
+<p>La récursion est terminale lorsqu’il ne reste plus d’opérations à faire sur la pile d’appel en dehors de l’appel récursif (qui est la dernière chose à faire). Par exemple pour la puissance on a l’exécution suivante :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puiss(2, 3)
+= 2*puiss(2, 2)
+= 2*2*puiss(2, 1)
+= 2*2*2*puiss(2, 0)
+= 2*2*2*1
+= 8
+</code></pre></div></div>
+
+<p>On remarque qu’il est impossible de calculer <code class="language-plaintext highlighter-rouge">2*puiss(2, 2)</code> car <code class="language-plaintext highlighter-rouge">puiss(2, 2)</code> doit être calculé pour fournir un résultat mais il demande lui-même de rappeler la fonction. Il faut imaginer des parenthèses vers la droite par exemple <code class="language-plaintext highlighter-rouge">2*(2*(2*puiss(2, 0)))</code> donc on ne peut pas juste multiplier les 2 entre eux. On accumule donc des informations supplémentaires dans la mémoire.</p>
+
+<p>On peut cependant programmer la fonction différemment. Pour cela on utilise un troisième paramètre appelé <em>accumulateur</em> qui permet d’accumuler le résultat et de faire des calculs directement sans attendre le résultat d’une fonction. On a donc :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="c1">// C'est la fonction auxiliaire avec accumulateur
+</span>
+<span class="kt">double</span> <span class="nf">puiss_ter2</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">k</span><span class="p">,</span> <span class="kt">double</span> <span class="n">acc</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">acc</span><span class="p">;</span> <span class="c1">// on renvoie ce qu'on a accumulé à la fin
+</span>
+	<span class="k">else</span>
+		<span class="k">return</span> <span class="n">puiss</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="n">acc</span><span class="p">);</span> <span class="c1">// on accumule dans acc
+</span>
+<span class="p">}</span>
+
+<span class="c1">// C'est la vraie fonction puissance qui cache l'accumulateur en interne
+</span>
+<span class="kt">double</span> <span class="nf">puiss_ter</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">puiss_ter2</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// on accumule avec des multiplications sur 1
+</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On obtient l’exécution suivante où les opérations peuvent être évaluées directement et donc la taille de la pile d’appel n’évolue plus en fonction du second paramètre.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>puiss_ter(2, 3)
+= puiss_ter2(2, 3, 1)
+= puiss_ter2(2, 2, 2)
+= puiss_ter2(2, 1, 4)
+= puiss_ter2(2, 0, 8)
+= 8
+</code></pre></div></div>
+
+<h2 id="mémoïsation">Mémoïsation</h2>
+
+<p>Quand on fait des appels récursifs, il se peut que l’on calcule plusieurs fois la même chose inutilement. Par exemple avec les coefficient binomiaux, on a :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin(n, p) = { 0 si p &gt; n
+            { 1 si p=0 ou p=n
+			{ bin(n-1, p) + bin(n-1, p-1) si 0&lt;p&lt;n
+			
+bin(3, 4)
+= bin(2, 4) + bin(2, 3)
+= bin(1, 4) + bin(1, 3) + bin(1, 3) + bin(1, 2)
+= ...
+</code></pre></div></div>
+
+<p>On remarque que <code class="language-plaintext highlighter-rouge">bin(1, 3)</code> est calculé deux fois. Si on continue on aura encore plus de redondances. Au lieu de recalculer pour rien, on peut calculer une seule fois puis les autres fois on accèdera à la valeur qu’on a sauvegardé. On obtient cette fonction (que je commente) :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="cm">/* Le principe est d'utiliser un tableau pour sauvegarder les valeurs, on a deux
+   dimensions pour les deux paramètres de la fonction */</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">bin_mem_2</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">bin_tab</span><span class="p">[][</span><span class="n">N</span><span class="p">])</span> <span class="p">{</span>
+  <span class="c1">// Cette partie est la même qu'avant
+</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">p</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="p">(</span><span class="n">bin_tab</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="c1">// Si on a jamais calculé la valeur de bin(n, p)
+</span>
+  <span class="c1">// Remarquez qu'on passe le tableau en paramètre pour le propager
+</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">bin_tab</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">bin_tab</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">bin_mem_2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">bin_tab</span><span class="p">)</span> <span class="o">+</span> <span class="n">bin_mem_2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">bin_tab</span><span class="p">);</span>
+  <span class="c1">// A la fin on renvoie toujours la valeur qu'on a déjà sauvegardée
+</span>
+  <span class="k">return</span> <span class="n">bin_tab</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">p</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">bin_mem</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* Toutes les valeurs sont mises à 0 par défaut, donc si on a jamais calculé
+     la valeur, la case sera à 0 */</span>
+  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">bin_tab</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="k">return</span> <span class="n">bin_mem_2</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">bin_tab</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="pointeurs">Pointeurs</h2>
+
+<p>Ce sont des variables qui contiennent des adresses dans la mémoire. Les opérations de base sont les suivantes :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span> <span class="c1">// renvoie l'adresse de x
+</span>
+<span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// renvoie la valeur à l'adresse dans p
+</span>
+<span class="n">p</span><span class="o">+</span><span class="n">k</span><span class="p">;</span> <span class="c1">// renvoie l'adresse à p + k cases dans la mémoire (selon le type de p)
+</span>
+<span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">k</span><span class="p">);</span> <span class="c1">// renvoie la valeur à l'adresse p+k
+</span>
+<span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="c1">// même chose que *(p+k)
+</span>
+
+<span class="c1">// On peut aussi faire d'autres opérations arithmétiques (-, *, ...) comme avec des entiers
+</span>
+<span class="c1">// Si le pointeur est de type int* alors on se déplace de 4 octets (taille d'un int)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On peut réserver un nouvel espace mémoire pour un pointeur en demandant un certain nombre de blocs pour un certain type. On utilise la fonction <code class="language-plaintext highlighter-rouge">malloc</code> qui renvoie une adresse dans la mémoire qui nous est offert. On peut se déplacer dans la zone réservée et cela nous permet en particulier de simuler un tableau. On utilise ensuite <code class="language-plaintext highlighter-rouge">free</code> pour dire qu’on ne se sert plus de cette portion de mémoire.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="c1">// on demande 1 bloc de type entier
+</span>
+<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// on met la valeur 3 dans la case d'adresse p
+</span>
+
+<span class="kt">int</span><span class="o">*</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nf">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="c1">// on demande 5 blocs de type entier
+</span>
+<span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// on met la valeur 3 à la 2 cases après tab
+</span>
+<span class="n">tab</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// on met la valeur 4 à la même case
+</span>
+<span class="o">*</span><span class="n">tab</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// par défaut, tab pointe sur la première case, on aurait pu écrire tab[0] = 1</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Attention, si on utilise <code class="language-plaintext highlighter-rouge">p+1</code> ou <code class="language-plaintext highlighter-rouge">tab+10</code>, on sort de la zone réservée et on risque d’avoir un <code class="language-plaintext highlighter-rouge">Segmentation fault</code>.</p>
+
+<p>Si on veut comparer les pointeurs et les tableaux alors voici deux codes équivalents :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="c1">// Version tableau
+</span>
+<span class="kt">int</span> <span class="n">tab</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tab</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+<span class="c1">// Version pointeur
+</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nf">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="o">*</span><span class="n">tab</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// on aurait pu écrire tab[0]
+</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">tab</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="mi">2</span><span class="p">));</span> <span class="c1">// on aurait pu écrire tab[2]
+</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>On a pas forcément besoin de faire un <code class="language-plaintext highlighter-rouge">malloc</code>, on aurait très bien pu travailler directement sur un tableau qui a déjà de la mémoire allouée :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="c1">// Tableau + pointeurs
+</span>
+<span class="kt">int</span> <span class="n">tab</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="o">*</span><span class="n">tab</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// on aurait pu écrire tab[0]
+</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">tab</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="mi">2</span><span class="p">));</span> <span class="c1">// on aurait pu écrire tab[2]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Avec des tableaux à deux dimensions, ça reste le même principe. Il ne faut pas oublier qu’un tableau à deux dimensions est un tableau qui contient des tableaux. Cela correspond donc à des pointeurs de pointeurs.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">tab</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+<span class="c1">// tab est un pointeur int**
+</span>
+<span class="c1">// *tab est un pointeur int*
+</span>
+<span class="c1">// **tab est un entier int correspondant à tab[0][0]
+</span>
+<span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// on aurait pu écrire tab[0][2]
+</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">tab</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// on aurait pu écrire &amp;tab[1][1]
+</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// on aurait pu écrire tab[1][1]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Si on travaille avec des structures, on utilise <code class="language-plaintext highlighter-rouge">.</code> pour accéder à un champs. Par exemple <code class="language-plaintext highlighter-rouge">pers.prenom</code>. Cependant si on a un pointeur on doit écrire <code class="language-plaintext highlighter-rouge">(*p).prenom</code> ou utiliser la syntaxe plus pratique <code class="language-plaintext highlighter-rouge">p-&gt;prenom</code>. Voici un exemple :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="code"><pre><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="c1">
+</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="c1">
+</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="c1">
+</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="n">personne</span> <span class="p">{</span>
+	<span class="kt">char</span><span class="o">*</span> <span class="n">nom</span><span class="p">;</span>
+	<span class="kt">char</span><span class="o">*</span> <span class="n">prenom</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// on aurait pu faire sans malloc en déclarant une structure directement
+</span>
+    <span class="k">struct</span> <span class="n">personne</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">personne</span><span class="p">));</span> 
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span><span class="p">);</span>
+    
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">nom</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">nom</span><span class="p">,</span> <span class="s">"Eng"</span><span class="p">);</span>
+    
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">prenom</span> <span class="o">=</span> <span class="s">"Boris"</span><span class="p">;</span> <span class="c1">// const char*
+</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">prenom</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">nom</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>La différence entre définir un pointeur ou une structure (ou une variable d’un type de donnée classique) est que la structure existe localement dans le bloc d’une fonction et qu’elle disparaît à la fin de la fonction. Si on veut vraiment modifier des données depuis l’extérieur alors on doit utiliser des pointeurs. Voici un exemple simple utilisant des variables entières :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// on modifie x seulement dans cette fonction mais pas à l'extérieur (on travaille donc avec une copie de x)
+</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">g</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+	<span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// on modifie la valeur de x (on travaille avec l'adresse d'une variable du programme entier)
+</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  </article>
+</main>
+
+
