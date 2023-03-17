@@ -510,6 +510,288 @@ bin(3, 4)
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+<h2 id="tri-par-insertion">Tri par insertion</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">tri_insertion</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+	<span class="c1">// On parcourt chaque case à partir de la première
+</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">taille</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="cm">/* Pour chaque case du tableau, on cherche où bien placer sa valeur derrière
+		selon l'ordre du tableau */</span>
+		<span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+		<span class="c1">// Tant qu'on ne trouve pas une valeur plus grande que la précédente, on continue à chercher
+</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+			<span class="n">echanger</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// on échange chaque paire côte-à-côte qui est désordonnée
+</span>
+			<span class="n">j</span><span class="o">--</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Remarquez qu'on modifie réellement les entiers à l'extérieur, donc on veut les adresses
+</span>
+<span class="kt">void</span> <span class="nf">echanger</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Exemple d’exécution du tri par insertion :</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>&lt;1&gt;</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>On commence sur la case 1. On cherche une valeur supérieure à gauche. Il n’y en a pas. On passe à la prochaine valeur de <code class="language-plaintext highlighter-rouge">i</code>.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>&lt;2&gt;</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pareil.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>&lt;3&gt;</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>La valeur à la case 3 est 2. Il y a plus grand juste à gauche (4). On échange.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>&lt;3&gt;</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>3</td>
+      <td>&lt;2&gt;</td>
+      <td>4</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>On est sur <code class="language-plaintext highlighter-rouge">j=2</code>. On voit qu’il y a plus grand juste à gauche. On échange.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>&lt;3&gt;</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>&lt;2&gt;</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Il n’y a plus rien de plus grand. On continue avec le <code class="language-plaintext highlighter-rouge">i</code> suivant.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>&lt;4&gt;</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>On a un 0 et c’est le plus petit. Donc on va le décaler successivement par échanges successifs jusqu’à qu’à arriver au début.</p>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>&lt;4&gt;</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Valeurs</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Il nous reste plus qu’à regarder la case 5 qui ne trouvera rien de plus grand à gauche et donc le programme s’arrête. Le tableau est bien trié.</p>
+
+<p><br /></p>
+
   </article>
 </main>
 
