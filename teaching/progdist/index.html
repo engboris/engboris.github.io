@@ -120,11 +120,11 @@
 
 <span class="c1">// Les opérations effectuées par le serveur
 </span>
-<span class="kd">class</span> <span class="nc">ServerTask</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">Slave</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="nc">Socket</span> <span class="n">client</span><span class="o">;</span>
     
-    <span class="kd">public</span> <span class="nf">ServerTask</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">client</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Slave</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">client</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">client</span> <span class="o">=</span> <span class="n">client</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -154,7 +154,7 @@
         <span class="k">try</span> <span class="o">{</span>
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Waiting for connections..."</span><span class="o">);</span>
             <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
-                <span class="k">this</span><span class="o">.</span><span class="na">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">ServerTask</span><span class="o">(</span><span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">()));</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Slave</span><span class="o">(</span><span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">()));</span>
                 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connection  [OK] "</span><span class="o">);</span>
             <span class="o">}</span>
 
