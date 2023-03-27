@@ -65,8 +65,6 @@
     </header>
     <h1 id="programmation-distribuée">Programmation distribuée</h1>
 
-<h2 id="tp3---partie-3">TP3 - Partie 3</h2>
-
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -115,87 +113,54 @@
 46
 47
 48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">java.net.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.concurrent.*</span><span class="o">;</span>
 
-
-<span class="kd">class</span> <span class="nc">Consumer</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="no">Q</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Consumer</span><span class="o">(</span><span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="no">Q</span><span class="o">){</span>
-        <span class="c1">// à remplir
+<span class="c1">// Les opérations effectuées par le serveur
 </span>
-    <span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Slave</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
-        <span class="c1">// à remplir
-</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">Producer</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="no">Q</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">dirname</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">done</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Producer</span><span class="o">(</span><span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="no">Q</span><span class="o">,</span> <span class="nc">String</span> <span class="n">dirname</span><span class="o">){</span>
-        <span class="c1">// à remplir
-</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isDone</span><span class="o">(){</span>
-    	<span class="c1">// à remplir
-</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
-        <span class="c1">// à remplir
-</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProdCon</span><span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="no">DONE</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Socket</span> <span class="n">client</span><span class="o">;</span>
     
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">arg</span><span class="o">[]){</span>
-        <span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="no">Q</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">5</span><span class="o">);</span>
-        <span class="nc">Thread</span> <span class="no">P</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Producer</span><span class="o">(</span><span class="no">Q</span><span class="o">,</span><span class="s">"/tmp/"</span><span class="o">));</span>
-        <span class="nc">Thread</span> <span class="o">[]</span><span class="nc">Cs</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
-            <span class="nc">Cs</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Consumer</span><span class="o">(</span><span class="no">Q</span><span class="o">));</span>
-            <span class="nc">Cs</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">start</span><span class="o">();</span>
-        <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Slave</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">client</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">client</span> <span class="o">=</span> <span class="n">client</span><span class="o">;</span>
+    <span class="o">}</span>
 
-        <span class="no">P</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">try</span><span class="o">{</span>
-            <span class="no">P</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
-            <span class="nc">ProdCon</span><span class="o">.</span><span class="na">DONE</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="c1">// à remplir
+</span>
         <span class="o">}</span>
         <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="no">E</span><span class="o">){</span>
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="no">E</span><span class="o">);</span>
+            <span class="no">E</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
         <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">ServerSocket</span> <span class="n">server</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ExecutorService</span> <span class="n">executor</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Server</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="kt">int</span> <span class="n">poolSize</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">executor</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">poolSize</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">manageRequest</span><span class="o">(){</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Waiting for connections..."</span><span class="o">);</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Slave</span><span class="o">(</span><span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">()));</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connection  [OK] "</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="no">E</span><span class="o">)</span> <span class="o">{</span>
+            <span class="no">E</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
