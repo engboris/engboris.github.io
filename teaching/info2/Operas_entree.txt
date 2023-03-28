@@ -1,0 +1,52 @@
+17
+Cosi_fan_tutte
+26/01/1790 Vienne
+Wolfgang_Amadeus Mozart (27/1/1756)
+Otello
+5/2/1887 Milan
+Giuseppe Verdi (10/10/1813)
+Jenufa
+21/1/1904 Brno
+Leos Janacek (3/7/1854)
+Pelleas_et_Melisande
+30/4/1902 Paris
+Claude Debussy (22/8/1862)
+Il_Barbiere_di_Siviglia
+20/2/1816 Rome
+Gioachino Rossini (29/2/1792)
+Il_Giasone
+5/1/1649 Venise
+Francesco Cavalli (14/2/1602)
+Wozzeck
+14/12/1925 Berlin
+Alban Berg (9/2/1885)
+Norma
+26/12/1831 Milan
+Vincenzo Bellini (3/11/1801)
+Tristan_und_Isolde
+10/6/1865 Münich
+Richard Wagner (22/5/1813)
+Madama_Butterfly
+17/2/1904 Milan
+Giacomo Puccini (22/12/1858)
+Eugene_Oneguine
+29/3/1879 Moscou
+Piotr_Ilitch Tchaïkovsky (25/4/1840)
+Robert_le_diable
+21/11/1831 Paris
+Giacomo Meyerbeer (5/9/1791)
+Die_Soldaten
+15/2/1965 Cologne
+Bernd_Alois Zimmermann (20/03/1918)
+Boris_Godounov
+8/2/1874 Saint-Pétersbourg
+Modeste Moussorgsky (21/3/1839)
+Faust
+19/3/1859 Paris
+Charles Gounod (17/6/1818)
+Carmen
+3/3/1875 Paris
+Georges Bizet (25/10/1838)
+Peter_Grimes
+7/6/1945 Londres
+Benjamin Britten (22/11/1913)
