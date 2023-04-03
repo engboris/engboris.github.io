@@ -794,12 +794,124 @@ bin(3, 4)
 
 <h2 id="tp7">TP7</h2>
 
-<ul>
-  <li><a href="/teaching/info2/td-tp7_Prog2_2023.pdf">Sujet</a></li>
-  <li><a href="/teaching/info2/opera.c">Fichiers utiles pour le TP opera.c</a></li>
-  <li><a href="/teaching/info2/Operas_entree.txt">Fichier de données pour le TP Opera_entree.txt</a></li>
-  <li><a href="/teaching/info2/opera_correction.c">Correction du TD</a></li>
-</ul>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">nbre_annees_revolues</span> <span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">individu</span> <span class="o">*</span> <span class="n">ind</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">date</span> <span class="o">*</span> <span class="n">d</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">echanger_laureat</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt2</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">reorganiser_tab_origine</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span> <span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">pays</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">select_tab_age</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span><span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">);</span>
+
+<span class="cm">/** Fonction qui calcule le nombre d'années révolues de l'individu ind à la date d */</span>
+<span class="cm">/** Par exemple, un individu né le 7 avril 1950 a 49 années révolues le 7 avril 2000 et en a 50 le 8 avril 2000 */</span>
+<span class="cm">/** Complexité : \Theta(1) */</span>
+<span class="kt">int</span> <span class="nf">nbre_annees_revolues</span> <span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">individu</span> <span class="o">*</span> <span class="n">ind</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">date</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">struct</span> <span class="n">date</span> <span class="o">*</span> <span class="n">d_copie</span> <span class="o">=</span> <span class="n">allouer_init_date</span><span class="p">(</span><span class="n">ind</span><span class="o">-&gt;</span><span class="n">naissance</span><span class="o">-&gt;</span><span class="n">jour</span><span class="p">,</span> <span class="n">ind</span><span class="o">-&gt;</span><span class="n">naissance</span><span class="o">-&gt;</span><span class="n">mois</span><span class="p">,</span> <span class="n">ind</span><span class="o">-&gt;</span><span class="n">naissance</span><span class="o">-&gt;</span><span class="n">annee</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">annee</span> <span class="o">-</span> <span class="p">(</span><span class="n">d_copie</span><span class="o">-&gt;</span><span class="n">annee</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">d_copie</span><span class="o">-&gt;</span><span class="n">annee</span> <span class="o">+=</span> <span class="n">res</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">comparer_date</span><span class="p">(</span><span class="n">d_copie</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="n">res</span> <span class="o">++</span><span class="p">;</span>
+	<span class="n">detruire_date</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_copie</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/** Fonction qui échange les adresses de lauréats pointées par les deux arguments */</span>
+<span class="kt">void</span> <span class="nf">echanger_laureat</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt2</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span><span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">lt1</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">lt1</span> <span class="o">=</span> <span class="o">*</span><span class="n">lt2</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">lt2</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/** Fonction qui réorganise le tableau d'adresses de lauréats tab, de taille n, */</span>
+<span class="cm">/* en plaçant en tête ceux qui ont été créés dans la ville v */</span>
+<span class="cm">/* Cette fonction renvoie le nombre de laureats du tableau créés dans la ville v */</span>
+<span class="cm">/** Complexité : \Theta(n) si n est la taille du tableau */</span>
+<span class="kt">int</span> <span class="nf">reorganiser_tab_origine</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span> <span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">pays</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">taille</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(;;)</span>
+	<span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">pays</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="o">++</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="o">-&gt;</span><span class="n">origine</span><span class="p">))</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">taille</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">pays</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="o">--</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="o">-&gt;</span><span class="n">origine</span><span class="p">))</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+		<span class="n">echanger_laureat</span> <span class="p">(</span><span class="n">tab</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">tab</span> <span class="o">+</span> <span class="n">j</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/** Fonction qui affiche tous les lauréats du tableau tab, de taille taille, */</span>
+<span class="cm">/* récompensés avant qu'ils aient a révolues */</span>
+<span class="cm">/** Complexité : \Theta(N) si N est la taille du tableau */</span>
+<span class="kt">void</span> <span class="nf">select_tab_age</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span><span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">a_revolu</span><span class="p">,</span> <span class="n">trouve</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">date</span> <span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">allouer_init_date</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">taille</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">d</span><span class="o">-&gt;</span><span class="n">annee</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">annee_prix</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">a_revolu</span> <span class="o">=</span> <span class="n">age_revolu</span><span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="n">trouve</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="n">afficher_laureat</span><span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">"[%s avait %d ans]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="o">-&gt;</span><span class="n">nom</span><span class="p">,</span> <span class="n">a_revolu</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">trouve</span><span class="p">)</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"Aucun lauréat récompensé avant qu'il ait %d ans révolus</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
 
   </article>
 </main>
