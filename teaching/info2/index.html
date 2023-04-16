@@ -852,11 +852,14 @@ bin(3, 4)
 56
 57
 58
+<<<<<<< HEAD
 59
 60
 61
 62
 63
+=======
+>>>>>>> 351b51e45cbe0b587ae80a9a9c009e076372772f
 </pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">nbre_annees_revolues</span> <span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">individu</span> <span class="o">*</span> <span class="n">ind</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">date</span> <span class="o">*</span> <span class="n">d</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">echanger_laureat</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">**</span><span class="n">lt2</span><span class="p">);</span>
 <span class="kt">int</span> <span class="nf">reorganiser_tab_origine</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span> <span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">pays</span><span class="p">);</span>
@@ -886,6 +889,7 @@ bin(3, 4)
 <span class="cm">/* en plaçant en tête ceux qui ont été créés dans la ville v */</span>
 <span class="cm">/* Cette fonction renvoie le nombre de laureats du tableau créés dans la ville v */</span>
 <span class="cm">/** Complexité : \Theta(n) si n est la taille du tableau */</span>
+<<<<<<< HEAD
 <span class="kt">int</span> <span class="nf">reorganiser_tab_origine</span><span class="p">(</span><span class="k">struct</span> <span class="n">laureat</span><span class="o">*</span> <span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">pays</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">int</span> <span class="n">nbLaureats</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -903,6 +907,18 @@ bin(3, 4)
 		<span class="n">echanger_laureat</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">tab</span><span class="o">+</span><span class="n">j</span><span class="p">);</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="n">nbLaureats</span><span class="p">;</span>
+=======
+<span class="kt">int</span> <span class="nf">reorganiser_tab_origine</span> <span class="p">(</span><span class="k">struct</span> <span class="n">laureat_Turing</span> <span class="o">*</span> <span class="n">tab</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">pays</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">taille</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(;;)</span>
+	<span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">pays</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="o">++</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="o">-&gt;</span><span class="n">origine</span><span class="p">))</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">taille</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">pays</span><span class="p">,</span> <span class="n">tab</span><span class="p">[</span><span class="o">--</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">laureat</span><span class="o">-&gt;</span><span class="n">origine</span><span class="p">))</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+		<span class="n">echanger_laureat</span> <span class="p">(</span><span class="n">tab</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">tab</span> <span class="o">+</span> <span class="n">j</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+>>>>>>> 351b51e45cbe0b587ae80a9a9c009e076372772f
 <span class="p">}</span>
 
 <span class="cm">/** Fonction qui affiche tous les lauréats du tableau tab, de taille taille, */</span>
