@@ -814,7 +814,20 @@ bin(3, 4)
 18
 19
 20
-</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">reorganiser</span><span class="p">(</span><span class="kt">int</span><span class="o">**</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+21
+22
+23
+24
+25
+26
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">echanger</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">reorganiser</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">int</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// compteur gauche -&gt;
 </span>
@@ -832,23 +845,153 @@ bin(3, 4)
 		<span class="cm">/* on continue tant qu'on a pas trouvé
 		   et qu'on est pas arrivé au début */</span>
 		<span class="k">while</span> <span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="n">g</span><span class="p">]</span><span class="o">!=</span><span class="n">tab</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
-			<span class="n">d</span><span class="o">++</span><span class="p">;</span>
-		<span class="c1">// on suppose que cette fonction existe
-</span>
+			<span class="n">d</span><span class="o">--</span><span class="p">;</span>
 		<span class="n">echanger</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">tab</span><span class="o">+</span><span class="n">j</span><span class="p">);</span>
 	<span class="p">}</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="amélioration-du-tri-à-bulle">Amélioration du tri à bulle</h2>
-
-<p>(Bientôt)</p>
-
 <h2 id="recherche-dans-un-tableau-trié">Recherche dans un tableau trié</h2>
 
-<p>(Bientôt)</p>
+<p>Commençons par le cas des tableaux d’entiers pour faire plus simple. On suppose que le tableau est trié dans l’ordre croissant. On renvoie 1 lorsque l’élément <code class="language-plaintext highlighter-rouge">x</code> est trouvé. Si on renvoie 0.</p>
 
-<h2 id="tp9">TP9</h2>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">rechercher</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">taille</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">milieu</span> <span class="o">=</span> <span class="n">taille</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">tab</span><span class="p">[</span><span class="n">milieu</span><span class="p">])</span>
+			<span class="n">rechercher</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">milieu</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">taille</span><span class="o">-</span><span class="n">milieu</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">tab</span><span class="p">[</span><span class="n">milieu</span><span class="p">])</span>
+			<span class="n">rechercher</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">milieu</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+		<span class="k">else</span>
+			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Maintenant, comme dans le TD9, on applique la recherche dichotomique avec les opéras. Nous chercons un opéra avec une certaine date de création. Attention, la difficulté est qu’on ne manipule pas un tableau d’opéras mais un tableau <em>d’adresses</em> d’opéras. Chaque élément de notre tableau est donc une adresse vers un opéra dans la mémoire.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">rechercher_tab_annee_creation</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">an</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">taille</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">milieu</span> <span class="o">=</span> <span class="n">taille</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+		<span class="cm">/* Remarques :
+		- tab et tab+milieu sont de type struct opera**
+		- tab[milieu] est de type struct opera*
+		- *tab[milieu] est de type opera */</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">an</span> <span class="o">&gt;</span> <span class="n">tab</span><span class="p">[</span><span class="n">milieu</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">date_creation</span><span class="o">-&gt;</span><span class="n">annee</span><span class="p">)</span>
+			<span class="n">rechercher_tab_annee_creation</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">milieu</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">taille</span><span class="o">-</span><span class="n">milieu</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">an</span><span class="p">);</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">an</span> <span class="o">&lt;</span> <span class="n">tab</span><span class="p">[</span><span class="n">milieu</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">date_creation</span><span class="o">-&gt;</span><span class="n">annee</span><span class="p">)</span>
+			<span class="n">rechercher_tab_annee_creation</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">milieu</span><span class="p">,</span> <span class="n">an</span><span class="p">);</span>
+		<span class="k">else</span>
+			<span class="n">afficher_opera</span><span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="n">milieu</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"Aucun opéra trouvé."</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="pointeurs-et-structures">Pointeurs et structures</h2>
+
+<p>On reprend l’exemple du TD9 avec des opéras. On rappelle que l’on a un tableau qui contient des adresses d’opéra (et un tableau est lui-même défini avec un pointeur).</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="cm">/* on a deux pointeurs qui pointent vers des adresses d'opéra
+   utiliser des pointeurs nous permet de modifier les valeurs
+   à une certaine adresse */</span>
+<span class="kt">void</span> <span class="nf">echange</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">op1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// on sauvegarde l'adresse d'opéra pointée par op1
+</span>
+	<span class="k">struct</span> <span class="n">opera</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">op1</span><span class="p">;</span>
+	<span class="c1">// on remplace la valeur à l'adresse op1 par celle d'op2
+</span>
+	<span class="o">*</span><span class="n">op1</span> <span class="o">=</span> <span class="o">*</span><span class="n">op2</span><span class="p">;</span>
+	<span class="c1">// on place l'adresse contenue par tmp dans la case d'adresse op2
+</span>
+	<span class="o">*</span><span class="n">op2</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">echange</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">op1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">op2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// on sauvegarde l'adresse d'opéra pointée par op1
+</span>
+	<span class="k">struct</span> <span class="n">opera</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">op1</span><span class="p">;</span>
+	<span class="c1">// on remplace la valeur à l'adresse op1 par celle d'op2
+</span>
+	<span class="o">*</span><span class="n">op1</span> <span class="o">=</span> <span class="o">*</span><span class="n">op2</span><span class="p">;</span>
+	<span class="c1">// on place l'adresse contenue par tmp dans la case d'adresse op2
+</span>
+	<span class="o">*</span><span class="n">op2</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -891,46 +1034,67 @@ bin(3, 4)
 39
 40
 41
-</pre></td><td class="code"><pre><span class="cm">/** Fonction qui affiche les opéras, référencés dans le tableau t, de taille n, */</span>
-<span class="cm">/* qui ont été créés dans la ville de naissance de leur compositeur */</span>
-<span class="kt">void</span> <span class="nf">select_tab_ville_creation</span> <span class="p">(</span><span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span><span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ville_creation</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">compositeur</span><span class="o">-&gt;</span><span class="n">origine</span><span class="p">))</span> <span class="p">{</span>
-			<span class="n">afficher_opera</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-		<span class="p">}</span>
+42
+43
+44
+45
+46
+47
+</pre></td><td class="code"><pre><span class="c1">// on renvoie une adresse qui contiendra un espace pour une adresse d'opéra
+</span>
+<span class="k">struct</span> <span class="n">opera</span><span class="o">*</span> <span class="nf">allouer_opera</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// on demande un espace mémoire pour contenir une structure opera
+</span>
+	<span class="k">struct</span> <span class="n">opera</span><span class="o">*</span> <span class="n">op</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span><span class="p">));</span>
+	<span class="c1">// on vérifie si l'allocation a bien fonctionné
+</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">op</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">perror</span><span class="p">(</span><span class="s">"Échec allocation opéra"</span><span class="p">);</span>
+		<span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="c1">// on quitte le programme en signalant un échec
+</span>
 	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">op</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="nf">allouer_tab_opera</span> <span class="p">(</span><span class="kt">int</span> <span class="n">taille</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="c1">// on demande un espace mémoire pour taille * la taille d'un pointeur d'opéra
+</span>
+	<span class="k">struct</span> <span class="n">opera</span><span class="o">**</span> <span class="n">res</span> <span class="o">=</span> <span class="n">malloc</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span><span class="o">*</span><span class="p">)</span> <span class="o">*</span> <span class="n">taille</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">taille</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">allouer_opera</span><span class="p">();</span>
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="cm">/** Fonction qui supprime du tableau t */</span>
-<span class="cm">/*  tous les opéras dont le compositeur avait a années révolues lors de la création */</span>
-<span class="cm">/* et renvoie l'adresse du nouveau tableau */</span>
-<span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span> <span class="nf">supprimer_tab_age_compositeur</span> <span class="p">(</span><span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span><span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">taille</span> <span class="o">=</span> <span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">nb_supp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* nb_supp = nombre de références supprimées */</span>
-	<span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span><span class="n">nouv_t</span><span class="p">;</span>
-	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">taille</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">nbre_annees_revolues</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">compositeur</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">date_creation</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-			<span class="n">detruire_opera</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-      <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-			<span class="o">++</span><span class="n">nb_supp</span><span class="p">;</span>
-		<span class="p">}</span>
+<span class="c1">// on libère la mémoire utilisée par un opéra
+</span>
+<span class="c1">// Remarque : on utilise une variable struct opera** afin de rediriger l'adresse d'opéra vers le vide (NULL)
+</span>
+<span class="kt">void</span> <span class="nf">detruire_opera</span> <span class="p">(</span><span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span> <span class="n">op</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// on libère chaque champs
+</span>
+	<span class="c1">// Remarque : on accède à l'adresse d'opéra avec *op car **op est un pointeur vers une adresse d'opéra
+</span>
+	<span class="n">free</span><span class="p">((</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">titre</span><span class="p">);</span>
+	<span class="n">free</span><span class="p">((</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ville_creation</span><span class="p">);</span>
+	<span class="cm">/* les libérateurs de mémoire utilisent le type struct date** et struct individu**
+	donc il faut passer l'adresse d'un pointeur de date et d'individu */</span>
+	<span class="n">detruire_date</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">date_creation</span><span class="p">);</span>
+	<span class="n">detruire_individu</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">compositeur</span><span class="p">);</span>
+	<span class="cm">/* op est un pointeur vers une adresse d'opéra, on libère la mémoire
+	de ce pointeur */</span>
+	<span class="n">free</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">);</span>
+	<span class="cm">/* on redirige le pointeur vers NULL */</span>
+	<span class="o">*</span><span class="n">op</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">detruire_tab_opera</span> <span class="p">(</span><span class="k">struct</span> <span class="n">opera</span> <span class="o">**</span><span class="n">tab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">taille</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">taille</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">detruire_opera</span><span class="p">(</span><span class="n">tab</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
 	<span class="p">}</span>
-	<span class="o">*</span><span class="n">n</span> <span class="o">=</span> <span class="n">taille</span> <span class="o">-</span> <span class="n">nb_supp</span><span class="p">;</span>
-	<span class="n">nouv_t</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">((</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">opera</span> <span class="o">*</span><span class="p">));</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">nouv_t</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">perror</span><span class="p">(</span><span class="s">"Erreur réallocation tableau d'opéras"</span><span class="p">);</span>
-    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
-  <span class="p">}</span>
-	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">taille</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-			<span class="n">nouv_t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-			<span class="o">++</span><span class="n">j</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="n">free</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-	<span class="k">return</span> <span class="n">nouv_t</span><span class="p">;</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">tab</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
